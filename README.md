@@ -1,11 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Talib Educational Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About Talib
+
+Talib is a comprehensive educational platform built with Laravel 10 that connects students with teachers and educational institutions across different countries. The platform supports both Arabic and English languages and provides a subscription-based model for educational service providers.
+
+## Features
+
+### User Categories & Subscription Fees
+- **Teachers** - 10 JD annually
+- **Educational Centers/Academies** - 25 JD annually  
+- **Private Schools** - 50 JD annually
+- **Kindergartens** - 50 JD annually
+- **Nurseries** - 40 JD annually
+- **Students/Parents** - Free (can browse without registration)
+
+### Key Features
+- ✅ Multilingual support (Arabic/English)
+- ✅ Role-based authentication system
+- ✅ Comprehensive database schema for educational entities
+- ✅ Responsive UI with TailwindCSS
+- ✅ Payment gateway integration ready
+- ✅ Search functionality for finding educators
+- ✅ Profile management for all user types
+
+## Technical Stack
+
+- **Framework**: Laravel 10
+- **Database**: MySQL
+- **Authentication**: Laravel Breeze
+- **Frontend**: Blade Templates + TailwindCSS
+- **Testing**: PHPUnit
+
+## Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   composer install
+   npm install
+   ```
+3. Set up environment:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+4. Configure database in `.env` file
+5. Run migrations and seeders:
+   ```bash
+   php artisan migrate
+   php artisan db:seed --class=CountrySeeder
+   ```
+6. Build assets:
+   ```bash
+   npm run build
+   ```
+7. Start the development server:
+   ```bash
+   php artisan serve
+   ```
+
+## Database Schema
+
+The platform includes comprehensive database tables for:
+- Users with role-based access
+- Countries and cities
+- Educational subjects and grades
+- Teachers, educational centers, schools, kindergartens, nurseries
+- Subscriptions and payments system
+- Many-to-many relationships for subjects and grades
+
+## Testing
+
+Run the test suite:
+```bash
+php artisan test
+```
+
+Current test coverage includes:
+- User role functionality tests
+- Authentication tests (via Laravel Breeze)
 
 ## About Laravel
 
