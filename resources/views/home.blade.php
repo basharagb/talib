@@ -14,6 +14,7 @@
                     <h1 class="text-xl font-bold text-blue-600">طالب - Talib</h1>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <a href="{{ route('search') }}" class="text-gray-600 hover:text-blue-600">{{ __('Search') }}</a>
                     <a href="?lang=ar" class="text-gray-600 hover:text-blue-600">العربية</a>
                     <a href="?lang=en" class="text-gray-600 hover:text-blue-600">English</a>
                     @auth
@@ -37,11 +38,11 @@
             <p class="text-xl text-gray-600 mb-8">{{ __('messages.description') }}</p>
             
             <div class="max-w-md mx-auto">
-                <form class="flex">
-                    <input type="text" placeholder="{{ __('messages.search_placeholder') }}" 
+                <form method="GET" action="{{ route('search') }}" class="flex">
+                    <input type="text" name="q" placeholder="{{ __('messages.search_placeholder') }}" 
                            class="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-r-md hover:bg-blue-700">
-                        Search
+                        {{ __('Search') }}
                     </button>
                 </form>
             </div>

@@ -52,9 +52,34 @@ class User extends Authenticatable
         return $this->hasOne(Teacher::class);
     }
 
+    public function educationalCenter()
+    {
+        return $this->hasOne(EducationalCenter::class);
+    }
+
+    public function school()
+    {
+        return $this->hasOne(School::class);
+    }
+
+    public function kindergarten()
+    {
+        return $this->hasOne(Kindergarten::class);
+    }
+
+    public function nursery()
+    {
+        return $this->hasOne(Nursery::class);
+    }
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class)->latest();
     }
 
     public function payments()
