@@ -44,4 +44,14 @@ class School extends Model
     {
         return $this->belongsToMany(Grade::class, 'school_grades');
     }
+
+    public function educationalStages()
+    {
+        return $this->belongsToMany(EducationalStage::class, 'school_educational_stage');
+    }
+
+    public function studentTypes()
+    {
+        return $this->belongsToMany(StudentType::class, 'school_student_type');
+    }
 }

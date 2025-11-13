@@ -75,6 +75,8 @@ return [
     
     'Subjects Taught' => 'المواد التي يتم تدريسها',
     'Grades Taught' => 'الصفوف التي يتم تدريسها',
+    'Educational Stages' => 'المراحل الدراسية',
+    'Student Type' => 'نوع الطلاب',
     'Ages Accepted' => 'الأعمار المقبولة',
     'Work Experience' => 'الخبرة العملية',
     
@@ -137,4 +139,6 @@ return [
     // Messages
     'Registration completed successfully. Please complete payment to activate your account.' => 'تم التسجيل بنجاح. يرجى إكمال الدفع لتفعيل حسابك.',
     'Registration failed. Please try again.' => 'فشل التسجيل. يرجى المحاولة مرة أخرى.',
+    'At least one educational stage must be selected' => 'يجب اختيار مرحلة دراسية واحدة على الأقل',
+    'At least one student type must be selected' => 'يجب اختيار نوع طلاب واحد على الأقل',
 ];

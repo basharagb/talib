@@ -194,6 +194,50 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <!-- Educational Stages -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ __('Educational Stages') }} <span class="text-red-500">*</span>
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        @foreach($educationalStages as $stage)
+                            <label class="flex items-center space-x-2 rtl:space-x-reverse p-3 border border-gray-300 rounded-lg hover:bg-gray-50">
+                                <input type="checkbox" name="educational_stages[]" value="{{ $stage->id }}"
+                                       {{ in_array($stage->id, old('educational_stages', [])) ? 'checked' : '' }}
+                                       class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="text-sm text-gray-700 font-medium">
+                                    {{ app()->getLocale() == 'ar' ? $stage->name_ar : $stage->name_en }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                    @error('educational_stages')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Student Types -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ __('Student Type') }} <span class="text-red-500">*</span>
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        @foreach($studentTypes as $type)
+                            <label class="flex items-center space-x-2 rtl:space-x-reverse p-3 border border-gray-300 rounded-lg hover:bg-gray-50">
+                                <input type="checkbox" name="student_types[]" value="{{ $type->id }}"
+                                       {{ in_array($type->id, old('student_types', [])) ? 'checked' : '' }}
+                                       class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="text-sm text-gray-700 font-medium">
+                                    {{ app()->getLocale() == 'ar' ? $type->name_ar : $type->name_en }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                    @error('student_types')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
             <!-- Social Media Links -->

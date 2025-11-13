@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\Grade;
+use App\Models\EducationalStage;
+use App\Models\StudentType;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +22,10 @@ class SchoolRegistrationController extends Controller
     {
         $countries = Country::all();
         $grades = Grade::all();
+        $educationalStages = EducationalStage::where('is_active', true)->get();
+        $studentTypes = StudentType::where('is_active', true)->get();
         
-        return view('registration.school', compact('countries', 'grades'));
+        return view('registration.school', compact('countries', 'grades', 'educationalStages', 'studentTypes'));
     }
 
     public function register(SchoolRegistrationRequest $request)
@@ -59,6 +63,16 @@ class SchoolRegistrationController extends Controller
             // Attach selected grades
             if ($request->has('grades')) {
                 $school->grades()->attach($request->grades);
+            }
+
+            // Attach selected educational stages
+            if ($request->has('educational_stages')) {
+                $school->educationalStages()->attach($request->educational_stages);
+            }
+
+            // Attach selected student types
+            if ($request->has('student_types')) {
+                $school->studentTypes()->attach($request->student_types);
             }
 
             // Create subscription record

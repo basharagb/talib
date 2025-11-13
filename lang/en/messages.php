@@ -75,6 +75,8 @@ return [
     
     'Subjects Taught' => 'Subjects Taught',
     'Grades Taught' => 'Grades Taught',
+    'Educational Stages' => 'Educational Stages',
+    'Student Type' => 'Student Type',
     'Ages Accepted' => 'Ages Accepted',
     'Work Experience' => 'Work Experience',
     
@@ -137,4 +139,6 @@ return [
     // Messages
     'Registration completed successfully. Please complete payment to activate your account.' => 'Registration completed successfully. Please complete payment to activate your account.',
     'Registration failed. Please try again.' => 'Registration failed. Please try again.',
+    'At least one educational stage must be selected' => 'At least one educational stage must be selected',
+    'At least one student type must be selected' => 'At least one student type must be selected',
 ];
