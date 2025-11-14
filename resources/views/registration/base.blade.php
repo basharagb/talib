@@ -306,7 +306,7 @@
 
                 <!-- Registration Types Links -->
                 <div class="mt-12 text-center animate-slide-up">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">{{ __('Register as a different type:') }}</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">{{ __('messages.register_different_type') }}</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                         <a href="{{ route('register.teacher') }}" class="group relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-500 hover:to-blue-600 rounded-2xl p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
                             <div class="flex flex-col items-center">
@@ -315,7 +315,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                     </svg>
                                 </div>
-                                <span class="text-blue-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('Teacher') }}</span>
+                                <span class="text-blue-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('messages.teacher') }}</span>
                                 <span class="text-xs text-blue-600 group-hover:text-blue-100 mt-1 transition-colors duration-300">10 JD</span>
                             </div>
                         </a>
@@ -327,7 +327,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                     </svg>
                                 </div>
-                                <span class="text-green-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('Educational Center') }}</span>
+                                <span class="text-green-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('messages.educational_center') }}</span>
                                 <span class="text-xs text-green-600 group-hover:text-green-100 mt-1 transition-colors duration-300">25 JD</span>
                             </div>
                         </a>
@@ -339,7 +339,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                     </svg>
                                 </div>
-                                <span class="text-purple-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('School') }}</span>
+                                <span class="text-purple-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('messages.school') }}</span>
                                 <span class="text-xs text-purple-600 group-hover:text-purple-100 mt-1 transition-colors duration-300">50 JD</span>
                             </div>
                         </a>
@@ -351,7 +351,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-5-10v2m0 0V4m0 2h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </div>
-                                <span class="text-pink-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('Kindergarten') }}</span>
+                                <span class="text-pink-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('messages.kindergarten') }}</span>
                                 <span class="text-xs text-pink-600 group-hover:text-pink-100 mt-1 transition-colors duration-300">50 JD</span>
                             </div>
                         </a>
@@ -363,7 +363,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                     </svg>
                                 </div>
-                                <span class="text-yellow-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('Nursery') }}</span>
+                                <span class="text-yellow-700 group-hover:text-white font-semibold transition-colors duration-300">{{ __('messages.nursery') }}</span>
                                 <span class="text-xs text-yellow-600 group-hover:text-yellow-100 mt-1 transition-colors duration-300">40 JD</span>
                             </div>
                         </a>

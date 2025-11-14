@@ -1,91 +1,85 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
-@section('title', __('Search'))
+@section('title', __('messages.search') . ' - ' . config('app.name', 'طالب'))
 
 @section('styles')
 <style>
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .animate-fade-in-up {
-        animation: fadeInUp 0.6s ease-out forwards;
-    }
-    
     .search-card {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     .search-card:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .type-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+    }
+    
+    .search-form {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .filter-section {
+        background: #f8f9fa;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
 </style>
 @endsection
 
 @section('content')
-<div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Search Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ __('Search Educational Services') }}</h1>
-            <p class="text-xl text-gray-600">{{ __('Find teachers, educational centers, schools, kindergartens, and nurseries') }}</p>
+<div class="main-content">
+    <!-- Search Header -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="h2 text-primary mb-3">{{ __('messages.search_educational_services') }}</h1>
+            <p class="text-muted">{{ __('messages.find_teachers_centers_schools') }}</p>
         </div>
+    </div>
 
-        <!-- Search Form -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <form method="GET" action="{{ route('search') }}" class="space-y-6">
-                <!-- Main Search -->
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex-1">
-                        <input type="text" name="q" value="{{ $query }}" 
-                               placeholder="{{ __('Search by name...') }}"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    </div>
-                    <button type="submit" 
-                            class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                        {{ __('Search') }}
-                    </button>
+    <!-- Search Form -->
+    <div class="search-form">
+        <form method="GET" action="{{ route('search') }}">
+            <!-- Main Search -->
+            <div class="row mb-3">
+                <div class="col-md-8">
+                    <label for="search-input" class="form-label">{{ __('messages.search_by_name') }}</label>
+                    <input type="text" name="q" id="search-input" value="{{ $query }}" 
+                           placeholder="{{ __('messages.search_by_name') }}..."
+                           class="form-control form-control-lg">
                 </div>
-
-                <!-- Mobile Filter Toggle -->
-                <div class="md:hidden mb-4">
-                    <button id="mobile-filter-toggle" 
-                            class="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg flex items-center justify-between hover:bg-gray-200 transition-colors">
-                        <span>{{ __('Filters') }}</span>
-                        <svg id="filter-icon" class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
+                <div class="col-md-4">
+                    <label for="type-select" class="form-label">{{ __('messages.type') }}</label>
+                    <select name="type" id="type-select" class="form-select form-select-lg">
+                        <option value="">{{ __('messages.all_types') }}</option>
+                        <option value="teacher" {{ $type == 'teacher' ? 'selected' : '' }}>{{ __("messages.teacher") }}</option>
+                        <option value="educational_center" {{ $type == 'educational_center' ? 'selected' : '' }}>{{ __("messages.educational_center") }}</option>
+                        <option value="school" {{ $type == 'school' ? 'selected' : '' }}>{{ __("messages.school") }}</option>
+                        <option value="kindergarten" {{ $type == 'kindergarten' ? 'selected' : '' }}>{{ __("messages.kindergarten") }}</option>
+                        <option value="nursery" {{ $type == 'nursery' ? 'selected' : '' }}>{{ __("messages.nursery") }}</option>
+                    </select>
                 </div>
+            </div>
 
-                <!-- Filters -->
-                <div id="filters-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 md:block hidden md:grid">
-                    <!-- Type Filter -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Type') }}</label>
-                        <select name="type" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">{{ __('All Types') }}</option>
-                            <option value="teacher" {{ $type === 'teacher' ? 'selected' : '' }}>{{ __('Teachers') }}</option>
-                            <option value="educational_center" {{ $type === 'educational_center' ? 'selected' : '' }}>{{ __('Educational Centers') }}</option>
-                            <option value="school" {{ $type === 'school' ? 'selected' : '' }}>{{ __('Schools') }}</option>
-                            <option value="kindergarten" {{ $type === 'kindergarten' ? 'selected' : '' }}>{{ __('Kindergartens') }}</option>
-                            <option value="nursery" {{ $type === 'nursery' ? 'selected' : '' }}>{{ __('Nurseries') }}</option>
-                        </select>
-                    </div>
-
-                    <!-- Country Filter -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Country') }}</label>
-                        <select name="country_id" id="country_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">{{ __('All Countries') }}</option>
+            <!-- Advanced Filters -->
+            <div class="filter-section">
+                <h6 class="mb-3">{{ __("messages.advanced_filters") }}</h6>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="country-select" class="form-label">{{ __("messages.country") }}</label>
+                        <select name="country_id" id="country-select" class="form-select">
+                            <option value="">{{ __("messages.all_countries") }}</option>
                             @foreach($countries as $country)
                                 <option value="{{ $country->id }}" {{ $country_id == $country->id ? 'selected' : '' }}>
                                     {{ app()->getLocale() == 'ar' ? $country->name_ar : $country->name_en }}
@@ -93,20 +87,10 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <!-- City Filter -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('City') }}</label>
-                        <select name="city_id" id="city_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">{{ __('All Cities') }}</option>
-                        </select>
-                    </div>
-
-                    <!-- Subject Filter -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Subject') }}</label>
-                        <select name="subject_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">{{ __('All Subjects') }}</option>
+                    <div class="col-md-3">
+                        <label for="subject-select" class="form-label">{{ __('messages.subject') }}</label>
+                        <select name="subject_id" id="subject-select" class="form-select">
+                            <option value="">{{ __('messages.all_subjects') }}</option>
                             @foreach($subjects as $subject)
                                 <option value="{{ $subject->id }}" {{ $subject_id == $subject->id ? 'selected' : '' }}>
                                     {{ app()->getLocale() == 'ar' ? $subject->name_ar : $subject->name_en }}
@@ -114,12 +98,10 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <!-- Grade Filter -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Grade') }}</label>
-                        <select name="grade_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">{{ __('All Grades') }}</option>
+                    <div class="col-md-2">
+                        <label for="grade-select" class="form-label">{{ __('messages.grade') }}</label>
+                        <select name="grade_id" id="grade-select" class="form-select">
+                            <option value="">{{ __('messages.all_grades') }}</option>
                             @foreach($grades as $grade)
                                 <option value="{{ $grade->id }}" {{ $grade_id == $grade->id ? 'selected' : '' }}>
                                     {{ app()->getLocale() == 'ar' ? $grade->name_ar : $grade->name_en }}
@@ -127,74 +109,75 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <!-- Educational Stage Filter (for Schools) -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Educational Stage') }}</label>
-                        <select name="educational_stage_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">{{ __('All Stages') }}</option>
-                            @if(isset($educationalStages))
-                                @foreach($educationalStages as $stage)
-                                    <option value="{{ $stage->id }}" {{ $educational_stage_id == $stage->id ? 'selected' : '' }}>
-                                        {{ app()->getLocale() == 'ar' ? $stage->name_ar : $stage->name_en }}
-                                    </option>
-                                @endforeach
-                            @endif
+                    <div class="col-md-2">
+                        <label for="educational-stage-select" class="form-label">{{ __('messages.educational_stage') }}</label>
+                        <select name="educational_stage_id" id="educational-stage-select" class="form-select">
+                            <option value="">{{ __('messages.all_stages') }}</option>
+                            @foreach($educationalStages as $stage)
+                                <option value="{{ $stage->id }}" {{ $educational_stage_id == $stage->id ? 'selected' : '' }}>
+                                    {{ app()->getLocale() == 'ar' ? $stage->name_ar : $stage->name_en }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
-
-                    <!-- Student Type Filter (for Schools) -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Student Type') }}</label>
-                        <select name="student_type_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">{{ __('All Types') }}</option>
-                            @if(isset($studentTypes))
-                                @foreach($studentTypes as $studentType)
-                                    <option value="{{ $studentType->id }}" {{ $student_type_id == $studentType->id ? 'selected' : '' }}>
-                                        {{ app()->getLocale() == 'ar' ? $studentType->name_ar : $studentType->name_en }}
-                                    </option>
-                                @endforeach
-                            @endif
+                    <div class="col-md-2">
+                        <label for="student-type-select" class="form-label">{{ __('messages.student_type') }}</label>
+                        <select name="student_type_id" id="student-type-select" class="form-select">
+                            <option value="">{{ __('messages.all_types') }}</option>
+                            @foreach($studentTypes as $type)
+                                <option value="{{ $type->id }}" {{ $student_type_id == $type->id ? 'selected' : '' }}>
+                                    {{ app()->getLocale() == 'ar' ? $type->name_ar : $type->name_en }}
+                                </option>
+                            @endforeach
                         </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">&nbsp;</label>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-search me-2"></i>{{ __('messages.search') }}
+                        </button>
                     </div>
                 </div>
-            </form>
+            </div>
+        </form>
+    </div>
+
+    <!-- Results -->
+    @if(count($results) > 0)
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 class="h4 text-success">
+                    {{ __("messages.search_results") }} ({{ count($results) }} {{ __("messages.results_found") }})
+                </h3>
+            </div>
         </div>
 
-        <!-- Results -->
-        @if($results->isNotEmpty())
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">
-                    {{ __('Search Results') }} ({{ $results->count() }} {{ __('results found') }})
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="results-grid">
-                @foreach($results as $index => $result)
-                    <div class="search-card bg-white rounded-lg shadow-lg overflow-hidden opacity-0 animate-fade-in-up" 
-                         style="animation-delay: {{ $index * 0.1 }}s">
+        <div class="row" id="results-grid">
+            @foreach($results as $index => $result)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card search-card h-100">
                         <!-- Image -->
-                        <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                            @if($result['image'])
-                                <img src="{{ asset('storage/' . $result['image']) }}" alt="{{ $result['name'] }}" 
-                                     class="w-full h-full object-cover">
+                        <div class="card-img-top bg-gradient text-white d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            @if(isset($result['image']) && $result['image'])
+                                <img src="{{ asset('storage/' . $result['image']) }}" alt="{{ $result['name'] }}"
+                                     class="img-fluid rounded" style="max-height: 180px; object-fit: cover;">
                             @else
-                                <div class="text-white text-6xl">
+                                <div class="text-center">
                                     @switch($result['type'])
                                         @case('teacher')
-                                            👨‍🏫
+                                            <i class="bi bi-person-circle" style="font-size: 4rem;"></i>
                                             @break
                                         @case('educational_center')
-                                            🏢
+                                            <i class="bi bi-building" style="font-size: 4rem;"></i>
                                             @break
                                         @case('school')
-                                            🏫
+                                            <i class="bi bi-mortarboard" style="font-size: 4rem;"></i>
                                             @break
                                         @case('kindergarten')
-                                            🎨
+                                            <i class="bi bi-star" style="font-size: 4rem;"></i>
                                             @break
                                         @case('nursery')
-                                            👶
+                                            <i class="bi bi-heart" style="font-size: 4rem;"></i>
                                             @break
                                     @endswitch
                                 </div>
@@ -202,147 +185,105 @@
                         </div>
 
                         <!-- Content -->
-                        <div class="p-6">
+                        <div class="card-body">
                             <!-- Type Badge -->
-                            <div class="mb-3">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                                    @switch($result['type'])
-                                        @case('teacher')
-                                            bg-blue-100 text-blue-800
-                                            @break
-                                        @case('educational_center')
-                                            bg-purple-100 text-purple-800
-                                            @break
-                                        @case('school')
-                                            bg-green-100 text-green-800
-                                            @break
-                                        @case('kindergarten')
-                                            bg-pink-100 text-pink-800
-                                            @break
-                                        @case('nursery')
-                                            bg-yellow-100 text-yellow-800
-                                            @break
-                                    @endswitch
-                                ">
-                                    {{ __(ucfirst(str_replace('_', ' ', $result['type']))) }}
-                                </span>
+                            <div class="mb-2">
+                                @switch($result['type'])
+                                    @case('teacher')
+                                        <span class="badge bg-primary type-badge">{{ __("messages.teacher") }}</span>
+                                        @break
+                                    @case('educational_center')
+                                        <span class="badge bg-success type-badge">{{ __("messages.educational_center") }}</span>
+                                        @break
+                                    @case('school')
+                                        <span class="badge bg-warning type-badge">{{ __("messages.school") }}</span>
+                                        @break
+                                    @case('kindergarten')
+                                        <span class="badge bg-info type-badge">{{ __("messages.kindergarten") }}</span>
+                                        @break
+                                    @case('nursery')
+                                        <span class="badge bg-secondary type-badge">{{ __("messages.nursery") }}</span>
+                                        @break
+                                @endswitch
                             </div>
 
                             <!-- Name -->
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $result['name'] }}</h3>
-
-                            <!-- Location -->
-                            <p class="text-gray-600 mb-3 flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                {{ $result['location'] }}
-                            </p>
+                            <h5 class="card-title">{{ $result['name'] }}</h5>
 
                             <!-- Description -->
-                            <p class="text-gray-700 mb-4 line-clamp-3">{{ Str::limit($result['description'], 120) }}</p>
-
-                            <!-- Additional Info -->
-                            @if(isset($result['subjects']) && $result['subjects'])
-                                <p class="text-sm text-gray-600 mb-2">
-                                    <strong>{{ __('Subjects') }}:</strong> {{ $result['subjects'] }}
+                            @if(isset($result['description']) && $result['description'])
+                                <p class="card-text text-muted">
+                                    {{ Str::limit($result['description'], 100) }}
                                 </p>
                             @endif
 
-                            @if(isset($result['grades']) && $result['grades'])
-                                <p class="text-sm text-gray-600 mb-2">
-                                    <strong>{{ __('Grades') }}:</strong> {{ $result['grades'] }}
-                                </p>
+                            <!-- Location -->
+                            @if(isset($result['location']) && $result['location'])
+                                <div class="d-flex align-items-center text-muted mb-2">
+                                    <i class="bi bi-geo-alt me-2"></i>
+                                    <small>{{ $result['location'] }}</small>
+                                </div>
                             @endif
 
-                            @if(isset($result['ages']) && $result['ages'])
-                                <p class="text-sm text-gray-600 mb-2">
-                                    <strong>{{ __('Ages') }}:</strong> {{ $result['ages'] }}
-                                </p>
+                            <!-- Contact Info -->
+                            @if(isset($result['phone']) && $result['phone'])
+                                <div class="d-flex align-items-center text-muted mb-2">
+                                    <i class="bi bi-telephone me-2"></i>
+                                    <small>{{ $result['phone'] }}</small>
+                                </div>
                             @endif
+                        </div>
 
-                            @if(isset($result['degree']) && $result['degree'])
-                                <p class="text-sm text-gray-600 mb-2">
-                                    <strong>{{ __('Degree') }}:</strong> {{ __(ucfirst($result['degree'])) }}
-                                </p>
-                            @endif
-
-                            <!-- Contact -->
-                            <div class="flex items-center justify-between pt-4 border-t border-gray-200">
-                                <a href="tel:{{ $result['phone'] }}" 
-                                   class="flex items-center text-blue-600 hover:text-blue-800">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                    </svg>
-                                    {{ $result['phone'] }}
-                                </a>
-                            </div>
+                        <!-- Footer -->
+                        <div class="card-footer bg-transparent">
+                            <a href="{{ route('search.show', [$result['type'], $result['id']]) }}" class="btn btn-outline-primary btn-sm w-100">
+                                <i class="bi bi-eye me-2"></i>{{ __('messages.view_details') }}
+                            </a>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        @elseif(request()->hasAny(['q', 'type', 'country_id', 'city_id', 'subject_id', 'grade_id']))
-            <div class="text-center py-12">
-                <div class="text-6xl mb-4">🔍</div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ __('No results found') }}</h3>
-                <p class="text-gray-600">{{ __('Try adjusting your search criteria or browse all categories') }}</p>
-            </div>
-        @else
-            <div class="text-center py-12">
-                <div class="text-6xl mb-4">🎓</div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ __('Start your search') }}</h3>
-                <p class="text-gray-600">{{ __('Use the search form above to find educational services') }}</p>
+                </div>
+            @endforeach
+        </div>
+        
+        <!-- Pagination -->
+        @if($results->hasPages())
+            <div class="row mt-4">
+                <div class="col-12 d-flex justify-content-center">
+                    {{ $results->links() }}
+                </div>
             </div>
         @endif
-    </div>
+    @else
+        <!-- No Results -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body py-5">
+                        <i class="bi bi-search text-muted" style="font-size: 4rem;"></i>
+                        <h4 class="mt-3">{{ __("messages.no_results_found") }}</h4>
+                        <p class="text-muted">{{ __("messages.try_adjusting_search") }}</p>
+                        <a href="{{ route('search') }}" class="btn btn-primary">
+                            {{ __("messages.browse_all") }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
+@endsection
 
+@section('scripts')
 <script>
-document.getElementById('country_filter').addEventListener('change', function() {
-    const countryId = this.value;
-    const citySelect = document.getElementById('city_filter');
-    
-    // Clear existing options
-    citySelect.innerHTML = '<option value="">{{ __("All Cities") }}</option>';
-    
-    if (countryId) {
-        fetch(`{{ route('search.cities', '') }}/${countryId}`)
-            .then(response => response.json())
-            .then(cities => {
-                cities.forEach(city => {
-                    const option = document.createElement('option');
-                    option.value = city.id;
-                    option.textContent = '{{ app()->getLocale() }}' === 'ar' ? city.name_ar : city.name_en;
-                    if (city.id == '{{ $city_id }}') {
-                        option.selected = true;
-                    }
-                    citySelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error:', error));
-    }
-});
-
-// Load cities on page load if country is selected
-if (document.getElementById('country_filter').value) {
-    document.getElementById('country_filter').dispatchEvent(new Event('change'));
-}
-
-// Mobile filter toggle
-document.getElementById('mobile-filter-toggle').addEventListener('click', function() {
-    const filtersContainer = document.getElementById('filters-container');
-    const filterIcon = document.getElementById('filter-icon');
-    
-    if (filtersContainer.classList.contains('hidden')) {
-        filtersContainer.classList.remove('hidden');
-        filtersContainer.classList.add('block');
-        filterIcon.style.transform = 'rotate(180deg)';
-    } else {
-        filtersContainer.classList.add('hidden');
-        filtersContainer.classList.remove('block');
-        filterIcon.style.transform = 'rotate(0deg)';
-    }
-});
+    // Auto-submit form when filters change
+    document.addEventListener('DOMContentLoaded', function() {
+        const selects = document.querySelectorAll('#type-select, #country-select, #subject-select, #grade-select, #educational-stage-select, #student-type-select');
+        selects.forEach(select => {
+            select.addEventListener('change', function() {
+                // Optional: Auto-submit on filter change
+                // this.form.submit();
+            });
+        });
+    });
 </script>
 @endsection

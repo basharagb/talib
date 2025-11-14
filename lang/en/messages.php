@@ -1,5 +1,22 @@
 <?php
 
+/**
+ * English messages for Laravel.
+ *
+ * This file contains all the application messages in English language
+ * for the Talib educational platform.
+ *
+ * PHP version 8.4
+ *
+ * @category Language
+ * @package  Talib
+ * @author   Talib Platform <info@talib.com>
+ * @license  MIT License
+ * @version  GIT: <git_id>
+ * @link     https://talib.com
+ * @since    1.0.0
+ */
+
 return [
     'welcome' => 'Welcome to Talib Platform',
     'description' => 'Educational platform connecting students with teachers and educational centers',
@@ -19,6 +36,37 @@ return [
     'kindergarten_fee' => '50 JD annually',
     'nursery_fee' => '40 JD annually',
     'student_free' => 'Free',
+    
+    // Dashboard
+    'dashboard' => 'Dashboard',
+    'talib_platform' => 'Talib Platform',
+    'profile' => 'Profile',
+    'search' => 'Search',
+    'registration' => 'Registration',
+    'settings' => 'Settings',
+    'home' => 'Home',
+    'logout' => 'Logout',
+    'view_more' => 'View More',
+    'register_now' => 'Register Now',
+    'register_school' => 'Register School',
+    'total_students' => 'Total Students',
+    'active_teachers' => 'Active Teachers',
+    'educational_centers' => 'Educational Centers',
+    'satisfaction_rate' => 'Satisfaction Rate',
+    'recent_activity' => 'Recent Activity',
+    'quick_actions' => 'Quick Actions',
+    'search_platform' => 'Search Platform',
+    'register_as_teacher' => 'Register as Teacher',
+    'register_center' => 'Register Center',
+    'welcome_back' => 'Welcome Back',
+    'dashboard_subtitle' => 'Manage your educational journey',
+    'active' => 'Active',
+    'new_student_enrolled' => 'New Student Enrolled',
+    'assignment_completed' => 'Assignment Completed',
+    'new_teacher_registered' => 'New Teacher Registered',
+    'activity_time_1' => '5 minutes ago',
+    'activity_time_2' => '15 minutes ago',
+    'activity_time_3' => '1 hour ago',
     
     // Registration Forms
     'Teacher Registration' => 'Teacher Registration',
@@ -146,14 +194,12 @@ return [
     'At least one student type must be selected' => 'At least one student type must be selected',
     
     // Navigation & UI
-    'home' => 'Home',
     'features' => 'Features',
     'statistics' => 'Statistics',
     'testimonials' => 'Testimonials',
     'contact' => 'Contact',
     'nav_login' => 'Login',
     'start_now' => 'Start Now',
-    'dashboard' => 'Dashboard',
     'language' => 'Language',
     'arabic' => 'العربية',
     'english' => 'English',
@@ -272,12 +318,62 @@ return [
     'search_now_btn' => 'Search Now',
     'contact_us_btn' => 'Contact Us',
     
+    // Search page translations
+    'search_educational_services' => 'Search Educational Services',
+    'find_teachers_centers_schools' => 'Find teachers, centers, schools, kindergartens and nurseries',
+    'search_by_name' => 'Search by name',
+    'all_types' => 'All Types',
+    'all_countries' => 'All Countries',
+    'all_subjects' => 'All Subjects',
+    'all_grades' => 'All Grades',
+    'all_stages' => 'All Stages',
+    'educational_stage' => 'Educational Stage',
+    'student_type' => 'Student Type',
+    'grade' => 'Grade',
+    'subject' => 'Subject',
+    'country' => 'Country',
+    'type' => 'Type',
+    'search_results' => 'Search Results',
+    'results_found' => 'results found',
+    'no_results_found' => 'No results found',
+    'try_adjusting_search' => 'Try adjusting your search criteria or browse all services',
+    'browse_all' => 'Browse All',
+    'view_details' => 'View Details',
+    'advanced_filters' => 'Advanced Filters',
+    'educational_platform' => 'Educational Platform',
+    'platform_description' => 'Comprehensive educational platform connecting students with the best teachers and educational centers',
+    'all_rights_reserved' => 'All Rights Reserved',
+    'location' => 'Location',
+    'contact_information' => 'Contact Information',
+    'phone' => 'Phone',
+    'email' => 'Email',
+    'social_media' => 'Social Media',
+    'contact_now' => 'Contact Now',
+    'back_to_search' => 'Back to Search',
+    'subjects' => 'Subjects',
+    'grades' => 'Grades',
+    'educational_stages' => 'Educational Stages',
+    'student_types' => 'Student Types',
+    'accepted_ages' => 'Accepted Ages',
+    
+    // Registration page titles
+    'school_registration' => 'Private School Registration',
+    'school_registration_description' => 'Join our educational network - Annual subscription: 50 JD',
+    'teacher_registration' => 'Teacher Registration',
+    'teacher_registration_description' => 'Join our educational network - Annual subscription: 10 JD',
+    'educational_center_registration' => 'Educational Center Registration',
+    'educational_center_registration_description' => 'Join our educational network - Annual subscription: 25 JD',
+    'kindergarten_registration' => 'Kindergarten Registration',
+    'kindergarten_registration_description' => 'Join our educational network - Annual subscription: 50 JD',
+    'nursery_registration' => 'Nursery Registration',
+    'nursery_registration_description' => 'Join our educational network - Annual subscription: 40 JD',
+    'register_different_type' => 'Register as a different type:',
+    
     // Footer
     'footer_description' => 'The new digital education platform that connects students with the best teachers and educational centers in the region.',
     'footer_email' => 'info@talib.com',
     'footer_phone' => '+962 6 123 4567',
     'footer_location' => 'Amman, Jordan',
-    'all_rights_reserved' => ' 2024 Talib. All rights reserved.',
     
     // Dashboard
     'Dashboard' => 'Dashboard',
@@ -338,4 +434,74 @@ return [
     'Assignment Completion' => 'Assignment Completion',
     'Course Progress' => 'Course Progress',
     'Student Satisfaction' => 'Student Satisfaction',
+    
+    'todays_schedule' => 'Today\'s Schedule',
+    'upcoming' => 'Upcoming',
+    'scheduled' => 'Scheduled',
+    'mathematics_grade_10' => 'Mathematics - Grade 10',
+    'english_grade_9' => 'English - Grade 9',
+    'science_grade_8' => 'Science - Grade 8',
+    'with_teacher' => 'with teacher',
+    'performance_overview' => 'Performance Overview',
+    'student_engagement' => 'Student Engagement',
+    'course_completion' => 'Course Completion',
+    'monthly_revenue' => 'Monthly Revenue',
+    'jd' => 'JD',
+    'from_last_month' => 'from last month',
+    
+    // Registration Review
+    'registration_review' => 'Registration Review',
+    'pending_registrations' => 'Pending Registrations',
+    'review_and_approve_registrations' => 'Review and approve registrations',
+    'pending_requests' => 'pending requests',
+    'back_to_dashboard' => 'Back to Dashboard',
+    'registered_on' => 'Registered on',
+    'view' => 'View',
+    'approve' => 'Approve',
+    'reject' => 'Reject',
+    'no_pending_registrations' => 'No Pending Registrations',
+    'all_registrations_processed' => 'All registrations have been processed',
+    'reject_registration' => 'Reject Registration',
+    'reject_registration_confirm' => 'Are you sure you want to reject the registration for',
+    'rejection_reason' => 'Rejection Reason',
+    'cancel' => 'Cancel',
+    'approve_registration_confirm' => 'Are you sure you want to approve this registration?',
+    'registration_approved_successfully' => 'Registration approved successfully',
+    'registration_rejected_successfully' => 'Registration rejected successfully',
+    'registration_already_processed' => 'This registration has already been processed',
+    
+    // Dashboard Updates
+    'teachers' => 'Teachers',
+    'private_schools' => 'Private Schools',
+    'kindergartens' => 'Kindergartens',
+    'nurseries' => 'Nurseries',
+    'students_parents' => 'Students & Parents',
+    'total_revenue' => 'Total Revenue',
+    'annually' => 'Annually',
+    'needs_review' => 'Needs Review',
+    'review_now' => 'Review Now',
+    'registration_options' => 'Registration Options',
+    
+    
+    // Registration Details
+    'registration_details' => 'Registration Details',
+    'back_to_list' => 'Back to List',
+    'basic_information' => 'Basic Information',
+    'registration_date' => 'Registration Date',
+    'teacher_information' => 'Teacher Information',
+    'center_information' => 'Center Information',
+    'academic_degree' => 'Academic Degree',
+    'experience_years' => 'Experience Years',
+    'years' => 'years',
+    'specialization' => 'Specialization',
+    'gender' => 'Gender',
+    'male' => 'Male',
+    'female' => 'Female',
+    'center_name' => 'Center Name',
+    'address' => 'Address',
+    'website' => 'Website',
+    'description' => 'Description',
+    'actions' => 'Actions',
+    'pending' => 'Pending',
+    'status' => 'Status',
 ];

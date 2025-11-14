@@ -13,18 +13,30 @@ class Nursery extends Model
         'user_id',
         'country_id',
         'city_id',
-        'district',
-        'location',
+        'name',
         'description',
+        'phone',
+        'email',
+        'address',
+        'website',
+        'facebook',
+        'twitter',
+        'instagram',
+        'linkedin',
         'logo',
-        'social_links',
-        'ages_accepted',
-        'subscription_fee',
+        'latitude',
+        'longitude',
+        'is_active',
+        'min_age_months',
+        'max_age_months',
     ];
 
     protected $casts = [
-        'social_links' => 'array',
-        'ages_accepted' => 'array',
+        'latitude' => 'decimal:8',
+        'longitude' => 'decimal:8',
+        'is_active' => 'boolean',
+        'min_age_months' => 'integer',
+        'max_age_months' => 'integer',
     ];
 
     public function user()

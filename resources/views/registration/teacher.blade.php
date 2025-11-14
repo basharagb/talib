@@ -1,10 +1,9 @@
 @extends('registration.base')
 
-@section('title', __('Teacher Registration'))
+@section('title', __('messages.teacher_registration'))
 
-@section('page-title', __('Teacher Registration'))
-
-@section('page-description', __('Join our platform as a teacher. Annual subscription: 10 JD'))
+@section('page-title', __('messages.teacher_registration'))
+@section('page-description', __('messages.teacher_registration_description'))
 
 @section('form-content')
 <form method="POST" action="{{ route('register.teacher.store') }}" enctype="multipart/form-data" class="space-y-6">

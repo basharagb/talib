@@ -31,6 +31,7 @@ Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('local
 // Search Routes (with rate limiting for public access)
 Route::get('/search', [SearchController::class, 'index'])->name('search')->middleware('throttle:60,1');
 Route::get('/search/cities/{country}', [SearchController::class, 'getCities'])->name('search.cities')->middleware('throttle:100,1');
+Route::get('/search/{type}/{id}', [SearchController::class, 'show'])->name('search.show')->middleware('throttle:60,1');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -74,6 +75,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Admin routes for registration review
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/registrations', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'index'])->name('registrations.index');
+        Route::get('/registrations/{user}', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'show'])->name('registrations.show');
+        Route::post('/registrations/{user}/approve', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'approve'])->name('registrations.approve');
+        Route::post('/registrations/{user}/reject', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'reject'])->name('registrations.reject');
+    });
 });
 
 require __DIR__.'/auth.php';

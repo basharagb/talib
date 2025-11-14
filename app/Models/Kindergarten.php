@@ -13,16 +13,26 @@ class Kindergarten extends Model
         'user_id',
         'country_id',
         'city_id',
-        'district',
-        'location',
+        'name',
         'description',
+        'phone',
+        'email',
+        'address',
+        'website',
+        'facebook',
+        'twitter',
+        'instagram',
+        'linkedin',
         'logo',
-        'social_links',
-        'subscription_fee',
+        'latitude',
+        'longitude',
+        'is_active',
     ];
 
     protected $casts = [
-        'social_links' => 'array',
+        'latitude' => 'decimal:8',
+        'longitude' => 'decimal:8',
+        'is_active' => 'boolean',
     ];
 
     public function user()

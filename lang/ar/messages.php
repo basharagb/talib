@@ -1,5 +1,22 @@
 <?php
 
+/**
+ * Arabic messages for Laravel.
+ *
+ * This file contains all the application messages in Arabic language
+ * for the Talib educational platform.
+ *
+ * PHP version 8.4
+ *
+ * @category Language
+ * @package  Talib
+ * @author   Talib Platform <info@talib.com>
+ * @license  MIT License
+ * @version  GIT: <git_id>
+ * @link     https://talib.com
+ * @since    1.0.0
+ */
+
 return [
     'welcome' => 'مرحباً بكم في موقع طالب',
     'description' => 'منصة تعليمية تربط الطلاب بالمعلمين والمراكز التعليمية',
@@ -19,6 +36,37 @@ return [
     'kindergarten_fee' => '50 دينار سنوياً',
     'nursery_fee' => '40 دينار سنوياً',
     'student_free' => 'مجاني',
+    
+    // Dashboard
+    'dashboard' => 'لوحة التحكم',
+    'talib_platform' => 'منصة طالب',
+    'profile' => 'الملف الشخصي',
+    'search' => 'البحث',
+    'registration' => 'التسجيل',
+    'settings' => 'الإعدادات',
+    'home' => 'الرئيسية',
+    'logout' => 'تسجيل الخروج',
+    'view_more' => 'عرض المزيد',
+    'register_now' => 'سجل الآن',
+    'register_school' => 'تسجيل مدرسة',
+    'total_students' => 'إجمالي الطلاب',
+    'active_teachers' => 'المعلمون النشطون',
+    'educational_centers' => 'المراكز التعليمية',
+    'satisfaction_rate' => 'معدل الرضا',
+    'recent_activity' => 'النشاط الأخير',
+    'quick_actions' => 'إجراءات سريعة',
+    'search_platform' => 'البحث في المنصة',
+    'register_as_teacher' => 'التسجيل كمعلم',
+    'register_center' => 'تسجيل مركز',
+    'welcome_back' => 'مرحباً بعودتك',
+    'dashboard_subtitle' => 'إدارة رحلتك التعليمية',
+    'active' => 'نشط',
+    'new_student_enrolled' => 'تسجيل طالب جديد',
+    'assignment_completed' => 'تم إنجاز المهمة',
+    'new_teacher_registered' => 'تسجيل معلم جديد',
+    'activity_time_1' => 'منذ 5 دقائق',
+    'activity_time_2' => 'منذ 15 دقيقة',
+    'activity_time_3' => 'منذ ساعة',
     
     // Registration Forms
     'Teacher Registration' => 'تسجيل المعلم',
@@ -146,14 +194,12 @@ return [
     'At least one student type must be selected' => 'يجب اختيار نوع طلاب واحد على الأقل',
     
     // Navigation & UI
-    'home' => 'الرئيسية',
     'features' => 'الميزات',
     'statistics' => 'الإحصائيات',
     'testimonials' => 'آراء العملاء',
     'contact' => 'تواصل معنا',
     'nav_login' => 'تسجيل الدخول',
     'start_now' => 'ابدأ الآن',
-    'dashboard' => 'لوحة التحكم',
     'language' => 'اللغة',
     'arabic' => 'العربية',
     'english' => 'English',
@@ -270,12 +316,62 @@ return [
     'search_now_btn' => 'ابحث الآن',
     'contact_us_btn' => 'تواصل معنا',
     
+    // Search page translations
+    'search_educational_services' => 'البحث في الخدمات التعليمية',
+    'find_teachers_centers_schools' => 'ابحث عن المعلمين والمراكز والمدارس',
+    'search_by_name' => 'البحث بالاسم',
+    'all_types' => 'جميع الأنواع',
+    'all_countries' => 'جميع البلدان',
+    'all_subjects' => 'جميع المواد',
+    'all_grades' => 'جميع الصفوف',
+    'all_stages' => 'جميع المراحل',
+    'educational_stage' => 'المرحلة الدراسية',
+    'student_type' => 'نوع الطلاب',
+    'grade' => 'الصف',
+    'subject' => 'المادة',
+    'country' => 'البلد',
+    'type' => 'النوع',
+    'search_results' => 'نتائج البحث',
+    'results_found' => 'نتيجة موجودة',
+    'no_results_found' => 'لم يتم العثور على نتائج',
+    'try_adjusting_search' => 'حاول تعديل معايير البحث أو تصفح جميع الخدمات',
+    'browse_all' => 'تصفح الكل',
+    'view_details' => 'عرض التفاصيل',
+    'advanced_filters' => 'فلاتر متقدمة',
+    'educational_platform' => 'المنصة التعليمية',
+    'platform_description' => 'منصة تعليمية شاملة تربط الطلاب بأفضل المعلمين والمراكز التعليمية',
+    'all_rights_reserved' => 'جميع الحقوق محفوظة',
+    'location' => 'الموقع',
+    'contact_information' => 'معلومات التواصل',
+    'phone' => 'الهاتف',
+    'email' => 'البريد الإلكتروني',
+    'social_media' => 'وسائل التواصل الاجتماعي',
+    'contact_now' => 'تواصل الآن',
+    'back_to_search' => 'العودة للبحث',
+    'subjects' => 'المواد',
+    'grades' => 'الصفوف',
+    'educational_stages' => 'المراحل الدراسية',
+    'student_types' => 'أنواع الطلاب',
+    'accepted_ages' => 'الأعمار المقبولة',
+    
+    // Registration page titles
+    'school_registration' => 'تسجيل مدرسة خاصة',
+    'school_registration_description' => 'انضم إلى شبكتنا التعليمية - اشتراك سنوي: 50 دينار',
+    'teacher_registration' => 'تسجيل معلم/معلمة',
+    'teacher_registration_description' => 'انضم إلى شبكتنا التعليمية - اشتراك سنوي: 10 دينار',
+    'educational_center_registration' => 'تسجيل مركز تعليمي',
+    'educational_center_registration_description' => 'انضم إلى شبكتنا التعليمية - اشتراك سنوي: 25 دينار',
+    'kindergarten_registration' => 'تسجيل روضة أطفال',
+    'kindergarten_registration_description' => 'انضم إلى شبكتنا التعليمية - اشتراك سنوي: 50 دينار',
+    'nursery_registration' => 'تسجيل حضانة أطفال',
+    'nursery_registration_description' => 'انضم إلى شبكتنا التعليمية - اشتراك سنوي: 40 دينار',
+    'register_different_type' => 'سجل كنوع مختلف:',
+    
     // Footer
     'footer_description' => 'منصة التعليم الرقمي الجديدة التي تربط الطلاب بأفضل المعلمين والمراكز التعليمية في المنطقة.',
     'footer_email' => 'info@talib.com',
     'footer_phone' => '+962 6 123 4567',
     'footer_location' => 'عمان، الأردن',
-    'all_rights_reserved' => '© 2024 طالب. جميع الحقوق محفوظة.',
     
     // Dashboard
     'Dashboard' => 'لوحة التحكم',
@@ -336,4 +432,73 @@ return [
     'Assignment Completion' => 'إنجاز الواجبات',
     'Course Progress' => 'تقدم الدورة',
     'Student Satisfaction' => 'رضا الطلاب',
+    
+    'todays_schedule' => 'جدول اليوم',
+    'upcoming' => 'قادم',
+    'scheduled' => 'مجدول',
+    'mathematics_grade_10' => 'رياضيات - الصف العاشر',
+    'english_grade_9' => 'إنجليزي - الصف التاسع',
+    'science_grade_8' => 'علوم - الصف الثامن',
+    'with_teacher' => 'مع المعلم',
+    'course_completion' => 'إنجاز الدورات',
+    'monthly_revenue' => 'الإيرادات الشهرية',
+    'jd' => 'دينار',
+    'from_last_month' => 'من الشهر الماضي',
+    
+    // Registration Review
+    'registration_review' => 'مراجعة طلبات التسجيل',
+    'pending_registrations' => 'طلبات التسجيل المعلقة',
+    'review_and_approve_registrations' => 'مراجعة والموافقة على طلبات التسجيل',
+    'pending_requests' => 'طلب معلق',
+    'back_to_dashboard' => 'العودة إلى لوحة التحكم',
+    'registered_on' => 'تم التسجيل في',
+    'view' => 'عرض',
+    'approve' => 'موافقة',
+    'reject' => 'رفض',
+    'no_pending_registrations' => 'لا توجد طلبات تسجيل معلقة',
+    'all_registrations_processed' => 'تم معالجة جميع طلبات التسجيل',
+    'reject_registration' => 'رفض طلب التسجيل',
+    'reject_registration_confirm' => 'هل أنت متأكد من رفض طلب التسجيل لـ',
+    'rejection_reason' => 'سبب الرفض',
+    'cancel' => 'إلغاء',
+    'approve_registration_confirm' => 'هل أنت متأكد من الموافقة على هذا الطلب؟',
+    'registration_approved_successfully' => 'تم الموافقة على طلب التسجيل بنجاح',
+    'registration_rejected_successfully' => 'تم رفض طلب التسجيل بنجاح',
+    'registration_already_processed' => 'تم معالجة هذا الطلب مسبقاً',
+    
+    // Dashboard Updates
+    'teachers' => 'معلمين/معلمات',
+    'private_schools' => 'مدارس خاصة',
+    'kindergartens' => 'رياض أطفال',
+    'nurseries' => 'حضانات أطفال',
+    'students_parents' => 'طلاب وأولياء أمور',
+    'total_revenue' => 'إجمالي الإيرادات',
+    'annually' => 'سنوياً',
+    'needs_review' => 'تحتاج مراجعة',
+    'review_now' => 'راجع الآن',
+    'registration_options' => 'خيارات التسجيل',
+    
+    
+    // Registration Details
+    'registration_details' => 'تفاصيل طلب التسجيل',
+    'back_to_list' => 'العودة إلى القائمة',
+    'basic_information' => 'المعلومات الأساسية',
+    'registration_date' => 'تاريخ التسجيل',
+    'teacher_information' => 'معلومات المعلم',
+    'center_information' => 'معلومات المركز',
+    'academic_degree' => 'الدرجة العلمية',
+    'experience_years' => 'سنوات الخبرة',
+    'years' => 'سنوات',
+    'specialization' => 'التخصص',
+    'gender' => 'الجنس',
+    'male' => 'ذكر',
+    'female' => 'أنثى',
+    'center_name' => 'اسم المركز',
+    'address' => 'العنوان',
+    'website' => 'الموقع الإلكتروني',
+    'description' => 'الوصف',
+    'actions' => 'الإجراءات',
+    'pending' => 'معلق',
+    'status' => 'الحالة',
+    
 ];

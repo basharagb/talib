@@ -1,5 +1,22 @@
 <?php
 
+/**
+ * Arabic validation messages for Laravel.
+ *
+ * This file contains all the validation error messages in Arabic language
+ * for the Talib educational platform.
+ *
+ * PHP version 8.4
+ *
+ * @category Language
+ * @package  Talib
+ * @author   Talib Platform <info@talib.com>
+ * @license  MIT License
+ * @version  GIT: <git_id>
+ * @link     https://talib.com
+ * @since    1.0.0
+ */
+
 return [
     'accepted' => 'يجب قبول :attribute.',
     'active_url' => ':attribute ليس رابطاً صحيحاً.',

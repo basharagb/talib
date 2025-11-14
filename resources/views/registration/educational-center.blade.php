@@ -1,6 +1,7 @@
 @extends('registration.base')
 
-@section('title', __('Educational Center Registration'))
+@section('page-title', __('messages.educational_center_registration'))
+@section('page-description', __('messages.educational_center_registration_description'))
 
 @section('content')
 <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">

@@ -1,9 +1,9 @@
 @extends('registration.base')
 
-@section('title', __('School Registration'))
+@section('title', __('messages.school_registration'))
 
-@section('page-title', __('Private School Registration'))
-@section('page-description', __('Join our educational network - Annual subscription: 50 JD'))
+@section('page-title', __('messages.school_registration'))
+@section('page-description', __('messages.school_registration_description'))
 
 @section('form-content')
 <form method="POST" action="{{ route('register.school.store') }}" enctype="multipart/form-data" class="space-y-6">

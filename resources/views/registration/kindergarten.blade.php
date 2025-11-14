@@ -1,6 +1,7 @@
 @extends('registration.base')
 
-@section('title', __('Kindergarten Registration'))
+@section('page-title', __('messages.kindergarten_registration'))
+@section('page-description', __('messages.kindergarten_registration_description'))
 
 @section('content')
 <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
