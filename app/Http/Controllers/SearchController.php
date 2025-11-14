@@ -11,15 +11,35 @@ use App\Models\Country;
 use App\Models\City;
 use App\Models\Subject;
 use App\Models\Grade;
+use App\Models\EducationalStage;
+use App\Models\StudentType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $countries = Country::all();
-        $subjects = Subject::all();
-        $grades = Grade::all();
+        // Cache static data for 1 hour
+        $countries = Cache::remember('countries', 3600, function () {
+            return Country::all();
+        });
+        
+        $subjects = Cache::remember('subjects', 3600, function () {
+            return Subject::all();
+        });
+        
+        $grades = Cache::remember('grades', 3600, function () {
+            return Grade::all();
+        });
+        
+        $educationalStages = Cache::remember('educational_stages', 3600, function () {
+            return EducationalStage::where('is_active', true)->get();
+        });
+        
+        $studentTypes = Cache::remember('student_types', 3600, function () {
+            return StudentType::where('is_active', true)->get();
+        });
         
         $results = [];
         $query = $request->get('q');
@@ -28,18 +48,20 @@ class SearchController extends Controller
         $city_id = $request->get('city_id');
         $subject_id = $request->get('subject_id');
         $grade_id = $request->get('grade_id');
+        $educational_stage_id = $request->get('educational_stage_id');
+        $student_type_id = $request->get('student_type_id');
 
-        if ($query || $type || $country_id || $city_id || $subject_id || $grade_id) {
-            $results = $this->performSearch($query, $type, $country_id, $city_id, $subject_id, $grade_id);
+        if ($query || $type || $country_id || $city_id || $subject_id || $grade_id || $educational_stage_id || $student_type_id) {
+            $results = $this->performSearch($query, $type, $country_id, $city_id, $subject_id, $grade_id, $educational_stage_id, $student_type_id);
         }
 
         return view('search.index', compact(
-            'results', 'query', 'type', 'countries', 'subjects', 'grades',
-            'country_id', 'city_id', 'subject_id', 'grade_id'
+            'results', 'query', 'type', 'countries', 'subjects', 'grades', 'educationalStages', 'studentTypes',
+            'country_id', 'city_id', 'subject_id', 'grade_id', 'educational_stage_id', 'student_type_id'
         ));
     }
 
-    private function performSearch($query, $type, $country_id, $city_id, $subject_id, $grade_id)
+    private function performSearch($query, $type, $country_id, $city_id, $subject_id, $grade_id, $educational_stage_id = null, $student_type_id = null)
     {
         $results = collect();
 
@@ -125,7 +147,7 @@ class SearchController extends Controller
 
         // Search Schools
         if (!$type || $type === 'school') {
-            $schools = School::with(['user', 'country', 'city', 'grades'])
+            $schools = School::with(['user', 'country', 'city', 'grades', 'educationalStages', 'studentTypes'])
                 ->whereHas('user', function ($q) use ($query) {
                     if ($query) {
                         $q->where('name', 'like', "%{$query}%");
@@ -142,6 +164,16 @@ class SearchController extends Controller
                         $gq->where('grades.id', $grade_id);
                     });
                 })
+                ->when($educational_stage_id, function ($q) use ($educational_stage_id) {
+                    $q->whereHas('educationalStages', function ($esq) use ($educational_stage_id) {
+                        $esq->where('educational_stages.id', $educational_stage_id);
+                    });
+                })
+                ->when($student_type_id, function ($q) use ($student_type_id) {
+                    $q->whereHas('studentTypes', function ($stq) use ($student_type_id) {
+                        $stq->where('student_types.id', $student_type_id);
+                    });
+                })
                 ->whereHas('user.subscription', function ($q) {
                     $q->where('status', 'active');
                 })
@@ -156,6 +188,8 @@ class SearchController extends Controller
                         'phone' => $school->user->phone,
                         'image' => $school->logo,
                         'grades' => $school->grades->pluck('name_en')->implode(', '),
+                        'educational_stages' => $school->educationalStages->pluck('name_ar')->implode(', '),
+                        'student_types' => $school->studentTypes->pluck('name_ar')->implode(', '),
                     ];
                 });
 

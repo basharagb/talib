@@ -2,6 +2,34 @@
 
 @section('title', __('Search'))
 
+@section('styles')
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .search-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .search-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="min-h-screen bg-gray-50 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,8 +55,19 @@
                     </button>
                 </div>
 
+                <!-- Mobile Filter Toggle -->
+                <div class="md:hidden mb-4">
+                    <button id="mobile-filter-toggle" 
+                            class="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg flex items-center justify-between hover:bg-gray-200 transition-colors">
+                        <span>{{ __('Filters') }}</span>
+                        <svg id="filter-icon" class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                </div>
+
                 <!-- Filters -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div id="filters-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 md:block hidden md:grid">
                     <!-- Type Filter -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Type') }}</label>
@@ -88,6 +127,36 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <!-- Educational Stage Filter (for Schools) -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Educational Stage') }}</label>
+                        <select name="educational_stage_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">{{ __('All Stages') }}</option>
+                            @if(isset($educationalStages))
+                                @foreach($educationalStages as $stage)
+                                    <option value="{{ $stage->id }}" {{ $educational_stage_id == $stage->id ? 'selected' : '' }}>
+                                        {{ app()->getLocale() == 'ar' ? $stage->name_ar : $stage->name_en }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+
+                    <!-- Student Type Filter (for Schools) -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Student Type') }}</label>
+                        <select name="student_type_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">{{ __('All Types') }}</option>
+                            @if(isset($studentTypes))
+                                @foreach($studentTypes as $studentType)
+                                    <option value="{{ $studentType->id }}" {{ $student_type_id == $studentType->id ? 'selected' : '' }}>
+                                        {{ app()->getLocale() == 'ar' ? $studentType->name_ar : $studentType->name_en }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
                 </div>
             </form>
         </div>
@@ -100,9 +169,10 @@
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($results as $result)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="results-grid">
+                @foreach($results as $index => $result)
+                    <div class="search-card bg-white rounded-lg shadow-lg overflow-hidden opacity-0 animate-fade-in-up" 
+                         style="animation-delay: {{ $index * 0.1 }}s">
                         <!-- Image -->
                         <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                             @if($result['image'])
@@ -258,5 +328,21 @@ document.getElementById('country_filter').addEventListener('change', function() 
 if (document.getElementById('country_filter').value) {
     document.getElementById('country_filter').dispatchEvent(new Event('change'));
 }
+
+// Mobile filter toggle
+document.getElementById('mobile-filter-toggle').addEventListener('click', function() {
+    const filtersContainer = document.getElementById('filters-container');
+    const filterIcon = document.getElementById('filter-icon');
+    
+    if (filtersContainer.classList.contains('hidden')) {
+        filtersContainer.classList.remove('hidden');
+        filtersContainer.classList.add('block');
+        filterIcon.style.transform = 'rotate(180deg)';
+    } else {
+        filtersContainer.classList.add('hidden');
+        filtersContainer.classList.remove('block');
+        filterIcon.style.transform = 'rotate(0deg)';
+    }
+});
 </script>
 @endsection

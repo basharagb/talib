@@ -2,24 +2,23 @@
 
 @section('title', __('School Registration'))
 
-@section('content')
-<div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-        <div class="bg-gradient-to-r from-green-600 to-blue-600 px-6 py-8">
-            <h2 class="text-3xl font-bold text-white text-center">
-                {{ __('Private School Registration') }}
-            </h2>
-            <p class="text-green-100 text-center mt-2">
-                {{ __('Annual subscription fee: 50 JD') }}
-            </p>
-        </div>
+@section('page-title', __('Private School Registration'))
+@section('page-description', __('Join our educational network - Annual subscription: 50 JD'))
 
-        <form method="POST" action="{{ route('register.school.store') }}" enctype="multipart/form-data" class="p-6 space-y-6">
+@section('form-content')
+<form method="POST" action="{{ route('register.school.store') }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             <!-- Basic Information -->
-            <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Basic Information') }}</h3>
+            <div class="form-section bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-100 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-500 text-white p-2 rounded-lg mr-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">{{ __('Basic Information') }}</h3>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- School Name -->
@@ -82,8 +81,16 @@
             </div>
 
             <!-- Location Information -->
-            <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Location Information') }}</h3>
+            <div class="form-section bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg border border-green-100 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <div class="bg-green-500 text-white p-2 rounded-lg mr-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">{{ __('Location Information') }}</h3>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Country -->
@@ -146,8 +153,15 @@
             </div>
 
             <!-- School Details -->
-            <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('School Details') }}</h3>
+            <div class="form-section bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg border border-purple-100 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <div class="bg-purple-500 text-white p-2 rounded-lg mr-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">{{ __('School Details') }}</h3>
+                </div>
                 
                 <!-- Description -->
                 <div class="mb-6">
@@ -273,27 +287,53 @@
 
             <!-- Submit Button -->
             <div class="flex justify-center pt-6">
-                <button type="submit" 
-                        class="bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-green-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform transition hover:scale-105">
-                    {{ __('Register & Proceed to Payment') }}
+                <button type="submit" id="submit-btn"
+                        class="bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-green-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span id="btn-text">{{ __('Register & Proceed to Payment') }}</span>
+                    <span id="btn-loading" class="hidden">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        {{ __('Processing...') }}
+                    </span>
                 </button>
             </div>
-        </form>
-    </div>
-</div>
+</form>
+@endsection
 
+@section('scripts')
 <script>
-document.getElementById('country_id').addEventListener('change', function() {
-    const countryId = this.value;
-    const citySelect = document.getElementById('city_id');
+document.addEventListener('DOMContentLoaded', function() {
+    // Form submission handler
+    const form = document.querySelector('form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnLoading = document.getElementById('btn-loading');
     
-    // Clear existing options
-    citySelect.innerHTML = '<option value="">{{ __("Select City") }}</option>';
+    form.addEventListener('submit', function() {
+        submitBtn.disabled = true;
+        btnText.classList.add('hidden');
+        btnLoading.classList.remove('hidden');
+    });
     
-    if (countryId) {
-        fetch(`{{ route('register.cities', '') }}/${countryId}`)
+    // Country change handler
+    document.getElementById('country_id').addEventListener('change', function() {
+        loadCities(this.value, 'city_id');
+    });
+    
+    function loadCities(countryId, citySelectId) {
+        const citySelect = document.getElementById(citySelectId);
+        
+        if (!countryId) {
+            citySelect.innerHTML = '<option value="">{{ __("Select City") }}</option>';
+            return;
+        }
+        
+        fetch(`/register/cities/${countryId}`)
             .then(response => response.json())
             .then(cities => {
+                citySelect.innerHTML = '<option value="">{{ __("Select City") }}</option>';
                 cities.forEach(city => {
                     const option = document.createElement('option');
                     option.value = city.id;

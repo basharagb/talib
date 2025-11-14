@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('country_id')->constrained();
+            $table->foreignId('city_id')->constrained();
+            $table->string('district')->nullable();
+            $table->string('location')->nullable();
+            $table->text('description');
+            $table->string('logo')->nullable();
+            $table->decimal('subscription_fee', 8, 2)->default(50.00);
             $table->timestamps();
         });
     }

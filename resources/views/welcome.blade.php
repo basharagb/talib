@@ -1,133 +1,1149 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ app()->getLocale() == 'ar' ? 'طالب - منصة التعليم الرقمي الرائدة' : 'Talib - Leading Digital Education Platform' }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        <!-- Styles -->
+        <!-- TailwindCSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'cairo': ['Cairo', 'sans-serif'],
+                            'inter': ['Inter', 'sans-serif'],
+                        },
+                        colors: {
+                            'primary': {
+                                50: '#eff6ff',
+                                100: '#dbeafe',
+                                200: '#bfdbfe',
+                                300: '#93c5fd',
+                                400: '#60a5fa',
+                                500: '#3b82f6',
+                                600: '#2563eb',
+                                700: '#1d4ed8',
+                                800: '#1e40af',
+                                900: '#1e3a8a',
+                            },
+                            'secondary': {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                300: '#7dd3fc',
+                                400: '#38bdf8',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                800: '#075985',
+                                900: '#0c4a6e',
+                            }
+                        },
+                        animation: {
+                            'fade-in': 'fadeIn 0.8s ease-out',
+                            'slide-up': 'slideUp 0.8s ease-out',
+                            'slide-down': 'slideDown 0.8s ease-out',
+                            'slide-left': 'slideLeft 0.8s ease-out',
+                            'slide-right': 'slideRight 0.8s ease-out',
+                            'scale-in': 'scaleIn 0.8s ease-out',
+                            'bounce-in': 'bounceIn 1s ease-out',
+                            'float': 'float 6s ease-in-out infinite',
+                            'pulse-slow': 'pulse 3s ease-in-out infinite',
+                            'spin-slow': 'spin 8s linear infinite',
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <!-- Custom Styles -->
         <style>
-            /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Figtree, sans-serif;font-feature-settings:normal}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::-webkit-backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.mx-6{margin-left:1.5rem;margin-right:1.5rem}.ml-4{margin-left:1rem}.mt-16{margin-top:4rem}.mt-6{margin-top:1.5rem}.mt-4{margin-top:1rem}.-mt-px{margin-top:-1px}.mr-1{margin-right:0.25rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.h-16{height:4rem}.h-7{height:1.75rem}.h-6{height:1.5rem}.h-5{height:1.25rem}.min-h-screen{min-height:100vh}.w-auto{width:auto}.w-16{width:4rem}.w-7{width:1.75rem}.w-6{width:1.5rem}.w-5{width:1.25rem}.max-w-7xl{max-width:80rem}.shrink-0{flex-shrink:0}.scale-100{--tw-scale-x:1;--tw-scale-y:1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.items-center{align-items:center}.justify-center{justify-content:center}.gap-6{gap:1.5rem}.gap-4{gap:1rem}.self-center{align-self:center}.rounded-lg{border-radius:0.5rem}.rounded-full{border-radius:9999px}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity))}.bg-dots-darker{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E")}.from-gray-700\/50{--tw-gradient-from:rgb(55 65 81 / 0.5);--tw-gradient-to:rgb(55 65 81 / 0);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:rgb(0 0 0 / 0);--tw-gradient-stops:var(--tw-gradient-from), transparent, var(--tw-gradient-to)}.bg-center{background-position:center}.stroke-red-500{stroke:#ef4444}.stroke-gray-400{stroke:#9ca3af}.p-6{padding:1.5rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.text-center{text-align:center}.text-right{text-align:right}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.font-semibold{font-weight:600}.leading-relaxed{line-height:1.625}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-gray-500\/20{--tw-shadow-color:rgb(107 114 128 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.selection\:bg-red-500 *::selection{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.selection\:bg-red-500::selection{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.hover\:text-gray-700:hover{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity))}.focus\:rounded-sm:focus{border-radius:0.125rem}.focus\:outline:focus{outline-style:solid}.focus\:outline-2:focus{outline-width:2px}.focus\:outline-red-500:focus{outline-color:#ef4444}.group:hover .group-hover\:stroke-gray-600{stroke:#4b5563}.z-10{z-index: 10}@media (prefers-reduced-motion: no-preference){.motion-safe\:hover\:scale-\[1\.01\]:hover{--tw-scale-x:1.01;--tw-scale-y:1.01;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}}@media (prefers-color-scheme: dark){.dark\:bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity))}.dark\:bg-gray-800\/50{background-color:rgb(31 41 55 / 0.5)}.dark\:bg-red-800\/20{background-color:rgb(153 27 27 / 0.2)}.dark\:bg-dots-lighter{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E")}.dark\:bg-gradient-to-bl{background-image:linear-gradient(to bottom left, var(--tw-gradient-stops))}.dark\:stroke-gray-600{stroke:#4b5563}.dark\:text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity))}.dark\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:shadow-none{--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.dark\:ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.dark\:ring-inset{--tw-ring-inset:inset}.dark\:ring-white\/5{--tw-ring-color:rgb(255 255 255 / 0.05)}.dark\:hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.group:hover .dark\:group-hover\:stroke-gray-400{stroke:#9ca3af}}@media (min-width: 640px){.sm\:fixed{position:fixed}.sm\:top-0{top:0px}.sm\:right-0{right:0px}.sm\:ml-0{margin-left:0px}.sm\:flex{display:flex}.sm\:items-center{align-items:center}.sm\:justify-center{justify-content:center}.sm\:justify-between{justify-content:space-between}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:gap-8{gap:2rem}.lg\:p-8{padding:2rem}}
+            /* Animations */
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideUp {
+                from { opacity: 0; transform: translateY(50px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-50px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            @keyframes slideLeft {
+                from { opacity: 0; transform: translateX(50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            
+            @keyframes slideRight {
+                from { opacity: 0; transform: translateX(-50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            
+            @keyframes scaleIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            
+            @keyframes bounceIn {
+                0% { opacity: 0; transform: scale(0.3); }
+                50% { opacity: 1; transform: scale(1.05); }
+                70% { transform: scale(0.9); }
+                100% { opacity: 1; transform: scale(1); }
+            }
+            
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+            }
+
+            /* Gradients */
+            .hero-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .hero-gradient::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+                animation: shimmer 3s ease-in-out infinite;
+            }
+            
+            @keyframes shimmer {
+                0%, 100% { transform: translateX(-100%); }
+                50% { transform: translateX(100%); }
+            }
+
+            .text-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .card-gradient {
+                background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255,255,255,0.2);
+            }
+
+            /* Glass Effect */
+            .glass-nav {
+                backdrop-filter: blur(20px);
+                background: rgba(255, 255, 255, 0.95);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Interactive Elements */
+            .btn-primary {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .btn-primary::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+                transition: left 0.5s;
+            }
+            
+            .btn-primary:hover::before {
+                left: 100%;
+            }
+            
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            }
+
+            .feature-card {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+                border-color: rgba(102, 126, 234, 0.3);
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            /* Stats Counter Animation */
+            .stat-number {
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* Floating Elements */
+            .floating-element {
+                animation: float 6s ease-in-out infinite;
+            }
+            
+            .floating-element:nth-child(2) {
+                animation-delay: -2s;
+            }
+            
+            .floating-element:nth-child(3) {
+                animation-delay: -4s;
+            }
+
+            /* Scroll Animations */
+            .scroll-animate {
+                opacity: 0;
+                transform: translateY(50px);
+                transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .scroll-animate.animate {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Custom Scrollbar */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 4px;
+            }
+            
+            ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+            }
         </style>
     </head>
-    <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                        @endif
-                    @endauth
+    <body class="{{ app()->getLocale() == 'ar' ? 'font-cairo' : 'font-inter' }} antialiased bg-gradient-to-br from-slate-50 to-blue-50 overflow-x-hidden">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 glass-nav animate-slide-down">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex items-center animate-slide-right">
+                        <div class="relative">
+                            <div class="text-4xl font-black text-gradient">طالب</div>
+                            <div class="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse"></div>
+                        </div>
+                        <div class="mr-4 text-sm text-gray-600 font-medium">
+                            <div>{{ app()->getLocale() == 'ar' ? 'منصة التعليم الرقمي' : 'Digital Education Platform' }}</div>
+                            <div class="text-xs text-primary-500">{{ app()->getLocale() == 'ar' ? 'الرائدة في المنطقة' : 'Leading in the Region' }}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Links -->
+                    <div class="hidden md:flex items-center space-x-6 lg:space-x-8 space-x-reverse animate-slide-down">
+                        <a href="#home" class="nav-link text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium relative group">
+                            {{ __('messages.home') }}
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#features" class="nav-link text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium relative group">
+                            {{ __('messages.features') }}
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#stats" class="nav-link text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium relative group">
+                            {{ __('messages.statistics') }}
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium relative group">
+                            {{ __('messages.testimonials') }}
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#contact" class="nav-link text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium relative group">
+                            {{ __('messages.contact') }}
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </div>
+                    
+                    <!-- Language Switcher -->
+                    <div class="hidden md:flex items-center space-x-2 space-x-reverse">
+                        <div class="relative group">
+                            <button class="flex items-center space-x-2 space-x-reverse text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium px-4 py-2 rounded-lg hover:bg-primary-50">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                                </svg>
+                                <span>{{ __('messages.language') }}</span>
+                                <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="absolute {{ app()->getLocale() == 'ar' ? 'right-0' : 'left-0' }} mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                <a href="{{ route('locale.switch', 'ar') }}" class="flex items-center space-x-3 space-x-reverse px-4 py-3 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors {{ app()->getLocale() == 'ar' ? 'bg-primary-50 text-primary-600' : '' }}">
+                                    <span class="text-lg">🇸🇦</span>
+                                    <span>{{ __('messages.arabic') }}</span>
+                                </a>
+                                <a href="{{ route('locale.switch', 'en') }}" class="flex items-center space-x-3 space-x-reverse px-4 py-3 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors {{ app()->getLocale() == 'en' ? 'bg-primary-50 text-primary-600' : '' }}">
+                                    <span class="text-lg">🇺🇸</span>
+                                    <span>{{ __('messages.english') }}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Auth Links -->
+                    <div class="flex items-center space-x-4 space-x-reverse animate-slide-left">
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="btn-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg">
+                                <i class="fas fa-tachometer-alt {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                {{ __('messages.dashboard') }}
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium px-4 py-2 rounded-lg hover:bg-primary-50">
+                                {{ __('messages.nav_login') }}
+                            </a>
+                            <a href="#register" class="btn-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg">
+                                <i class="fas fa-rocket {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                                {{ __('messages.start_now') }}
+                            </a>
+                        @endauth
+                        
+                        <!-- Mobile Menu Button -->
+                        <button class="md:hidden text-gray-700 hover:text-primary-600 transition-colors p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()" id="mobile-menu-button">
+                            <svg class="w-6 h-6 transition-transform duration-300" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                            <svg class="w-6 h-6 transition-transform duration-300 hidden" id="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-            @endif
-
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                <div class="flex justify-center">
-                    <svg viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto bg-gray-100 dark:bg-gray-900">
-                        <path d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z" fill="#FF2D20"/>
-                    </svg>
+                
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-lg border-t border-gray-200 animate-slide-down">
+                    <div class="px-4 py-6 space-y-4">
+                        <a href="#home" class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.home') }}</a>
+                        <a href="#features" class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.features') }}</a>
+                        <a href="#stats" class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.statistics') }}</a>
+                        <a href="#testimonials" class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.testimonials') }}</a>
+                        <a href="#contact" class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.contact') }}</a>
+                        
+                        <!-- Language Switcher for Mobile -->
+                        <div class="border-t border-gray-200 pt-4 mt-4">
+                            <div class="space-y-2">
+                                <a href="{{ route('locale.switch', 'ar') }}" class="mobile-nav-link flex items-center space-x-3 space-x-reverse text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 {{ app()->getLocale() == 'ar' ? 'bg-primary-50 text-primary-600' : '' }}">
+                                    <span class="text-lg">🇸🇦</span>
+                                    <span>{{ __('messages.arabic') }}</span>
+                                </a>
+                                <a href="{{ route('locale.switch', 'en') }}" class="mobile-nav-link flex items-center space-x-3 space-x-reverse text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 {{ app()->getLocale() == 'en' ? 'bg-primary-50 text-primary-600' : '' }}">
+                                    <span class="text-lg">🇺🇸</span>
+                                    <span>{{ __('messages.english') }}</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-4 mt-4">
+                            @guest
+                                <a href="{{ route('login') }}" class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.nav_login') }}</a>
+                                <a href="#register" class="mobile-nav-link block btn-primary text-white py-3 px-4 rounded-lg mt-2 text-center">{{ __('messages.start_now') }}</a>
+                            @else
+                                <a href="{{ url('/dashboard') }}" class="mobile-nav-link block btn-primary text-white py-3 px-4 rounded-lg text-center">{{ __('messages.dashboard') }}</a>
+                            @endguest
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </nav>
 
-                <div class="mt-16">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <a href="https://laravel.com/docs" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                                    </svg>
-                                </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Documentation</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laravel has wonderful documentation covering every aspect of the framework. Whether you are a newcomer or have prior experience with Laravel, we recommend reading our documentation from beginning to end.
-                                </p>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
+            <!-- Floating Background Elements -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="floating-element absolute top-20 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+                <div class="floating-element absolute top-40 left-20 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+                <div class="floating-element absolute bottom-20 right-1/4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+                <div class="floating-element absolute bottom-40 left-10 w-16 h-16 bg-white/15 rounded-full blur-lg"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 md:pt-0">
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen">
+                    <!-- Content -->
+                    <div class="text-white space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-right order-2 lg:order-1">
+                        <div class="animate-slide-right">
+                            <div class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 mb-4 sm:mb-6">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse {{ app()->getLocale() == 'ar' ? 'ml-2 sm:ml-3' : 'mr-2 sm:mr-3' }}"></span>
+                                <span class="text-xs sm:text-sm font-medium">{{ app()->getLocale() == 'ar' ? 'منصة تعليمية متطورة' : 'Advanced Educational Platform' }}</span>
                             </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
-
-                        <a href="https://laracasts.com" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
-                                    </svg>
-                                </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laracasts</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                </p>
+                            
+                            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-4 sm:mb-6">
+                                {{ __('messages.hero_title') }}
+                            </h1>
+                        </div>
+                        
+                        <p class="text-xl md:text-2xl text-gray-100 leading-relaxed max-w-2xl animate-slide-up">
+                            {{ __('messages.hero_subtitle') }}
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 animate-slide-up">
+                            <a href="#register" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl inline-flex items-center justify-center group">
+                                <svg class="w-5 h-5 {{ app()->getLocale() == 'ar' ? 'ml-2 group-hover:translate-x-1' : 'mr-2 group-hover:-translate-x-1' }} transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                                {{ __('messages.get_started') }}
+                            </a>
+                            <a href="#features" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all backdrop-blur-sm inline-flex items-center justify-center">
+                                <svg class="w-5 h-5 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                {{ __('messages.learn_more') }}
+                            </a>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 pt-6 sm:pt-8 animate-slide-up">
+                            <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 lg:p-6">
+                                <div class="text-xl sm:text-2xl lg:text-3xl font-bold stat-number" data-target="5000">0</div>
+                                <div class="text-xs sm:text-sm text-gray-200 mt-1">{{ __('messages.active_users') }}</div>
                             </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
-
-                        <a href="https://laravel-news.com" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
-                                    </svg>
-                                </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laravel News</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                </p>
+                            <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 lg:p-6">
+                                <div class="text-xl sm:text-2xl lg:text-3xl font-bold stat-number" data-target="150">0</div>
+                                <div class="text-xs sm:text-sm text-gray-200 mt-1">{{ __('messages.educational_institutions') }}</div>
                             </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
-
-                        <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64" />
-                                    </svg>
+                            <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 lg:p-6">
+                                <div class="text-xl sm:text-2xl lg:text-3xl font-bold stat-number" data-target="98">0</div>
+                                <div class="text-xs sm:text-sm text-gray-200 mt-1">{{ app()->getLocale() == 'ar' ? '% نسبة الرضا' : '% ' . __('messages.customer_satisfaction') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Visual Elements -->
+                    <div class="relative animate-slide-left order-1 lg:order-2 mb-8 lg:mb-0">
+                        <div class="relative z-10">
+                            <!-- Main Card -->
+                            <div class="card-gradient rounded-3xl p-8 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="mr-4">
+                                            <h3 class="font-bold text-gray-900">أحمد محمد</h3>
+                                            <p class="text-sm text-gray-600">معلم رياضيات</p>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-600">الطلاب النشطين</span>
+                                            <span class="font-semibold text-primary-600">45</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-600">التقييم</span>
+                                            <div class="flex text-yellow-400">
+                                                ★★★★★
+                                            </div>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-gradient-to-r from-primary-500 to-secondary-500 h-2 rounded-full w-4/5"></div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Forge</a>, <a href="https://vapor.laravel.com" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Vapor</a>, <a href="https://nova.laravel.com" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Nova</a>, and <a href="https://envoyer.io" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Telescope</a>, and more.
-                                </p>
+                            </div>
+                            
+                            <!-- Floating Cards -->
+                            <div class="absolute -top-4 -left-4 card-gradient rounded-xl p-4 shadow-lg animate-float">
+                                <div class="flex items-center text-white">
+                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center ml-2">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium">درس مكتمل</span>
+                                </div>
+                            </div>
+                            
+                            <div class="absolute -bottom-4 -right-4 card-gradient rounded-xl p-4 shadow-lg animate-float" style="animation-delay: -2s;">
+                                <div class="flex items-center text-white">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center ml-2">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium">{{ __('messages.new_students') }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <a href="#features" class="text-white/70 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
 
-                <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm sm:text-left">
-                        &nbsp;
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-white relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #667eea 1px, transparent 0); background-size: 20px 20px;"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-12 sm:mb-16 lg:mb-20 scroll-animate">
+                    <div class="inline-flex items-center bg-primary-50 text-primary-600 rounded-full px-4 sm:px-6 py-2 mb-4 sm:mb-6">
+                        <svg class="w-4 h-4 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        <span class="text-sm sm:text-base">{{ app()->getLocale() == 'ar' ? 'الميزات الرئيسية' : 'Key Features' }}</span>
                     </div>
-
-                    <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 sm:mb-6">{{ __('messages.features_title') }}</h2>
+                    <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+                        {{ __('messages.features_subtitle') }}
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                    <!-- Feature 1 -->
+                    <div class="feature-card bg-white p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl text-center group scroll-animate">
+                        <div class="relative mb-8">
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
+                                <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
+                                <svg class="w-3 h-3 text-yellow-800" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">{{ __('messages.easy_setup') }}</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed px-2 sm:px-0">{{ __('messages.easy_setup_desc') }}</p>
+                        <div class="mt-4 sm:mt-6 flex items-center justify-center text-blue-600 font-medium text-sm sm:text-base">
+                            <span class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ app()->getLocale() == 'ar' ? 'أقل من 5 دقائق' : 'Less than 5 minutes' }}</span>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 2 -->
+                    <div class="feature-card bg-white p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl text-center group scroll-animate">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
+                                <svg class="w-3 h-3 text-green-800" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ __('messages.wide_network') }}</h3>
+                        <p class="text-gray-600 leading-relaxed">{{ __('messages.wide_network_desc') }}</p>
+                        <div class="mt-6 flex items-center justify-center text-green-600 font-medium">
+                            <span class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ __('messages.wide_network_members') }}</span>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 3 -->
+                    <div class="feature-card bg-white p-8 rounded-3xl text-center group scroll-animate">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-6 h-6 bg-purple-400 rounded-full flex items-center justify-center">
+                                <svg class="w-3 h-3 text-purple-800" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ __('messages.smart_analytics') }}</h3>
+                        <p class="text-gray-600 leading-relaxed">{{ __('messages.smart_analytics_desc') }}</p>
+                        <div class="mt-6 flex items-center justify-center text-purple-600 font-medium">
+                            <span class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ __('messages.smart_analytics_reports') }}</span>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 4 -->
+                    <div class="feature-card bg-white p-8 rounded-3xl text-center group scroll-animate">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-orange-500/25 transition-all duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-6 h-6 bg-orange-400 rounded-full flex items-center justify-center">
+                                <svg class="w-3 h-3 text-orange-800" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ __('messages.advanced_security') }}</h3>
+                        <p class="text-gray-600 leading-relaxed">{{ __('messages.advanced_security_desc') }}</p>
+                        <div class="mt-6 flex items-center justify-center text-orange-600 font-medium">
+                            <span class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ __('messages.advanced_security_ssl') }}</span>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 5 -->
+                    <div class="feature-card bg-white p-8 rounded-3xl text-center group scroll-animate">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-pink-500/25 transition-all duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2m3 0V2a1 1 0 011-1h4a1 1 0 011 1v2m-9 4h10a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-6 h-6 bg-pink-400 rounded-full flex items-center justify-center">
+                                <svg class="w-3 h-3 text-pink-800" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ __('messages.smart_scheduling') }}</h3>
+                        <p class="text-gray-600 leading-relaxed">{{ __('messages.smart_scheduling_desc') }}</p>
+                        <div class="mt-6 flex items-center justify-center text-pink-600 font-medium">
+                            <span class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ __('messages.smart_scheduling_reminders') }}</span>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 6 -->
+                    <div class="feature-card bg-white p-8 rounded-3xl text-center group scroll-animate">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-indigo-500/25 transition-all duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-6 h-6 bg-indigo-400 rounded-full flex items-center justify-center">
+                                <svg class="w-3 h-3 text-indigo-800" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ __('messages.support_247') }}</h3>
+                        <p class="text-gray-600 leading-relaxed">{{ __('messages.support_247_desc') }}</p>
+                        <div class="mt-6 flex items-center justify-center text-indigo-600 font-medium">
+                            <span class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ __('messages.support_247_response') }}</span>
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats" class="py-12 sm:py-16 lg:py-20 hero-gradient relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="floating-element absolute top-10 right-10 w-32 h-32 bg-white rounded-full blur-3xl"></div>
+                <div class="floating-element absolute bottom-10 left-10 w-24 h-24 bg-white rounded-full blur-2xl"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-8 sm:mb-12 lg:mb-16 scroll-animate">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6">{{ __('messages.stats_title') }}</h2>
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-100 max-w-3xl mx-auto px-4">
+                        {{ __('messages.stats_description') }}
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-8">
+                    <div class="text-center scroll-animate">
+                        <div class="card-gradient rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mb-4">
+                            <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white stat-number mb-1 sm:mb-2" data-target="5247">0</div>
+                            <div class="text-xs sm:text-sm lg:text-base text-gray-200 font-medium">{{ __('messages.active_users') }}</div>
+                        </div>
+                    </div>
+                    <div class="text-center scroll-animate">
+                        <div class="card-gradient rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mb-4">
+                            <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white stat-number mb-1 sm:mb-2" data-target="1250">0</div>
+                            <div class="text-xs sm:text-sm lg:text-base text-gray-200 font-medium">{{ __('messages.registered_teachers') }}</div>
+                        </div>
+                    </div>
+                    <div class="text-center scroll-animate">
+                        <div class="card-gradient rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mb-4">
+                            <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white stat-number mb-1 sm:mb-2" data-target="340">0</div>
+                            <div class="text-xs sm:text-sm lg:text-base text-gray-200 font-medium">{{ __('messages.educational_institutions') }}</div>
+                        </div>
+                    </div>
+                    <div class="text-center scroll-animate">
+                        <div class="card-gradient rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 mb-4">
+                            <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white stat-number mb-1 sm:mb-2" data-target="98">0</div>
+                            <div class="text-xs sm:text-sm lg:text-base text-gray-200 font-medium">{{ __('messages.customer_satisfaction') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-8 sm:mb-12 lg:mb-16 scroll-animate">
+                    <div class="inline-flex items-center bg-primary-50 text-primary-600 rounded-full px-4 sm:px-6 py-2 mb-4 sm:mb-6">
+                        <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        <span class="text-sm sm:text-base">{{ __('messages.testimonials_badge') }}</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 sm:mb-6">{{ __('messages.testimonials_title') }}</h2>
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+                        {{ __('messages.testimonials_subtitle') }}
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-animate">
+                        <div class="flex text-yellow-400 mb-4">
+                            ★★★★★
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            "{{ __('messages.testimonial_1_text') }}"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold ml-3 sm:ml-4 text-sm sm:text-base">
+                                أ
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('messages.testimonial_1_name') }}</h4>
+                                <p class="text-xs sm:text-sm text-gray-500">{{ __('messages.testimonial_1_title') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-animate">
+                        <div class="flex text-yellow-400 mb-4">
+                            ★★★★★
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            "{{ __('messages.testimonial_2_text') }}"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold ml-4">
+                                س
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">{{ __('messages.testimonial_2_name') }}</h4>
+                                <p class="text-sm text-gray-500">{{ __('messages.testimonial_2_title') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-animate">
+                        <div class="flex text-yellow-400 mb-4">
+                            ★★★★★
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            "{{ __('messages.testimonial_3_text') }}"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold ml-4">
+                                ف
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">{{ __('messages.testimonial_3_name') }}</h4>
+                                <p class="text-sm text-gray-500">{{ __('messages.testimonial_3_title') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-animate">
+                        <div class="flex text-yellow-400 mb-4">
+                            ★★★★★
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            "{{ __('messages.testimonial_4_text') }}"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold ml-4">
+                                م
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">{{ __('messages.testimonial_4_name') }}</h4>
+                                <p class="text-sm text-gray-500">{{ __('messages.testimonial_4_title') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 5 -->
+                    <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-animate">
+                        <div class="flex text-yellow-400 mb-4">
+                            ★★★★★
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            "{{ __('messages.testimonial_5_text') }}"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold ml-4">
+                                ل
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">{{ __('messages.testimonial_5_name') }}</h4>
+                                <p class="text-sm text-gray-500">{{ __('messages.testimonial_5_title') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 6 -->
+                    <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 scroll-animate">
+                        <div class="flex text-yellow-400 mb-4">
+                            ★★★★★
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            "{{ __('messages.testimonial_6_text') }}"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold ml-4">
+                                ع
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">{{ __('messages.testimonial_6_name') }}</h4>
+                                <p class="text-sm text-gray-500">{{ __('messages.testimonial_6_title') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="register" class="py-20 hero-gradient relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="floating-element absolute top-20 right-20 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+                <div class="floating-element absolute bottom-20 left-20 w-32 h-32 bg-white rounded-full blur-2xl"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="text-white scroll-animate">
+                    <h2 class="text-5xl font-black mb-8">{{ __('messages.cta_ready_title') }}</h2>
+                    <p class="text-xl mb-12 text-gray-100 max-w-2xl mx-auto leading-relaxed">
+                        {{ __('messages.cta_ready_description') }}
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        <div class="card-gradient rounded-2xl p-6 text-center">
+                            <div class="text-2xl font-bold mb-2">{{ __('messages.teacher') }}</div>
+                            <div class="text-gray-200 mb-4">{{ __('messages.teacher_fee') }}</div>
+                            <a href="{{ route('register.teacher') }}" class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                                {{ __('messages.start_now_btn') }}
+                            </a>
+                        </div>
+                        <div class="card-gradient rounded-2xl p-6 text-center">
+                            <div class="text-2xl font-bold mb-2">{{ __('messages.educational_center') }}</div>
+                            <div class="text-gray-200 mb-4">{{ __('messages.center_fee') }}</div>
+                            <a href="{{ route('register.educational-center') }}" class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                                {{ __('messages.start_now_btn') }}
+                            </a>
+                        </div>
+                        <div class="card-gradient rounded-2xl p-6 text-center">
+                            <div class="text-2xl font-bold mb-2">{{ __('messages.school') }}</div>
+                            <div class="text-gray-200 mb-4">{{ __('messages.school_fee') }}</div>
+                            <a href="{{ route('register.school') }}" class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                                {{ __('messages.start_now_btn') }}
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{{ route('search') }}" class="bg-white text-primary-600 px-8 py-4 rounded-full font-bold text-lg shadow-2xl inline-flex items-center justify-center group">
+                            <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ __('messages.search_now_btn') }}
+                        </a>
+                        <a href="#contact" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all backdrop-blur-sm inline-flex items-center justify-center">
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            {{ __('messages.contact_us_btn') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section-padding bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">{{ __('messages.faq_title') }}</h2>
+                    <p class="text-xl text-gray-600">{{ __('messages.faq_subtitle') }}</p>
+                </div>
+                
+                <div class="space-y-8">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('messages.faq_1_question') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.faq_1_answer') }}</p>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('messages.faq_2_question') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.faq_2_answer') }}</p>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('messages.faq_3_question') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.faq_3_answer') }}</p>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('messages.faq_4_question') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.faq_4_answer') }}</p>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('messages.faq_5_question') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.faq_5_answer') }}</p>
+                    </div>
+                    
+                    <!-- FAQ Item 6 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('messages.faq_6_question') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.faq_6_answer') }}</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <p class="text-gray-600 mb-6">{{ __('messages.faq_no_answer') }}</p>
+                    <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-lg font-semibold text-lg">
+                        {{ __('messages.contact_sales_btn') }}
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="register" class="section-padding hero-gradient">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="text-white">
+                    <h2 class="text-4xl font-bold mb-8">{{ __('messages.cta_create_account') }}</h2>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <a href="{{ route('register.teacher') }}" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all">
+                            {{ __('messages.start_now_btn') }}
+                        </a>
+                        <a href="#contact" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all">
+                            {{ __('messages.contact_sales_link') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-gray-900 text-white py-12 sm:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="text-2xl sm:text-3xl font-bold text-gradient mb-6 sm:mb-8">طالب</div>
+                <p class="text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
+                    {{ __('messages.footer_description') }}
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12">
+                    <div class="text-gray-400 text-sm sm:text-base">{{ __('messages.footer_email') }}</div>
+                    <div class="text-gray-400 text-sm sm:text-base">{{ __('messages.footer_phone') }}</div>
+                    <div class="text-gray-400 text-sm sm:text-base">{{ __('messages.footer_location') }}</div>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-6 sm:pt-8">
+                    <p class="text-gray-400 text-sm sm:text-base">{{ __('messages.all_rights_reserved') }}</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JavaScript -->
+        <script>
+            // Mobile Menu Toggle
+            function toggleMobileMenu() {
+                const menu = document.getElementById('mobile-menu');
+                const menuIcon = document.getElementById('menu-icon');
+                const closeIcon = document.getElementById('close-icon');
+                
+                menu.classList.toggle('hidden');
+                
+                // Animate hamburger to X
+                if (menu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                } else {
+                    menuIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                }
+            }
+
+            // Close mobile menu when clicking on links
+            document.addEventListener('DOMContentLoaded', function() {
+                const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        const menu = document.getElementById('mobile-menu');
+                        if (!menu.classList.contains('hidden')) {
+                            toggleMobileMenu();
+                        }
+                    });
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    const menu = document.getElementById('mobile-menu');
+                    const button = document.getElementById('mobile-menu-button');
+                    
+                    if (!menu.contains(event.target) && !button.contains(event.target) && !menu.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+
+            // Smooth Scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Stats Counter Animation
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                
+                function updateCounter() {
+                    start += increment;
+                    if (start < target) {
+                        element.textContent = Math.floor(start);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target;
+                    }
+                }
+                updateCounter();
+            }
+
+            // Scroll Animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        
+                        // Animate counters when stats section is visible
+                        if (entry.target.classList.contains('stat-number')) {
+                            const target = parseInt(entry.target.getAttribute('data-target'));
+                            animateCounter(entry.target, target);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all scroll-animate elements
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.scroll-animate').forEach(el => {
+                    observer.observe(el);
+                });
+
+                document.querySelectorAll('.stat-number').forEach(el => {
+                    observer.observe(el);
+                });
+
+                // Add stagger animation to feature cards
+                const featureCards = document.querySelectorAll('.feature-card');
+                featureCards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                });
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 50) {
+                    nav.classList.add('backdrop-blur-xl', 'bg-white/90');
+                } else {
+                    nav.classList.remove('backdrop-blur-xl', 'bg-white/90');
+                }
+            });
+
+            // Parallax effect for floating elements
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelectorAll('.floating-element');
+                
+                parallax.forEach((element, index) => {
+                    const speed = 0.5 + (index * 0.1);
+                    element.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+
+            // Add loading animation
+            window.addEventListener('load', function() {
+                document.body.classList.add('loaded');
+            });
+        </script>
+
+        <!-- Font Awesome for Icons -->
+        <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -75,8 +75,11 @@ return [
     
     'Subjects Taught' => 'Subjects Taught',
     'Grades Taught' => 'Grades Taught',
+    'Educational Stage' => 'Educational Stage',
     'Educational Stages' => 'Educational Stages',
     'Student Type' => 'Student Type',
+    'Student Types' => 'Student Types',
+    'All Stages' => 'All Stages',
     'Ages Accepted' => 'Ages Accepted',
     'Work Experience' => 'Work Experience',
     
@@ -141,4 +144,198 @@ return [
     'Registration failed. Please try again.' => 'Registration failed. Please try again.',
     'At least one educational stage must be selected' => 'At least one educational stage must be selected',
     'At least one student type must be selected' => 'At least one student type must be selected',
+    
+    // Navigation & UI
+    'home' => 'Home',
+    'features' => 'Features',
+    'statistics' => 'Statistics',
+    'testimonials' => 'Testimonials',
+    'contact' => 'Contact',
+    'nav_login' => 'Login',
+    'start_now' => 'Start Now',
+    'dashboard' => 'Dashboard',
+    'language' => 'Language',
+    'arabic' => 'العربية',
+    'english' => 'English',
+    
+    // Hero Section
+    'hero_title' => 'Next-Generation Educational Infrastructure',
+    'hero_subtitle' => 'Talib platform connects students with the best teachers and educational centers in the Arab region',
+    'get_started' => 'Get Started',
+    'learn_more' => 'Learn More',
+    'browse_services' => 'Browse Services',
+    
+    // Features Section
+    'features_title' => 'Why Talib?',
+    'features_subtitle' => 'We provide you with the best tools and services to achieve your educational goals',
+    'easy_setup' => 'Instant Setup',
+    'easy_setup_desc' => 'Get started in less than 5 minutes with an easy-to-use interface',
+    'wide_network' => 'Wide Network',
+    'wide_network_desc' => 'Over 5000 active members of teachers and educational centers',
+    'smart_analytics' => 'Smart Analytics',
+    'smart_analytics_desc' => 'Instant and advanced reports to track performance and growth',
+    'advanced_security' => 'Advanced Security',
+    'advanced_security_desc' => '256-bit SSL protection and highest security standards',
+    'smart_scheduling' => 'Smart Scheduling',
+    'smart_scheduling_desc' => 'Automatic reminder system and smart follow-up',
+    'support_247' => '24/7 Support',
+    'support_247_desc' => 'Specialized support team available around the clock',
+    
+    // Statistics
+    'stats_title' => 'Numbers Speak for Themselves',
+    'active_users' => 'Active Users',
+    'registered_teachers' => 'Registered Teachers',
+    'educational_institutions' => 'Educational Institutions',
+    'customer_satisfaction' => 'Customer Satisfaction',
+    
+    // Testimonials Section
+    'testimonials_badge' => 'Customer Reviews',
+    'testimonials_title' => 'What Our Customers Say?',
+    'testimonials_subtitle' => 'Discover the experiences of teachers, students, and educational institutions with Talib platform',
+    
+    // CTA Section
+    'cta_title' => 'Ready to Start?',
+    'cta_subtitle' => 'Join thousands of teachers and educational centers and discover the difference',
+    'create_account' => 'Create Account',
+    'contact_sales' => 'Contact Sales',
+    
+    // Testimonial Content
+    'testimonial_1_text' => 'Talib platform completely changed my teaching method. Now I can reach students from all over the region and manage my classes with ease.',
+    'testimonial_1_name' => 'Ahmed Mohammed',
+    'testimonial_1_title' => 'Math Teacher - Amman',
+    
+    'testimonial_2_text' => 'As a school principal, I appreciate the advanced tools the platform provides for managing teachers and students. The system is easy to use and sophisticated.',
+    'testimonial_2_name' => 'Sarah Ahmed',
+    'testimonial_2_title' => 'School Principal - Riyadh',
+    
+    'testimonial_3_text' => 'My son has improved a lot since he started using the platform. The teachers are professional and the educational content is excellent. I highly recommend it.',
+    'testimonial_3_name' => 'Fatima Ali',
+    'testimonial_3_title' => 'Parent - Dubai',
+    
+    'testimonial_4_text' => 'The platform helped me organize my educational center better. Student management and scheduling have become much easier and more efficient.',
+    'testimonial_4_name' => 'Omar Hassan',
+    'testimonial_4_title' => 'Educational Center Owner - Kuwait',
+    
+    'testimonial_5_text' => 'As a kindergarten teacher, I found the platform very suitable for managing young children. The tools are simple and effective.',
+    'testimonial_5_name' => 'Layla Mahmoud',
+    'testimonial_5_title' => 'Kindergarten Teacher - Beirut',
+    
+    'testimonial_6_text' => 'The technical support is excellent and the response is quick. The team is always ready to help solve any problem we face.',
+    'testimonial_6_name' => 'Khalid Al-Rashid',
+    'testimonial_6_title' => 'Private School Director - Abu Dhabi',
+    
+    // FAQ Section
+    'faq_title' => 'Frequently Asked Questions',
+    'faq_subtitle' => 'Everything you need to know about Talib',
+    
+    'faq_1_question' => 'Is Talib secure?',
+    'faq_1_answer' => 'Talib uses the latest end-to-end encryption technologies to protect user data and information.',
+    
+    'faq_2_question' => 'Does Talib comply with data protection laws?',
+    'faq_2_answer' => 'Yes, Talib complies with General Data Protection Regulation (GDPR). The company adheres to the principles and regulations set forth in GDPR, ensuring the protection and privacy of user data.',
+    
+    'faq_3_question' => 'Where can I download the app?',
+    'faq_3_answer' => 'You can install the app directly from the App Store for iOS devices or Play Store for Android devices',
+    
+    'faq_4_question' => 'Is the virtual card secure?',
+    'faq_4_answer' => 'Yes, the virtual card is secure. It uses strong security measures to protect user information and transactions, ensuring a high level of security for users.',
+    
+    'faq_5_question' => 'What do I need?',
+    'faq_5_answer' => 'The device must run an operating system that supports NFC. For Android, NFC support is widespread, especially in modern versions of Android. For iOS, NFC support is available on iPhone models with iOS 11 and later.',
+    
+    'faq_6_question' => 'Who has access to my data in Talib?',
+    'faq_6_answer' => 'Access to your information is limited to authorized individuals or entities as defined in the privacy policy of the service or institution. Usually, only designated employees or systems with the necessary permissions and authorizations have access to user data.',
+    
+    'faq_no_answer' => 'Can\'t find the answer you\'re looking for? Please contact us.',
+    'contact_sales_btn' => 'Contact Sales',
+    
+    // Feature Details
+    'wide_network_members' => '+5000 Active Members',
+    'smart_analytics_reports' => 'Instant Reports',
+    'advanced_security_ssl' => 'SSL 256-bit',
+    'smart_scheduling_reminders' => 'Automatic Reminders',
+    'support_247_response' => 'Instant Response',
+    'easy_setup_time' => 'Less than 5 minutes',
+    
+    // Additional Content
+    'new_students' => '+25 New Students',
+    'stats_description' => 'Join thousands of users who trust the Talib platform to achieve their educational goals',
+    'cta_ready_title' => 'Ready to Start Your Educational Journey?',
+    'cta_ready_description' => 'Join thousands of teachers and students who achieve success with the Talib platform',
+
+    // CTA Section
+    'cta_create_account' => 'Create an account instantly and start accepting payments. You can also contact us to design a custom package for your business.',
+    'start_now_btn' => 'Start Now',
+    'contact_sales_link' => 'Contact Sales',
+    
+    // Search Buttons
+    'search_now_btn' => 'Search Now',
+    'contact_us_btn' => 'Contact Us',
+    
+    // Footer
+    'footer_description' => 'The new digital education platform that connects students with the best teachers and educational centers in the region.',
+    'footer_email' => 'info@talib.com',
+    'footer_phone' => '+962 6 123 4567',
+    'footer_location' => 'Amman, Jordan',
+    'all_rights_reserved' => ' 2024 Talib. All rights reserved.',
+    
+    // Dashboard
+    'Dashboard' => 'Dashboard',
+    'Home' => 'Home',
+    'Logout' => 'Logout',
+    'Active' => 'Active',
+    'Dashboard Overview' => 'Dashboard Overview',
+    'Profile Management' => 'Profile Management',
+    'My Courses' => 'My Courses',
+    'Students' => 'Students',
+    'Schedule' => 'Schedule',
+    'Messages' => 'Messages',
+    'Analytics' => 'Analytics',
+    'Payments' => 'Payments',
+    'Settings' => 'Settings',
+    'Total Students' => 'Total Students',
+    'this month' => 'this month',
+    'Active Courses' => 'Active Courses',
+    '2 new this week' => '2 new this week',
+    'Monthly Revenue' => 'Monthly Revenue',
+    'vs last month' => 'vs last month',
+    'Average Rating' => 'Average Rating',
+    'Recent Activity' => 'Recent Activity',
+    'View All' => 'View All',
+    'New student enrolled' => 'New student enrolled',
+    'Ahmed Ali joined Mathematics Course' => 'Ahmed Ali joined Mathematics Course',
+    '2 minutes ago' => '2 minutes ago',
+    'Assignment completed' => 'Assignment completed',
+    'Sara Mohammed submitted Physics homework' => 'Sara Mohammed submitted Physics homework',
+    '15 minutes ago' => '15 minutes ago',
+    'New message received' => 'New message received',
+    'Parent inquiry about Chemistry course' => 'Parent inquiry about Chemistry course',
+    '1 hour ago' => '1 hour ago',
+    'New 5-star review' => 'New 5-star review',
+    'Excellent teaching methods and clear explanations' => 'Excellent teaching methods and clear explanations',
+    '3 hours ago' => '3 hours ago',
+    'Quick Actions' => 'Quick Actions',
+    'Add New Course' => 'Add New Course',
+    'Schedule Class' => 'Schedule Class',
+    'Send Message' => 'Send Message',
+    'View Analytics' => 'View Analytics',
+    'Today\'s Schedule' => 'Today\'s Schedule',
+    'View Calendar' => 'View Calendar',
+    'Mathematics - Grade 10' => 'Mathematics - Grade 10',
+    'Algebra and Functions' => 'Algebra and Functions',
+    'Room 205 • 25 students' => 'Room 205 • 25 students',
+    'Physics - Grade 11' => 'Physics - Grade 11',
+    'Mechanics and Motion' => 'Mechanics and Motion',
+    'Lab 3 • 18 students' => 'Lab 3 • 18 students',
+    'Chemistry - Grade 12' => 'Chemistry - Grade 12',
+    'Organic Chemistry' => 'Organic Chemistry',
+    'Lab 1 • 22 students' => 'Lab 1 • 22 students',
+    'Performance Overview' => 'Performance Overview',
+    'Last 7 days' => 'Last 7 days',
+    'Last 30 days' => 'Last 30 days',
+    'Last 3 months' => 'Last 3 months',
+    'Student Engagement' => 'Student Engagement',
+    'Assignment Completion' => 'Assignment Completion',
+    'Course Progress' => 'Course Progress',
+    'Student Satisfaction' => 'Student Satisfaction',
 ];

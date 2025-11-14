@@ -126,13 +126,15 @@ class SchoolEnhancementsTest extends TestCase
         $this->assertTrue($school->studentTypes->contains('slug', 'mixed'));
     }
 
-    public function test_school_registration_form_loads_with_new_fields(): void
+    public function test_school_registration_form_shows_new_fields()
     {
         $this->artisan('db:seed', ['--class' => 'CountrySeeder']);
         $this->artisan('db:seed', ['--class' => 'EducationalStageSeeder']);
         $this->artisan('db:seed', ['--class' => 'StudentTypeSeeder']);
         
-        $response = $this->get('/register/school');
+        // Test with English locale
+        app()->setLocale('en');
+        $response = $this->get('/register/school?lang=en');
         
         $response->assertStatus(200);
         $response->assertSee('Educational Stages');

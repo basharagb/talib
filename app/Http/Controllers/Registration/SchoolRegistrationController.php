@@ -15,6 +15,7 @@ use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 class SchoolRegistrationController extends Controller
 {
@@ -76,23 +77,25 @@ class SchoolRegistrationController extends Controller
             }
 
             // Create subscription record
-            Subscription::create([
+            $subscription = Subscription::create([
                 'user_id' => $user->id,
                 'type' => 'school',
-                'amount' => 50,
+                'amount' => 50.00,
                 'status' => 'pending',
-                'expires_at' => now()->addYear(),
+                'expires_at' => Carbon::now()->addYear(),
             ]);
 
             DB::commit();
 
             // Redirect to payment page
-            return redirect()->route('payment.show', ['subscription' => $user->subscription->id])
-                           ->with('success', __('Registration completed successfully. Please complete payment to activate your account.'));
+            return redirect()->route('payment.show', $subscription)
+                ->with('success', __('School registration completed successfully! Please proceed to payment.'));
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => __('Registration failed. Please try again.')])->withInput();
+            return back()->withErrors(['error' => __('Registration failed. Please try again.')])
+                ->withInput()
+                ->with('error', __('Registration failed. Please check your information and try again.'));
         }
     }
 

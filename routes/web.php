@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Registration\TeacherRegistrationController;
 use App\Http\Controllers\Registration\EducationalCenterRegistrationController;
 use App\Http\Controllers\Registration\SchoolRegistrationController;
@@ -24,9 +25,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Search Routes
-Route::get('/search', [SearchController::class, 'index'])->name('search');
-Route::get('/search/cities/{country}', [SearchController::class, 'getCities'])->name('search.cities');
+// Language switching route
+Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
+
+// Search Routes (with rate limiting for public access)
+Route::get('/search', [SearchController::class, 'index'])->name('search')->middleware('throttle:60,1');
+Route::get('/search/cities/{country}', [SearchController::class, 'getCities'])->name('search.cities')->middleware('throttle:100,1');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

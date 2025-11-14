@@ -19,6 +19,6 @@ class HomeController extends Controller
             app()->setLocale(session('locale'));
         }
 
-        return view('home');
+        return view('welcome');
     }
 }
