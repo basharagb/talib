@@ -69,7 +69,11 @@ class SchoolEnhancementsTest extends TestCase
         
         $user = User::factory()->create(['role' => 'school']);
         $country = Country::first();
-        $city = City::first();
+        $city = City::create([
+            'name_ar' => 'عمان',
+            'name_en' => 'Amman',
+            'country_id' => $country->id
+        ]);
         
         $school = School::create([
             'user_id' => $user->id,
@@ -97,7 +101,11 @@ class SchoolEnhancementsTest extends TestCase
         
         $user = User::factory()->create(['role' => 'school']);
         $country = Country::first();
-        $city = City::first();
+        $city = City::create([
+            'name_ar' => 'عمان',
+            'name_en' => 'Amman',
+            'country_id' => $country->id
+        ]);
         
         $school = School::create([
             'user_id' => $user->id,
