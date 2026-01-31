@@ -144,14 +144,24 @@ class UserManagementController extends Controller
     {
         if (!$request->filled('country_id')) return;
         
-        $center = \App\Models\EducationalCenter::create([
+        $data = [
             'user_id' => $user->id,
             'country_id' => $request->country_id,
             'city_id' => $request->city_id,
             'district' => $request->district,
             'location' => $request->location,
             'description' => $request->description,
-        ]);
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'whatsapp' => $request->whatsapp,
+        ];
+
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('centers/logos', 'public');
+        }
+
+        $center = \App\Models\EducationalCenter::create($data);
 
         if ($request->has('subjects')) {
             $center->subjects()->attach($request->subjects);
@@ -162,14 +172,24 @@ class UserManagementController extends Controller
     {
         if (!$request->filled('country_id')) return;
         
-        $school = \App\Models\School::create([
+        $data = [
             'user_id' => $user->id,
             'country_id' => $request->country_id,
             'city_id' => $request->city_id,
             'district' => $request->district,
             'location' => $request->location,
             'description' => $request->description,
-        ]);
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'whatsapp' => $request->whatsapp,
+        ];
+
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('schools/logos', 'public');
+        }
+
+        $school = \App\Models\School::create($data);
 
         if ($request->has('grades')) {
             $school->grades()->attach($request->grades);
@@ -186,7 +206,7 @@ class UserManagementController extends Controller
     {
         if (!$request->filled('country_id')) return;
         
-        \App\Models\Kindergarten::create([
+        $data = [
             'user_id' => $user->id,
             'country_id' => $request->country_id,
             'city_id' => $request->city_id,
@@ -196,14 +216,24 @@ class UserManagementController extends Controller
             'email' => $request->email,
             'address' => $request->location,
             'is_active' => $request->status === 'active',
-        ]);
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'whatsapp' => $request->whatsapp,
+        ];
+
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('kindergartens/logos', 'public');
+        }
+
+        \App\Models\Kindergarten::create($data);
     }
 
     private function createNurseryProfile($user, $request)
     {
         if (!$request->filled('country_id')) return;
         
-        \App\Models\Nursery::create([
+        $data = [
             'user_id' => $user->id,
             'country_id' => $request->country_id,
             'city_id' => $request->city_id,
@@ -215,7 +245,17 @@ class UserManagementController extends Controller
             'is_active' => $request->status === 'active',
             'min_age_months' => $request->min_age_months ?? 1,
             'max_age_months' => $request->max_age_months ?? 60,
-        ]);
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'whatsapp' => $request->whatsapp,
+        ];
+
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('nurseries/logos', 'public');
+        }
+
+        \App\Models\Nursery::create($data);
     }
 
     /**
