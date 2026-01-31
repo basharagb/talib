@@ -321,7 +321,7 @@
 <body
     class="{{ app()->getLocale() == 'ar' ? 'font-cairo' : 'font-inter' }} antialiased bg-gradient-to-br from-slate-50 to-blue-50 overflow-x-hidden">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-nav animate-slide-down">
+    <nav class="fixed top-0 w-full z-50 glass-nav animate-slide-down hidden md:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div class="flex justify-between items-center h-16 md:h-20">
                 <!-- Logo -->
@@ -523,7 +523,7 @@
                     </div>
 
                     <p
-                        class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-100 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up px-2 lg:px-0">
+                        class="text-base sm:text-lg md:text-xl lg:text-xl text-gray-100 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up px-2 lg:px-0">
                         {{ __('messages.hero_subtitle') }}
                     </p>
 
@@ -556,7 +556,8 @@
                             <div class="text-2xl sm:text-4xl lg:text-5xl font-bold stat-number" data-target="5000">0
                             </div>
                             <div class="text-xs sm:text-base text-gray-200 mt-1 sm:mt-2">
-                                {{ __('messages.active_users') }}</div>
+                                {{ __('messages.active_users') }}
+                            </div>
                         </div>
                         <div
                             class="text-center bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-6 lg:p-8">
@@ -749,7 +750,8 @@
                         </div>
                     </div>
                     <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
-                        {{ __('messages.wide_network') }}</h3>
+                        {{ __('messages.wide_network') }}
+                    </h3>
                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{{ __('messages.wide_network_desc') }}
                     </p>
                     <div
