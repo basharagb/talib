@@ -322,17 +322,17 @@
     class="{{ app()->getLocale() == 'ar' ? 'font-cairo' : 'font-inter' }} antialiased bg-gradient-to-br from-slate-50 to-blue-50 overflow-x-hidden">
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-nav animate-slide-down">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex justify-between items-center h-16 md:h-20">
                 <!-- Logo -->
                 <div class="flex items-center animate-slide-right">
                     <div class="relative">
-                        <div class="text-4xl font-black text-gradient">طالب</div>
+                        <div class="text-2xl md:text-4xl font-black text-gradient">طالب</div>
                         <div
-                            class="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse">
+                            class="absolute -top-0.5 -right-0.5 w-2 h-2 md:w-3 md:h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse">
                         </div>
                     </div>
-                    <div class="mr-4 text-sm text-gray-600 font-medium">
+                    <div class="mr-2 md:mr-4 text-xs md:text-sm text-gray-600 font-medium hidden sm:block">
                         <div>{{ app()->getLocale() == 'ar' ? 'منصة التعليم الرقمي' : 'Digital Education Platform' }}
                         </div>
                         <div class="text-xs text-primary-500">
@@ -409,21 +409,22 @@
                 </div>
 
                 <!-- Auth Links -->
-                <div class="flex items-center space-x-4 space-x-reverse animate-slide-left">
+                <div class="flex items-center space-x-2 space-x-reverse animate-slide-left">
                     @auth
                         <a href="{{ url('/dashboard') }}"
-                            class="btn-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg">
-                            <i class="fas fa-tachometer-alt {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
-                            {{ __('messages.dashboard') }}
+                            class="btn-primary text-white px-4 py-2 md:px-8 md:py-3 rounded-full font-semibold shadow-lg text-sm md:text-base">
+                            <span class="hidden sm:inline">{{ __('messages.dashboard') }}</span>
+                            <span class="sm:hidden">لوحة التحكم</span>
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium px-4 py-2 rounded-lg hover:bg-primary-50">
+                            class="hidden md:block text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium px-4 py-2 rounded-lg hover:bg-primary-50">
                             {{ __('messages.nav_login') }}
                         </a>
-                        <a href="#register" class="btn-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg">
-                            <i class="fas fa-rocket {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
-                            {{ __('messages.start_now') }}
+                        <a href="#register"
+                            class="btn-primary text-white px-4 py-2 md:px-8 md:py-3 rounded-full font-semibold shadow-lg text-sm md:text-base">
+                            <span class="hidden sm:inline">{{ __('messages.start_now') }}</span>
+                            <span class="sm:hidden">ابدأ الآن</span>
                         </a>
                     @endauth
 
@@ -448,42 +449,42 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu"
                 class="md:hidden hidden bg-white/95 backdrop-blur-lg border-t border-gray-200 animate-slide-down">
-                <div class="px-4 py-6 space-y-4">
+                <div class="px-4 py-4 space-y-2">
                     <a href="#home"
-                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.home') }}</a>
+                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base">{{ __('messages.home') }}</a>
                     <a href="#features"
-                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.features') }}</a>
+                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base">{{ __('messages.features') }}</a>
                     <a href="#stats"
-                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.statistics') }}</a>
+                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base">{{ __('messages.statistics') }}</a>
                     <a href="#testimonials"
-                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.testimonials') }}</a>
+                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base">{{ __('messages.testimonials') }}</a>
                     <a href="#contact"
-                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.contact') }}</a>
+                        class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base">{{ __('messages.contact') }}</a>
 
                     <!-- Language Switcher for Mobile -->
-                    <div class="border-t border-gray-200 pt-4 mt-4">
+                    <div class="border-t border-gray-200 pt-3 mt-3">
                         <div class="space-y-2">
                             <a href="{{ route('locale.switch', 'ar') }}"
-                                class="mobile-nav-link flex items-center space-x-3 space-x-reverse text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 {{ app()->getLocale() == 'ar' ? 'bg-primary-50 text-primary-600' : '' }}">
-                                <span class="text-lg">🇸🇦</span>
+                                class="mobile-nav-link flex items-center space-x-3 space-x-reverse text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base {{ app()->getLocale() == 'ar' ? 'bg-primary-50 text-primary-600' : '' }}">
+                                <span class="text-xl">🇸🇦</span>
                                 <span>{{ __('messages.arabic') }}</span>
                             </a>
                             <a href="{{ route('locale.switch', 'en') }}"
-                                class="mobile-nav-link flex items-center space-x-3 space-x-reverse text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 {{ app()->getLocale() == 'en' ? 'bg-primary-50 text-primary-600' : '' }}">
-                                <span class="text-lg">🇺🇸</span>
+                                class="mobile-nav-link flex items-center space-x-3 space-x-reverse text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base {{ app()->getLocale() == 'en' ? 'bg-primary-50 text-primary-600' : '' }}">
+                                <span class="text-xl">🇺🇸</span>
                                 <span>{{ __('messages.english') }}</span>
                             </a>
                         </div>
                     </div>
-                    <div class="border-t border-gray-200 pt-4 mt-4">
+                    <div class="border-t border-gray-200 pt-3 mt-3">
                         @guest
                             <a href="{{ route('login') }}"
-                                class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50">{{ __('messages.nav_login') }}</a>
+                                class="mobile-nav-link block text-gray-700 hover:text-primary-600 transition-colors font-medium py-3 px-4 rounded-lg hover:bg-primary-50 text-base">{{ __('messages.nav_login') }}</a>
                             <a href="#register"
-                                class="mobile-nav-link block btn-primary text-white py-3 px-4 rounded-lg mt-2 text-center">{{ __('messages.start_now') }}</a>
+                                class="mobile-nav-link block btn-primary text-white py-3 px-4 rounded-lg mt-2 text-center text-base font-bold">{{ __('messages.start_now') }}</a>
                         @else
                             <a href="{{ url('/dashboard') }}"
-                                class="mobile-nav-link block btn-primary text-white py-3 px-4 rounded-lg text-center">{{ __('messages.dashboard') }}</a>
+                                class="mobile-nav-link block btn-primary text-white py-3 px-4 rounded-lg text-center text-base font-bold">{{ __('messages.dashboard') }}</a>
                         @endguest
                     </div>
                 </div>
@@ -494,41 +495,42 @@
     <!-- Hero Section -->
     <section id="home" class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
         <!-- Floating Background Elements -->
-        <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden hidden md:block">
             <div class="floating-element absolute top-20 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
             <div class="floating-element absolute top-40 left-20 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
             <div class="floating-element absolute bottom-20 right-1/4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
             <div class="floating-element absolute bottom-40 left-10 w-16 h-16 bg-white/15 rounded-full blur-lg"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 md:pt-0">
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pt-20 pb-8 md:pt-0">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen">
                 <!-- Content -->
                 <div
-                    class="text-white space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-right order-2 lg:order-1">
+                    class="text-white space-y-4 sm:space-y-6 lg:space-y-12 text-center lg:text-right order-2 lg:order-1">
                     <div class="animate-slide-right">
                         <div
                             class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 mb-4 sm:mb-6">
                             <span
-                                class="w-2 h-2 bg-green-400 rounded-full animate-pulse {{ app()->getLocale() == 'ar' ? 'ml-2 sm:ml-3' : 'mr-2 sm:mr-3' }}"></span>
+                                class="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse {{ app()->getLocale() == 'ar' ? 'ml-2 sm:ml-3' : 'mr-2 sm:mr-3' }}"></span>
                             <span
-                                class="text-xs sm:text-sm font-medium">{{ app()->getLocale() == 'ar' ? 'منصة تعليمية متطورة' : 'Advanced Educational Platform' }}</span>
+                                class="text-sm sm:text-base font-medium">{{ app()->getLocale() == 'ar' ? 'منصة تعليمية متطورة' : 'Advanced Educational Platform' }}</span>
                         </div>
 
                         <h1
-                            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-4 sm:mb-6">
+                            class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight mb-4 sm:mb-6">
                             {{ __('messages.hero_title') }}
                         </h1>
                     </div>
 
-                    <p class="text-xl md:text-2xl text-gray-100 leading-relaxed max-w-2xl animate-slide-up">
+                    <p
+                        class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-100 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up px-2 lg:px-0">
                         {{ __('messages.hero_subtitle') }}
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-4 animate-slide-up">
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-slide-up px-2 lg:px-0">
                         <a href="#register"
-                            class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl inline-flex items-center justify-center group">
-                            <svg class="w-5 h-5 {{ app()->getLocale() == 'ar' ? 'ml-2 group-hover:translate-x-1' : 'mr-2 group-hover:-translate-x-1' }} transition-transform"
+                            class="btn-primary text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-2xl inline-flex items-center justify-center group">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 {{ app()->getLocale() == 'ar' ? 'ml-2 group-hover:translate-x-1' : 'mr-2 group-hover:-translate-x-1' }} transition-transform"
                                 fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -537,9 +539,9 @@
                             {{ __('messages.get_started') }}
                         </a>
                         <a href="#features"
-                            class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all backdrop-blur-sm inline-flex items-center justify-center">
-                            <svg class="w-5 h-5 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
+                            class="border-2 border-white/30 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white/10 transition-all backdrop-blur-sm inline-flex items-center justify-center">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -548,21 +550,26 @@
                     </div>
 
                     <!-- Stats -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 pt-6 sm:pt-8 animate-slide-up">
-                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 lg:p-6">
-                            <div class="text-xl sm:text-2xl lg:text-3xl font-bold stat-number" data-target="5000">0
+                    <div class="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-8 pt-6 sm:pt-8 animate-slide-up">
+                        <div
+                            class="text-center bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-6 lg:p-8">
+                            <div class="text-2xl sm:text-4xl lg:text-5xl font-bold stat-number" data-target="5000">0
                             </div>
-                            <div class="text-xs sm:text-sm text-gray-200 mt-1">{{ __('messages.active_users') }}</div>
+                            <div class="text-xs sm:text-base text-gray-200 mt-1 sm:mt-2">
+                                {{ __('messages.active_users') }}</div>
                         </div>
-                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 lg:p-6">
-                            <div class="text-xl sm:text-2xl lg:text-3xl font-bold stat-number" data-target="150">0</div>
-                            <div class="text-xs sm:text-sm text-gray-200 mt-1">
+                        <div
+                            class="text-center bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-6 lg:p-8">
+                            <div class="text-2xl sm:text-4xl lg:text-5xl font-bold stat-number" data-target="150">0
+                            </div>
+                            <div class="text-xs sm:text-base text-gray-200 mt-1 sm:mt-2">
                                 {{ __('messages.educational_institutions') }}
                             </div>
                         </div>
-                        <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 lg:p-6">
-                            <div class="text-xl sm:text-2xl lg:text-3xl font-bold stat-number" data-target="98">0</div>
-                            <div class="text-xs sm:text-sm text-gray-200 mt-1">
+                        <div
+                            class="text-center bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-6 lg:p-8">
+                            <div class="text-2xl sm:text-4xl lg:text-5xl font-bold stat-number" data-target="98">0</div>
+                            <div class="text-xs sm:text-base text-gray-200 mt-1 sm:mt-2">
                                 {{ app()->getLocale() == 'ar' ? '% نسبة الرضا' : '% ' . __('messages.customer_satisfaction') }}
                             </div>
                         </div>
@@ -570,7 +577,7 @@
                 </div>
 
                 <!-- Visual Elements -->
-                <div class="relative animate-slide-left order-1 lg:order-2 mb-8 lg:mb-0">
+                <div class="relative animate-slide-left order-1 lg:order-2 mb-12 lg:mb-0 hidden lg:block">
                     <div class="relative z-10">
                         <!-- Main Card -->
                         <div
@@ -651,7 +658,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-white relative overflow-hidden">
+    <section id="features" class="py-12 sm:py-16 lg:py-20 bg-white relative overflow-hidden">
         <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-5">
             <div class="absolute inset-0"
@@ -660,21 +667,21 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-12 sm:mb-16 lg:mb-20 scroll-animate">
+            <div class="text-center mb-8 sm:mb-12 lg:mb-16 scroll-animate">
                 <div
-                    class="inline-flex items-center bg-primary-50 text-primary-600 rounded-full px-4 sm:px-6 py-2 mb-4 sm:mb-6">
-                    <svg class="w-4 h-4 {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}" fill="currentColor"
-                        viewBox="0 0 20 20">
+                    class="inline-flex items-center bg-primary-50 text-primary-600 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 mb-3 sm:mb-4">
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 {{ app()->getLocale() == 'ar' ? 'ml-1.5 sm:ml-2' : 'mr-1.5 sm:mr-2' }}"
+                        fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                     <span
-                        class="text-sm sm:text-base">{{ app()->getLocale() == 'ar' ? 'الميزات الرئيسية' : 'Key Features' }}</span>
+                        class="text-xs sm:text-sm">{{ app()->getLocale() == 'ar' ? 'الميزات الرئيسية' : 'Key Features' }}</span>
                 </div>
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 sm:mb-6">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-3 sm:mb-4">
                     {{ __('messages.features_title') }}
                 </h2>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
                     {{ __('messages.features_subtitle') }}
                 </p>
             </div>
@@ -682,35 +689,36 @@
             <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                 <!-- Feature 1 -->
                 <div
-                    class="feature-card bg-white p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl text-center group scroll-animate">
-                    <div class="relative mb-8">
+                    class="feature-card bg-white p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl text-center group scroll-animate">
+                    <div class="relative mb-4 sm:mb-6">
                         <div
-                            class="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
-                            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
+                            <svg class="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
                         <div
-                            class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-                            <svg class="w-3 h-3 text-yellow-800" fill="currentColor" viewBox="0 0 20 20">
+                            class="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-400 rounded-full flex items-center justify-center">
+                            <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-yellow-800" fill="currentColor"
+                                viewBox="0 0 20 20">
                                 <path
                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                         {{ __('messages.easy_setup') }}
                     </h3>
-                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed px-2 sm:px-0">
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
                         {{ __('messages.easy_setup_desc') }}
                     </p>
                     <div
-                        class="mt-4 sm:mt-6 flex items-center justify-center text-blue-600 font-medium text-sm sm:text-base">
+                        class="mt-3 sm:mt-4 flex items-center justify-center text-blue-600 font-medium text-xs sm:text-sm">
                         <span
-                            class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ app()->getLocale() == 'ar' ? 'أقل من 5 دقائق' : 'Less than 5 minutes' }}</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            class="{{ app()->getLocale() == 'ar' ? 'ml-1.5' : 'mr-1.5' }}">{{ app()->getLocale() == 'ar' ? 'أقل من 5 دقائق' : 'Less than 5 minutes' }}</span>
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
                                 clip-rule="evenodd" />
@@ -720,30 +728,35 @@
 
                 <!-- Feature 2 -->
                 <div
-                    class="feature-card bg-white p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl text-center group scroll-animate">
-                    <div class="relative mb-8">
+                    class="feature-card bg-white p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl text-center group scroll-animate">
+                    <div class="relative mb-4 sm:mb-6">
                         <div
-                            class="w-20 h-20 mx-auto bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
-                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto bg-gradient-to-br from-green-500 to-green-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
+                            <svg class="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
                         </div>
                         <div
-                            class="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
-                            <svg class="w-3 h-3 text-green-800" fill="currentColor" viewBox="0 0 20 20">
+                            class="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-5 h-5 sm:w-6 sm:h-6 bg-green-400 rounded-full flex items-center justify-center">
+                            <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-800" fill="currentColor"
+                                viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ __('messages.wide_network') }}</h3>
-                    <p class="text-gray-600 leading-relaxed">{{ __('messages.wide_network_desc') }}</p>
-                    <div class="mt-6 flex items-center justify-center text-green-600 font-medium">
+                    <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
+                        {{ __('messages.wide_network') }}</h3>
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed">{{ __('messages.wide_network_desc') }}
+                    </p>
+                    <div
+                        class="mt-3 sm:mt-4 flex items-center justify-center text-green-600 font-medium text-xs sm:text-sm">
                         <span
-                            class="{{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}">{{ __('messages.wide_network_members') }}</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            class="{{ app()->getLocale() == 'ar' ? 'ml-1.5' : 'mr-1.5' }}">{{ __('messages.wide_network_members') }}</span>
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
