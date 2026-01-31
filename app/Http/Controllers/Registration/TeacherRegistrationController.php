@@ -36,6 +36,7 @@ class TeacherRegistrationController extends Controller
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
                 'role' => 'teacher',
+                'status' => 'pending',
             ]);
 
             // Create teacher profile
@@ -85,9 +86,9 @@ class TeacherRegistrationController extends Controller
         }
     }
 
-    public function getCities(Request $request)
+    public function getCities($country)
     {
-        $cities = City::where('country_id', $request->country_id)->get();
+        $cities = City::where('country_id', $country)->get();
         return response()->json($cities);
     }
 

@@ -76,12 +76,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    // Admin routes for registration review
+    // Admin routes for registration review and user management
     Route::prefix('admin')->name('admin.')->group(function () {
+        // Registration Review
         Route::get('/registrations', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'index'])->name('registrations.index');
         Route::get('/registrations/{user}', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'show'])->name('registrations.show');
         Route::post('/registrations/{user}/approve', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'approve'])->name('registrations.approve');
         Route::post('/registrations/{user}/reject', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'reject'])->name('registrations.reject');
+        
+        // User Management
+        Route::resource('users', App\Http\Controllers\Admin\UserManagementController::class);
+        Route::post('/users/bulk-update-status', [App\Http\Controllers\Admin\UserManagementController::class, 'bulkUpdateStatus'])->name('users.bulk-update-status');
     });
 });
 

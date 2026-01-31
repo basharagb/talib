@@ -36,6 +36,7 @@ class KindergartenRegistrationController extends Controller
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
                 'role' => 'kindergarten',
+                'status' => 'pending',
             ]);
 
             // Create kindergarten profile
@@ -82,9 +83,9 @@ class KindergartenRegistrationController extends Controller
         }
     }
 
-    public function getCities(Request $request)
+    public function getCities($country)
     {
-        $cities = City::where('country_id', $request->country_id)->get();
+        $cities = City::where('country_id', $country)->get();
         return response()->json($cities);
     }
 
