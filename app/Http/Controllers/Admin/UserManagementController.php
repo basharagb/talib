@@ -113,7 +113,7 @@ class UserManagementController extends Controller
     {
         if (!$request->filled('country_id')) return;
         
-        $teacher = \App\Models\Teacher::create([
+        $data = [
             'user_id' => $user->id,
             'country_id' => $request->country_id,
             'city_id' => $request->city_id,
@@ -123,7 +123,17 @@ class UserManagementController extends Controller
             'description' => $request->description,
             'gender' => $request->gender,
             'experience' => $request->experience,
-        ]);
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'instagram' => $request->instagram,
+            'whatsapp' => $request->whatsapp,
+        ];
+
+        if ($request->hasFile('profile_photo')) {
+            $data['profile_photo'] = $request->file('profile_photo')->store('teachers/photos', 'public');
+        }
+
+        $teacher = \App\Models\Teacher::create($data);
 
         if ($request->has('subjects')) {
             $teacher->subjects()->attach($request->subjects);
