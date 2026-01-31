@@ -493,7 +493,8 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
+    <section id="home"
+        class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden pt-0 md:pt-0">
         <!-- Floating Background Elements -->
         <div class="absolute inset-0 overflow-hidden hidden md:block">
             <div class="floating-element absolute top-20 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
@@ -523,7 +524,7 @@
                     </div>
 
                     <p
-                        class="text-base sm:text-lg md:text-xl lg:text-xl text-gray-100 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up px-2 lg:px-0">
+                        class="text-sm sm:text-base md:text-base lg:text-lg text-gray-100 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up px-2 lg:px-0">
                         {{ __('messages.hero_subtitle') }}
                     </p>
 
