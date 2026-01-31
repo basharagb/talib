@@ -494,7 +494,7 @@
 
     <!-- Hero Section -->
     <section id="home"
-        class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden pt-0 md:pt-0">
+        class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden pt-0 md:pt-20">
         <!-- Floating Background Elements -->
         <div class="absolute inset-0 overflow-hidden hidden md:block">
             <div class="floating-element absolute top-20 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
@@ -503,7 +503,7 @@
             <div class="floating-element absolute bottom-40 left-10 w-16 h-16 bg-white/15 rounded-full blur-lg"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pt-20 pb-8 md:pt-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pt-4 pb-8 md:pt-0">
             <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen">
                 <!-- Content -->
                 <div
