@@ -207,7 +207,7 @@
         </div>
 
         <!-- Navigation -->
-        <nav class="glass-nav fixed top-0 w-full z-50 shadow-lg">
+        <nav class="glass-nav fixed top-0 w-full z-50 shadow-lg hidden md:block">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20">
                     <div class="flex items-center animate-slide-up">
@@ -248,7 +248,7 @@
         </nav>
 
         <!-- Main Content -->
-        <main class="pt-28 pb-12 relative z-10">
+        <main class="pt-8 md:pt-28 pb-12 relative z-10">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Registration Header -->
                 <div class="text-center mb-12 animate-slide-up">
