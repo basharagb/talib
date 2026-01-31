@@ -18,6 +18,8 @@ class Teacher extends Model
         'degree',
         'description',
         'profile_image',
+        'cv_file',
+        'certificates',
         'gender',
         'social_links',
         'experience',
@@ -26,6 +28,7 @@ class Teacher extends Model
 
     protected $casts = [
         'social_links' => 'array',
+        'certificates' => 'array',
     ];
 
     public function user()

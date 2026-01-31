@@ -25,6 +25,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Sitemap for SEO
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+
 // Language switching route
 Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 
@@ -87,6 +90,10 @@ Route::middleware('auth')->group(function () {
         // User Management
         Route::resource('users', App\Http\Controllers\Admin\UserManagementController::class);
         Route::post('/users/bulk-update-status', [App\Http\Controllers\Admin\UserManagementController::class, 'bulkUpdateStatus'])->name('users.bulk-update-status');
+        
+        // Analytics Dashboard
+        Route::get('/analytics', [App\Http\Controllers\Admin\AnalyticsController::class, 'index'])->name('analytics.index');
+        Route::get('/analytics/export', [App\Http\Controllers\Admin\AnalyticsController::class, 'export'])->name('analytics.export');
     });
 });
 

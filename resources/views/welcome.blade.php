@@ -1094,51 +1094,69 @@
             <div class="floating-element absolute bottom-20 left-20 w-32 h-32 bg-white rounded-full blur-2xl"></div>
         </div>
 
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="text-white scroll-animate">
-                <h2 class="text-5xl font-black mb-8">{{ __('messages.cta_ready_title') }}</h2>
-                <p class="text-xl mb-12 text-gray-100 max-w-2xl mx-auto leading-relaxed">
+                <h2 class="text-4xl md:text-5xl font-black mb-6">{{ __('messages.cta_ready_title') }}</h2>
+                <p class="text-lg md:text-xl mb-12 text-gray-100 max-w-3xl mx-auto leading-relaxed">
                     {{ __('messages.cta_ready_description') }}
                 </p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12">
-                    <div class="card-gradient rounded-2xl p-6 text-center">
-                        <div class="text-2xl font-bold mb-2">{{ __('messages.teacher') }}</div>
-                        <div class="text-gray-200 mb-4">{{ __('messages.teacher_fee') }}</div>
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6 mb-12 max-w-6xl mx-auto">
+                    <div
+                        class="card-gradient rounded-2xl p-6 text-center flex flex-col justify-between min-h-[200px] hover:transform hover:scale-105 transition-all duration-300">
+                        <div>
+                            <div class="text-xl md:text-2xl font-bold mb-2">{{ __('messages.teacher') }}</div>
+                            <div class="text-gray-200 mb-4 text-sm md:text-base">{{ __('messages.teacher_fee') }}</div>
+                        </div>
                         <a href="{{ route('register.teacher') }}"
-                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block w-full">
                             {{ __('messages.start_now_btn') }}
                         </a>
                     </div>
-                    <div class="card-gradient rounded-2xl p-6 text-center">
-                        <div class="text-2xl font-bold mb-2">{{ __('messages.educational_center') }}</div>
-                        <div class="text-gray-200 mb-4">{{ __('messages.center_fee') }}</div>
+                    <div
+                        class="card-gradient rounded-2xl p-6 text-center flex flex-col justify-between min-h-[200px] hover:transform hover:scale-105 transition-all duration-300">
+                        <div>
+                            <div class="text-xl md:text-2xl font-bold mb-2">{{ __('messages.educational_center') }}
+                            </div>
+                            <div class="text-gray-200 mb-4 text-sm md:text-base">{{ __('messages.center_fee') }}</div>
+                        </div>
                         <a href="{{ route('register.educational-center') }}"
-                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block w-full">
                             {{ __('messages.start_now_btn') }}
                         </a>
                     </div>
-                    <div class="card-gradient rounded-2xl p-6 text-center">
-                        <div class="text-2xl font-bold mb-2">{{ __('messages.school') }}</div>
-                        <div class="text-gray-200 mb-4">{{ __('messages.school_fee') }}</div>
+                    <div
+                        class="card-gradient rounded-2xl p-6 text-center flex flex-col justify-between min-h-[200px] hover:transform hover:scale-105 transition-all duration-300">
+                        <div>
+                            <div class="text-xl md:text-2xl font-bold mb-2">{{ __('messages.school') }}</div>
+                            <div class="text-gray-200 mb-4 text-sm md:text-base">{{ __('messages.school_fee') }}</div>
+                        </div>
                         <a href="{{ route('register.school') }}"
-                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block w-full">
                             {{ __('messages.start_now_btn') }}
                         </a>
                     </div>
-                    <div class="card-gradient rounded-2xl p-6 text-center">
-                        <div class="text-2xl font-bold mb-2">{{ __('messages.kindergarten') }}</div>
-                        <div class="text-gray-200 mb-4">{{ __('messages.kindergarten_fee') }}</div>
+                    <div
+                        class="card-gradient rounded-2xl p-6 text-center flex flex-col justify-between min-h-[200px] hover:transform hover:scale-105 transition-all duration-300">
+                        <div>
+                            <div class="text-xl md:text-2xl font-bold mb-2">{{ __('messages.kindergarten') }}</div>
+                            <div class="text-gray-200 mb-4 text-sm md:text-base">{{ __('messages.kindergarten_fee') }}
+                            </div>
+                        </div>
                         <a href="{{ route('register.kindergarten') }}"
-                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block w-full">
                             {{ __('messages.start_now_btn') }}
                         </a>
                     </div>
-                    <div class="card-gradient rounded-2xl p-6 text-center">
-                        <div class="text-2xl font-bold mb-2">{{ __('messages.nursery') }}</div>
-                        <div class="text-gray-200 mb-4">{{ __('messages.nursery_fee') }}</div>
+                    <div
+                        class="card-gradient rounded-2xl p-6 text-center flex flex-col justify-between min-h-[200px] hover:transform hover:scale-105 transition-all duration-300">
+                        <div>
+                            <div class="text-xl md:text-2xl font-bold mb-2">{{ __('messages.nursery') }}</div>
+                            <div class="text-gray-200 mb-4 text-sm md:text-base">{{ __('messages.nursery_fee') }}</div>
+                        </div>
                         <a href="{{ route('register.nursery') }}"
-                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block">
+                            class="bg-white text-primary-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block w-full">
                             {{ __('messages.start_now_btn') }}
                         </a>
                     </div>

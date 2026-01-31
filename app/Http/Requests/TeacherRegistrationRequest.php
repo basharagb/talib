@@ -24,7 +24,10 @@ class TeacherRegistrationRequest extends FormRequest
             'location' => ['nullable', 'string', 'max:500'],
             'degree' => ['required', 'in:diploma,bachelor,master,high_diploma,doctorate'],
             'description' => ['required', 'string', 'min:50'],
-            'profile_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'profile_image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'cv_file' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:5120'],
+            'certificates' => ['required', 'array', 'min:1'],
+            'certificates.*' => ['file', 'mimes:pdf,jpg,jpeg,png', 'max:5120'],
             'gender' => ['required', 'in:male,female'],
             'experience' => ['required', 'string', 'min:20'],
             'subjects' => ['required', 'array', 'min:1'],
@@ -56,8 +59,16 @@ class TeacherRegistrationRequest extends FormRequest
             'experience.required' => __('Work experience is required'),
             'experience.min' => __('Work experience must be at least 20 characters'),
             'subjects.required' => __('At least one subject must be selected'),
+            'profile_image.required' => __('Profile photo is required'),
             'profile_image.image' => __('Profile image must be a valid image file'),
             'profile_image.max' => __('Profile image size must not exceed 2MB'),
+            'cv_file.required' => __('CV file is required'),
+            'cv_file.mimes' => __('CV must be a PDF or Word document'),
+            'cv_file.max' => __('CV file size must not exceed 5MB'),
+            'certificates.required' => __('At least one certificate is required'),
+            'certificates.min' => __('At least one certificate must be uploaded'),
+            'certificates.*.mimes' => __('Certificates must be PDF or image files'),
+            'certificates.*.max' => __('Each certificate size must not exceed 5MB'),
         ];
     }
 }

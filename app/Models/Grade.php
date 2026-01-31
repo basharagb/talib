@@ -13,6 +13,8 @@ class Grade extends Model
         'name_ar',
         'name_en',
         'level',
+        'type',
+        'is_active',
     ];
 
     public function teachers()

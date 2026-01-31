@@ -1,2 +1,38 @@
+# Talib Educational Platform - robots.txt
+# https://talib.com
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /payment/
+Disallow: /storage/
+Disallow: /*.json$
+Disallow: /*?*
+
+# Allow search engines to index public pages
+Allow: /search
+Allow: /register/
+
+# Sitemap location
+Sitemap: https://talib.com/sitemap.xml
+
+# Crawl delay for polite crawling
+Crawl-delay: 10
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /payment/
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /payment/

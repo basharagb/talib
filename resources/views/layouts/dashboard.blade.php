@@ -334,6 +334,15 @@
                             </a>
                         </li>
 
+                        <!-- Analytics -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.analytics.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.analytics.*') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-graph-up"></i>
+                                <p>{{ __('messages.analytics') }}</p>
+                            </a>
+                        </li>
+
                         <!-- Registration Menu -->
                         <li class="nav-item {{ request()->routeIs('register.*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">

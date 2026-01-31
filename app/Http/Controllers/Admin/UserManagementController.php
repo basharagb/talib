@@ -123,14 +123,37 @@ class UserManagementController extends Controller
             'description' => $request->description,
             'gender' => $request->gender,
             'experience' => $request->experience,
-            'facebook' => $request->facebook,
-            'twitter' => $request->twitter,
-            'instagram' => $request->instagram,
-            'whatsapp' => $request->whatsapp,
+            'subscription_fee' => 10,
         ];
 
-        if ($request->hasFile('profile_photo')) {
-            $data['profile_photo'] = $request->file('profile_photo')->store('teachers/photos', 'public');
+        // Handle profile image upload
+        if ($request->hasFile('profile_image')) {
+            $data['profile_image'] = $request->file('profile_image')->store('teachers/profiles', 'public');
+        }
+
+        // Handle CV file upload
+        if ($request->hasFile('cv_file')) {
+            $data['cv_file'] = $request->file('cv_file')->store('teachers/cvs', 'public');
+        }
+
+        // Handle certificates upload
+        if ($request->hasFile('certificates')) {
+            $certificatePaths = [];
+            foreach ($request->file('certificates') as $certificate) {
+                $certificatePaths[] = $certificate->store('teachers/certificates', 'public');
+            }
+            $data['certificates'] = $certificatePaths;
+        }
+
+        // Handle social links
+        $socialLinks = [];
+        if ($request->facebook) $socialLinks['facebook'] = $request->facebook;
+        if ($request->twitter) $socialLinks['twitter'] = $request->twitter;
+        if ($request->instagram) $socialLinks['instagram'] = $request->instagram;
+        if ($request->linkedin) $socialLinks['linkedin'] = $request->linkedin;
+        if ($request->whatsapp) $socialLinks['whatsapp'] = $request->whatsapp;
+        if (!empty($socialLinks)) {
+            $data['social_links'] = $socialLinks;
         }
 
         $teacher = \App\Models\Teacher::create($data);

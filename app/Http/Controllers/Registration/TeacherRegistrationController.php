@@ -60,6 +60,21 @@ class TeacherRegistrationController extends Controller
                 $teacher->update(['profile_image' => $imagePath]);
             }
 
+            // Handle CV file upload
+            if ($request->hasFile('cv_file')) {
+                $cvPath = $request->file('cv_file')->store('teachers/cvs', 'public');
+                $teacher->update(['cv_file' => $cvPath]);
+            }
+
+            // Handle certificates upload
+            if ($request->hasFile('certificates')) {
+                $certificatePaths = [];
+                foreach ($request->file('certificates') as $certificate) {
+                    $certificatePaths[] = $certificate->store('teachers/certificates', 'public');
+                }
+                $teacher->update(['certificates' => $certificatePaths]);
+            }
+
             // Attach selected subjects
             if ($request->has('subjects')) {
                 $teacher->subjects()->attach($request->subjects);
