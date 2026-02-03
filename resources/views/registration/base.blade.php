@@ -375,6 +375,130 @@
 
     <!-- JavaScript for dynamic functionality -->
     <script>
+        // Searchable Select Component
+        function initSearchableSelect(selectId) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+            
+            // Create wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'searchable-select-wrapper relative';
+            select.parentNode.insertBefore(wrapper, select);
+            
+            // Create search input
+            const searchInput = document.createElement('input');
+            searchInput.type = 'text';
+            searchInput.placeholder = '{{ app()->getLocale() == "ar" ? "ابحث عن الدولة..." : "Search country..." }}';
+            searchInput.className = 'form-input w-full px-4 py-3 focus:outline-none transition-all duration-300 mb-2';
+            searchInput.id = selectId + '_search';
+            
+            // Create dropdown container
+            const dropdown = document.createElement('div');
+            dropdown.className = 'searchable-dropdown hidden absolute z-50 w-full bg-white border-2 border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto';
+            dropdown.style.top = '100%';
+            
+            wrapper.appendChild(searchInput);
+            wrapper.appendChild(dropdown);
+            
+            // Hide original select but keep it for form submission
+            select.style.display = 'none';
+            wrapper.appendChild(select);
+            
+            // Store options
+            const options = Array.from(select.options).map(opt => ({
+                value: opt.value,
+                text: opt.textContent,
+                selected: opt.selected
+            }));
+            
+            // Render options
+            function renderOptions(filter = '') {
+                const filtered = options.filter(opt => 
+                    opt.text.toLowerCase().includes(filter.toLowerCase())
+                );
+                
+                dropdown.innerHTML = filtered.map(opt => `
+                    <div class="searchable-option px-4 py-3 cursor-pointer hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 transition-all duration-200 ${opt.value === select.value ? 'bg-gradient-to-r from-purple-100 to-blue-100 font-medium' : ''}" 
+                         data-value="${opt.value}">
+                        ${opt.text}
+                    </div>
+                `).join('');
+                
+                // Add click handlers
+                dropdown.querySelectorAll('.searchable-option').forEach(optEl => {
+                    optEl.addEventListener('click', function() {
+                        const value = this.dataset.value;
+                        select.value = value;
+                        searchInput.value = this.textContent.trim();
+                        dropdown.classList.add('hidden');
+                        
+                        // Trigger change event
+                        select.dispatchEvent(new Event('change', { bubbles: true }));
+                    });
+                });
+            }
+            
+            // Set initial value if selected
+            const selectedOpt = options.find(opt => opt.selected && opt.value);
+            if (selectedOpt) {
+                searchInput.value = selectedOpt.text;
+            }
+            
+            // Event handlers
+            searchInput.addEventListener('focus', function() {
+                renderOptions(this.value);
+                dropdown.classList.remove('hidden');
+            });
+            
+            searchInput.addEventListener('input', function() {
+                renderOptions(this.value);
+                dropdown.classList.remove('hidden');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!wrapper.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+            
+            // Keyboard navigation
+            searchInput.addEventListener('keydown', function(e) {
+                const options = dropdown.querySelectorAll('.searchable-option');
+                const current = dropdown.querySelector('.searchable-option.bg-blue-100');
+                let index = Array.from(options).indexOf(current);
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (index < options.length - 1) index++;
+                    options.forEach(o => o.classList.remove('bg-blue-100'));
+                    if (options[index]) {
+                        options[index].classList.add('bg-blue-100');
+                        options[index].scrollIntoView({ block: 'nearest' });
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (index > 0) index--;
+                    options.forEach(o => o.classList.remove('bg-blue-100'));
+                    if (options[index]) {
+                        options[index].classList.add('bg-blue-100');
+                        options[index].scrollIntoView({ block: 'nearest' });
+                    }
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const highlighted = dropdown.querySelector('.searchable-option.bg-blue-100') || options[0];
+                    if (highlighted) highlighted.click();
+                } else if (e.key === 'Escape') {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        }
+        
+        // Initialize searchable selects on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initSearchableSelect('country_id');
+        });
+        
         // Country/City dropdown functionality
         function loadCities(countryId, citySelectId) {
             const citySelect = document.getElementById(citySelectId);

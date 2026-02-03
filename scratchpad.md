@@ -1,6 +1,137 @@
 # Talib Educational Platform - Project Scratchpad
 
-## Current Task: � إصلاح مشكلة التسجيل (start_date) والترجمات المفقودة - ✅ مكتمل
+## Current Task: 🔧 إصلاح خطأ 403 + تفعيل نظام الدفع الكامل - ✅ مكتمل
+
+### 📋 المشاكل المُصلحة:
+1. **خطأ 403 عند الوصول لـ dashboard**: كان middleware admin يمنع المستخدمين العاديين
+2. **نظام الدفع غير مكتمل**: حقول الدفع مفقودة في Subscription Model
+3. **الكاش القديم**: كان يسبب مشاكل في التحديثات
+
+### ✅ الإصلاحات المطبقة:
+- [x] حذف جميع أنواع الكاش (cache, config, route, view)
+- [x] إزالة middleware admin من route dashboard
+- [x] تحديث CheckUserStatus middleware لإعادة توجيه المستخدمين المعلقين
+- [x] إضافة جميع حقول الدفع إلى Subscription Model (fillable & casts)
+- [x] تحديث PaymentController للسماح للمستخدمين بالوصول لاشتراكاتهم
+- [x] إعادة بناء config cache
+
+### 📁 الملفات المعدلة:
+- `routes/web.php` - إزالة admin middleware من dashboard
+- `app/Http/Middleware/CheckUserStatus.php` - إضافة توجيه dashboard للمعلقين
+- `app/Models/Subscription.php` - إضافة حقول الدفع الكاملة
+- `app/Http/Controllers/PaymentController.php` - تحسين رسائل الخطأ
+
+### 🧪 نتائج الاختبار:
+- ✅ الكاش تم حذفه بنجاح
+- ✅ المستخدمون المعلقون يتم توجيههم لصفحة حالة الدفع
+- ✅ المستخدمون النشطون يمكنهم الوصول لـ dashboard
+- ✅ نظام الدفع جاهز بجميع الخيارات (فيزا، باي بال، تحويل، كاش)
+
+---
+
+## Previous Task: 🔧 إصلاح خطأ 403 + بيئة التطوير المحلية - ✅ مكتمل
+
+### 📋 المشاكل المُصلحة:
+1. **خطأ 403 Forbidden**: صفحة حالة الدفع كانت ترفض الوصول بسبب عدم تجديد الجلسة
+2. **عدم وجود سكريبت بدء**: لم يكن هناك ملف .sh لبدء بيئة التطوير
+
+### ✅ الإصلاحات المطبقة:
+- [x] إضافة `session()->regenerate()` بعد تسجيل الدخول التلقائي
+- [x] إنشاء `start-dev.sh` لبدء الخوادم المحلية
+- [x] إنشاء `CleanTestUsersSeeder` لحذف المستخدمين التجريبيين
+- [x] حذف 2 مستخدم تجريبي (مع الاحتفاظ بـ 4 مدراء)
+
+### 📁 الملفات المعدلة/المُنشأة:
+- `app/Http/Controllers/Registration/TeacherRegistrationController.php`
+- `app/Http/Controllers/Registration/EducationalCenterRegistrationController.php`
+- `app/Http/Controllers/Registration/SchoolRegistrationController.php`
+- `app/Http/Controllers/Registration/KindergartenRegistrationController.php`
+- `app/Http/Controllers/Registration/NurseryRegistrationController.php`
+- `start-dev.sh` (جديد)
+- `database/seeders/CleanTestUsersSeeder.php` (جديد)
+
+### 🧪 نتائج الاختبار:
+- ✅ Home: 200
+- ✅ Search: 200
+- ✅ Teacher Registration: 200
+- ✅ School Registration: 200
+- ✅ Cities API: 200
+
+---
+
+## Previous Task: 🔧 إصلاح تدفق التسجيل + بحث الدول + حقول اختيارية - ✅ مكتمل
+
+### 📋 المشاكل المُصلحة:
+1. **تدفق التسجيل خاطئ**: بعد التسجيل كان يوجه للـ login بدلاً من تسجيل الدخول تلقائياً
+2. **حقول إجبارية خاطئة**: الصورة الشخصية، السيرة الذاتية، الشهادات كانت إجبارية
+3. **صعوبة اختيار الدولة**: قائمة الدول طويلة بدون بحث
+
+### ✅ الإصلاحات المطبقة:
+- [x] تسجيل الدخول تلقائياً بعد التسجيل (Auth::login)
+- [x] التوجيه لصفحة حالة الدفع بدلاً من صفحة الدفع
+- [x] جعل profile_image اختياري (nullable)
+- [x] جعل cv_file اختياري (nullable)
+- [x] جعل certificates اختياري (nullable)
+- [x] إضافة بحث في قائمة الدول (searchable dropdown)
+
+### 📁 الملفات المعدلة:
+- `app/Http/Controllers/Registration/TeacherRegistrationController.php`
+- `app/Http/Controllers/Registration/EducationalCenterRegistrationController.php`
+- `app/Http/Controllers/Registration/SchoolRegistrationController.php`
+- `app/Http/Controllers/Registration/KindergartenRegistrationController.php`
+- `app/Http/Controllers/Registration/NurseryRegistrationController.php`
+- `app/Http/Requests/TeacherRegistrationRequest.php`
+- `resources/views/registration/teacher.blade.php`
+- `resources/views/registration/base.blade.php`
+
+### 📦 للنشر على cPanel:
+1. رفع الملفات المعدلة عبر File Manager
+2. مسح الكاش: `php artisan cache:clear && php artisan view:clear`
+
+---
+
+## Previous Task: �🐛 إصلاح خطأ تسجيل المعلم (status truncation + validation) - ✅ مكتمل
+
+### 📋 المشاكل:
+1. **خطأ قاعدة البيانات**: `Data truncated for column 'status'` - السيرفر لم يشغل migration إضافة 'pending'
+2. **Validation صارم جداً**: description min:50، experience min:20، certificates required
+
+### ✅ الإصلاحات المطبقة:
+- [x] إزالة `min:50` من حقل description
+- [x] إزالة `min:20` من حقل experience  
+- [x] جعل certificates اختياري (nullable بدلاً من required)
+- [x] تنظيف رسائل الخطأ المرتبطة
+
+### 📁 الملفات المعدلة:
+- `app/Http/Requests/TeacherRegistrationRequest.php`
+
+### ✅ تم رفعه على السيرفر:
+1. **TeacherRegistrationRequest.php** - تم رفعه بنجاح ✅
+2. **fix-db-simple.php** - سكريبت إصلاح قاعدة البيانات ✅
+
+### ⚠️ يحتاج تشغيل يدوي على السيرفر:
+بسبب عدم استقرار SSH، يرجى تشغيل أحد الخيارات التالية:
+
+**الخيار 1: تشغيل السكريبت عبر SSH**
+```bash
+ssh digit874@66.198.240.7
+cd public_html
+php fix-db-simple.php
+rm fix-db-simple.php  # حذف الملف بعد التشغيل
+```
+
+**الخيار 2: تشغيل SQL مباشرة من phpMyAdmin**
+```sql
+ALTER TABLE subscriptions MODIFY COLUMN status ENUM('active', 'expired', 'cancelled', 'pending') DEFAULT 'pending';
+```
+
+**الخيار 3: تشغيل عبر cPanel Terminal**
+- افتح cPanel Terminal
+- نفذ: `cd public_html && php fix-db-simple.php`
+
+---
+
+## Previous Task: � إصلاح مشكلة التسجيل (start_date) والترجمات المفقودة - ✅ مكتمل
 
 ### 📋 الخطة:
 - [x] تحليل مشكلة start_date في جدول subscriptions

@@ -282,121 +282,152 @@
             <div class="sidebar-wrapper">
                 <nav class="mt-2">
                     <ul class="nav sidebar-menu flex-column" role="navigation">
-                        <!-- Dashboard -->
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard') }}"
-                                class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-speedometer"></i>
-                                <p>{{ __('messages.dashboard') }}</p>
-                            </a>
-                        </li>
+                        @php
+                            $user = Auth::user();
+                            $isAdmin = $user->isAdmin();
+                            $isPending = $user->isPending();
+                            $isActive = $user->isActive();
+                        @endphp
 
-                        <!-- Profile -->
-                        <li class="nav-item">
-                            <a href="{{ route('profile.edit') }}"
-                                class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-person-circle"></i>
-                                <p>{{ __('messages.profile') }}</p>
-                            </a>
-                        </li>
+                        @if($isPending)
+                            {{-- المستخدم المعلق يرى حالة التسجيل والرئيسية --}}
+                            <li class="nav-item">
+                                <a href="{{ route('home') }}"
+                                    class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-house-door"></i>
+                                    <p>الرئيسية</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('payment.status', ['subscription' => $user->subscription->id ?? 0]) }}"
+                                    class="nav-link {{ request()->routeIs('payment.status') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-hourglass-split"></i>
+                                    <p>{{ __('messages.registration_status') }}</p>
+                                </a>
+                            </li>
+                        @else
+                            {{-- المستخدم النشط أو الأدمن --}}
 
-                        <!-- Search -->
-                        <li class="nav-item">
-                            <a href="{{ route('search') }}"
-                                class="nav-link {{ request()->routeIs('search*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-search"></i>
-                                <p>{{ __('messages.search') }}</p>
-                            </a>
-                        </li>
-
-                        <!-- Registration Review -->
-                        <li class="nav-item">
-                            <a href="{{ route('admin.registrations.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.registrations.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-clipboard-check"></i>
-                                <p>{{ __('messages.registration_review') }}
-                                    @php
-                                        $pendingCount = \App\Models\User::where('status', 'pending')->count();
-                                    @endphp
-                                    @if($pendingCount > 0)
-                                        <span class="badge bg-danger rounded-pill ms-2">{{ $pendingCount }}</span>
-                                    @endif
-                                </p>
-                            </a>
-                        </li>
-
-                        <!-- User Management -->
-                        <li class="nav-item">
-                            <a href="{{ route('admin.users.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-people"></i>
-                                <p>{{ __('messages.user_management') }}</p>
-                            </a>
-                        </li>
-
-                        <!-- Analytics -->
-                        <li class="nav-item">
-                            <a href="{{ route('admin.analytics.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.analytics.*') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-graph-up"></i>
-                                <p>{{ __('messages.analytics') }}</p>
-                            </a>
-                        </li>
-
-                        <!-- Registration Menu -->
-                        <li class="nav-item {{ request()->routeIs('register.*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-person-plus"></i>
-                                <p>{{ __('messages.registration') }}
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+                            @if($isAdmin)
+                                <!-- لوحة التحكم - للأدمن فقط -->
                                 <li class="nav-item">
-                                    <a href="{{ route('register.teacher') }}"
-                                        class="nav-link {{ request()->routeIs('register.teacher') ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>{{ __('messages.teacher') }}</p>
+                                    <a href="{{ route('dashboard') }}"
+                                        class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-speedometer"></i>
+                                        <p>{{ __('messages.dashboard') }}</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('register.educational-center') }}"
-                                        class="nav-link {{ request()->routeIs('register.educational-center') ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>{{ __('messages.educational_center') }}</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('register.school') }}"
-                                        class="nav-link {{ request()->routeIs('register.school') ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>{{ __('messages.school') }}</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('register.kindergarten') }}"
-                                        class="nav-link {{ request()->routeIs('register.kindergarten') ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>{{ __('messages.kindergarten') }}</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('register.nursery') }}"
-                                        class="nav-link {{ request()->routeIs('register.nursery') ? 'active' : '' }}">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>{{ __('messages.nursery') }}</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                            @endif
 
-                        <!-- Settings -->
-                        <li class="nav-item">
-                            <a href="{{ route('profile.edit') }}" class="nav-link">
-                                <i class="nav-icon bi bi-gear"></i>
-                                <p>{{ __('messages.settings') }}</p>
-                            </a>
-                        </li>
+                            <!-- الملف الشخصي - للجميع -->
+                            <li class="nav-item">
+                                <a href="{{ route('profile.edit') }}"
+                                    class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                                    <i class="nav-icon bi bi-person-circle"></i>
+                                    <p>{{ __('messages.profile') }}</p>
+                                </a>
+                            </li>
+
+                            @if($isAdmin)
+                                <!-- البحث - للأدمن فقط في لوحة التحكم -->
+                                <li class="nav-item">
+                                    <a href="{{ route('search') }}"
+                                        class="nav-link {{ request()->routeIs('search*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-search"></i>
+                                        <p>{{ __('messages.search') }}</p>
+                                    </a>
+                                </li>
+
+                                <!-- مراجعة التسجيلات - للأدمن فقط -->
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.registrations.index') }}"
+                                        class="nav-link {{ request()->routeIs('admin.registrations.*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-clipboard-check"></i>
+                                        <p>{{ __('messages.registration_review') }}
+                                            @php
+                                                $pendingCount = \App\Models\User::where('status', 'pending')->count();
+                                            @endphp
+                                            @if($pendingCount > 0)
+                                                <span class="badge bg-danger rounded-pill ms-2">{{ $pendingCount }}</span>
+                                            @endif
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <!-- إدارة المستخدمين - للأدمن فقط -->
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.users.index') }}"
+                                        class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-people"></i>
+                                        <p>{{ __('messages.user_management') }}</p>
+                                    </a>
+                                </li>
+
+                                <!-- التحليلات - للأدمن فقط -->
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.analytics.index') }}"
+                                        class="nav-link {{ request()->routeIs('admin.analytics.*') ? 'active' : '' }}">
+                                        <i class="nav-icon bi bi-graph-up"></i>
+                                        <p>{{ __('messages.analytics') }}</p>
+                                    </a>
+                                </li>
+
+                                <!-- قائمة التسجيل - للأدمن فقط -->
+                                <li class="nav-item {{ request()->routeIs('register.*') ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon bi bi-person-plus"></i>
+                                        <p>{{ __('messages.registration') }}
+                                            <i class="nav-arrow bi bi-chevron-right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('register.teacher') }}"
+                                                class="nav-link {{ request()->routeIs('register.teacher') ? 'active' : '' }}">
+                                                <i class="nav-icon bi bi-circle"></i>
+                                                <p>{{ __('messages.teacher') }}</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('register.educational-center') }}"
+                                                class="nav-link {{ request()->routeIs('register.educational-center') ? 'active' : '' }}">
+                                                <i class="nav-icon bi bi-circle"></i>
+                                                <p>{{ __('messages.educational_center') }}</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('register.school') }}"
+                                                class="nav-link {{ request()->routeIs('register.school') ? 'active' : '' }}">
+                                                <i class="nav-icon bi bi-circle"></i>
+                                                <p>{{ __('messages.school') }}</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('register.kindergarten') }}"
+                                                class="nav-link {{ request()->routeIs('register.kindergarten') ? 'active' : '' }}">
+                                                <i class="nav-icon bi bi-circle"></i>
+                                                <p>{{ __('messages.kindergarten') }}</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('register.nursery') }}"
+                                                class="nav-link {{ request()->routeIs('register.nursery') ? 'active' : '' }}">
+                                                <i class="nav-icon bi bi-circle"></i>
+                                                <p>{{ __('messages.nursery') }}</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- الإعدادات - للأدمن فقط -->
+                                <li class="nav-item">
+                                    <a href="{{ route('profile.edit') }}" class="nav-link">
+                                        <i class="nav-icon bi bi-gear"></i>
+                                        <p>{{ __('messages.settings') }}</p>
+                                    </a>
+                                </li>
+                            @endif
+                        @endif
                     </ul>
                 </nav>
             </div>

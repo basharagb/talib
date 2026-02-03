@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\City;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -69,8 +70,14 @@ class NurseryRegistrationController extends Controller
 
             DB::commit();
 
-            // Redirect to payment page
-            return redirect()->route('payment.show', ['subscription' => $user->subscription->id])
+            // Auto-login the user after registration
+            Auth::login($user);
+            
+            // Regenerate session for security
+            request()->session()->regenerate();
+
+            // Redirect to payment status page
+            return redirect()->route('payment.status', ['subscription' => $user->subscription->id])
                            ->with('success', __('Registration completed successfully. Please complete payment to activate your account.'));
 
         } catch (\Exception $e) {

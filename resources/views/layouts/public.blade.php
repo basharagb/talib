@@ -5,7 +5,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', config('app.name', 'طالب'))</title>
+
+    <!-- SEO Meta Tags -->
+    <title>@yield('title', __('messages.seo_title'))</title>
+    <meta name="description" content="@yield('description', __('messages.seo_description'))">
+    <meta name="keywords" content="@yield('keywords', __('messages.seo_keywords'))">
+    <meta name="author" content="طالب - Talib">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title', __('messages.seo_title'))">
+    <meta property="og:description" content="@yield('description', __('messages.seo_description'))">
+    <meta property="og:image" content="{{ asset('images/talib_logo.png') }}">
+    <meta property="og:locale" content="{{ app()->getLocale() == 'ar' ? 'ar_AR' : 'en_US' }}">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('title', __('messages.seo_title'))">
+    <meta name="twitter:description" content="@yield('description', __('messages.seo_description'))">
+    <meta name="twitter:image" content="{{ asset('images/talib_logo.png') }}">
+
+    <!-- Structured Data for Educational Platform -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "طالب - Talib",
+        "description": "{{ __('messages.seo_description') }}",
+        "url": "{{ config('app.url') }}",
+        "logo": "{{ asset('images/talib_logo.png') }}",
+        "sameAs": [],
+        "areaServed": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": 31.9454,
+                "longitude": 35.9284
+            },
+            "geoRadius": "5000"
+        }
+    }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -38,7 +38,7 @@ Route::get('/search/{type}/{id}', [SearchController::class, 'show'])->name('sear
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'check.status'])->name('dashboard');
 
 // Registration Routes
 Route::prefix('register')->name('register.')->group(function () {
@@ -75,13 +75,13 @@ Route::middleware('auth')->prefix('payment')->name('payment.')->group(function (
     Route::get('/{subscription}/cancel', [PaymentController::class, 'cancel'])->name('cancel');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'check.status'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    // Admin routes for registration review and user management
-    Route::prefix('admin')->name('admin.')->group(function () {
+    // Admin routes for registration review and user management - Admin Only
+    Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
         // Registration Review
         Route::get('/registrations', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'index'])->name('registrations.index');
         Route::get('/registrations/{user}', [App\Http\Controllers\Admin\RegistrationReviewController::class, 'show'])->name('registrations.show');

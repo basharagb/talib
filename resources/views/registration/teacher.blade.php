@@ -221,9 +221,9 @@
                 <!-- Profile Image -->
                 <div>
                     <label for="profile_image" class="block text-sm font-medium text-gray-700 mb-2">
-                        {{ __('messages.Profile Photo') }} <span class="text-red-500">*</span>
+                        {{ __('messages.Profile Photo') }}
                     </label>
-                    <input type="file" id="profile_image" name="profile_image" accept="image/*" required
+                    <input type="file" id="profile_image" name="profile_image" accept="image/*"
                         onchange="previewImage(this, 'profile_preview')"
                         class="form-input w-full px-4 py-3 focus:outline-none transition-all duration-300">
                     <img id="profile_preview" class="mt-2 h-20 w-20 object-cover rounded-full hidden" alt="Profile Preview">
@@ -282,9 +282,9 @@
             <!-- CV File -->
             <div class="mt-6">
                 <label for="cv_file" class="block text-sm font-medium text-gray-700 mb-2">
-                    {{ __('messages.CV File') }} <span class="text-red-500">*</span>
+                    {{ __('messages.CV File') }}
                 </label>
-                <input type="file" id="cv_file" name="cv_file" accept=".pdf,.doc,.docx" required
+                <input type="file" id="cv_file" name="cv_file" accept=".pdf,.doc,.docx"
                     class="form-input w-full px-4 py-3 focus:outline-none transition-all duration-300">
                 <p class="mt-1 text-xs text-gray-500">{{ __('messages.Accepted formats: PDF, DOC, DOCX (Max: 5MB)') }}</p>
                 @error('cv_file')
@@ -295,12 +295,13 @@
             <!-- Certificates -->
             <div class="mt-6">
                 <label for="certificates" class="block text-sm font-medium text-gray-700 mb-2">
-                    {{ __('messages.Certificates') }} <span class="text-red-500">*</span>
+                    {{ __('messages.Certificates') }}
                 </label>
-                <input type="file" id="certificates" name="certificates[]" accept=".pdf,.jpg,.jpeg,.png" multiple required
+                <input type="file" id="certificates" name="certificates[]" accept=".pdf,.jpg,.jpeg,.png" multiple
                     class="form-input w-full px-4 py-3 focus:outline-none transition-all duration-300">
                 <p class="mt-1 text-xs text-gray-500">
-                    {{ __('messages.You can upload multiple certificates (PDF or images, Max: 5MB each)') }}</p>
+                    {{ __('messages.You can upload multiple certificates (PDF or images, Max: 5MB each)') }}
+                </p>
                 @error('certificates')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Subscription;
 use App\Models\Payment;
+use App\Mail\PaymentApprovedMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -75,12 +78,22 @@ class PaymentController extends Controller
 
                 DB::commit();
 
+                // Send confirmation email for auto-approved payments
+                if (in_array($request->payment_method, ['card', 'paypal'])) {
+                    try {
+                        Mail::to($subscription->user->email)->send(new PaymentApprovedMail($subscription));
+                    } catch (\Exception $e) {
+                        // Log email error but don't fail the payment
+                        Log::error('Failed to send payment approval email: ' . $e->getMessage());
+                    }
+                }
+
                 if ($subscription->status === 'active') {
                     return redirect()->route('payment.status', $subscription)
-                                   ->with('success', __('Payment completed successfully! Your account is now active.'));
+                                   ->with('success', 'تم الدفع بنجاح! تم تفعيل حسابك وإرسال رسالة تأكيد إلى بريدك الإلكتروني.');
                 } else {
                     return redirect()->route('payment.status', $subscription)
-                                   ->with('info', __('Payment submitted. Waiting for admin approval.'));
+                                   ->with('info', 'تم إرسال طلب الدفع. بانتظار موافقة الإدارة.');
                 }
             } else {
                 $subscription->update([
@@ -101,8 +114,9 @@ class PaymentController extends Controller
 
     public function status(Subscription $subscription)
     {
-        if ($subscription->user_id !== auth()->id()) {
-            abort(403);
+        // Allow user to access their own subscription or admin to access any
+        if ($subscription->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403, 'غير مصرح لك بالوصول إلى هذه الصفحة');
         }
 
         return view('payment.status', compact('subscription'));

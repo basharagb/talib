@@ -116,4 +116,19 @@ class User extends Authenticatable
     {
         return $this->role === 'student';
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isPending()
+    {
+        return $this->status === 'pending';
+    }
+
+    public function isActive()
+    {
+        return $this->status === 'active';
+    }
 }

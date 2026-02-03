@@ -13,6 +13,7 @@ use App\Models\EducationalStage;
 use App\Models\StudentType;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
@@ -90,8 +91,14 @@ class SchoolRegistrationController extends Controller
 
             DB::commit();
 
-            // Redirect to payment page
-            return redirect()->route('payment.show', $subscription)
+            // Auto-login the user after registration
+            Auth::login($user);
+            
+            // Regenerate session for security
+            request()->session()->regenerate();
+
+            // Redirect to payment status page
+            return redirect()->route('payment.status', $subscription)
                 ->with('success', __('School registration completed successfully! Please proceed to payment.'));
 
         } catch (\Exception $e) {
