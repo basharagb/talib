@@ -1,6 +1,36 @@
 # Talib Educational Platform - Project Scratchpad
 
-## Current Task: 📱 إنشاء تطبيق موبايل Flutter + إصلاح خطأ تسجيل الدخول - ✅ مكتمل
+## Current Task: � إصلاح أخطاء Seeders و Vendor + اختبار تسجيل الدخول
+
+### 📋 الخطة:
+- [x] فحص database seeders للأخطاء
+- [x] تحديث كلمات المرور للأدمن إلى admin123
+- [x] بناء assets (npm run build)
+- [x] تشغيل السيرفر المحلي
+- [ ] اختبار تسجيل دخول جميع المستخدمين محلياً
+- [ ] اختبار تسجيل دخول جميع المستخدمين على https://talib.live
+- [ ] توثيق النتائج
+
+### 🔧 الإصلاحات المطبقة:
+- ✅ تحديث AdminUsersSeeder - تغيير كلمات المرور من 'password' إلى 'admin123'
+- ✅ تشغيل seeder: `php artisan db:seed --class=AdminUsersSeeder`
+- ✅ بناء Vite assets: `npm run build`
+- ✅ تشغيل السيرفر المحلي: `php artisan serve`
+
+### 🐛 الأخطاء المكتشفة في Logs:
+1. **DemoDataSeeder** - خطأ في السطر 329 (Attempt to read property "id" on null)
+2. **Vite manifest** - تم حله ببناء الـ assets
+3. **center_subjects table** - عمود educational_center_id مفقود (خطأ قديم)
+
+### 👥 حسابات الاختبار:
+- Admin - admin@talib.com (admin123)
+- Shadi Aldabbas - shadi_aldabbas@hotmail.com (admin123)
+- Admin User - mrhalzby45@gmail.com (admin123)
+- Jadallah Neamah - jadallah.neamah@gmail.com (admin123)
+
+---
+
+## Previous Task: �📱 إنشاء تطبيق موبايل Flutter + إصلاح خطأ تسجيل الدخول - ✅ مكتمل
 
 ### 📋 الخطة:
 - [x] دمج التغييرات بأمان إلى main branch

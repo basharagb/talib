@@ -17,7 +17,7 @@ class AdminUsersSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'email' => 'admin@talib.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'status' => 'active',
                 'email_verified_at' => now(),
@@ -25,7 +25,7 @@ class AdminUsersSeeder extends Seeder
             [
                 'name' => 'Shadi Aldabbas',
                 'email' => 'shadi_aldabbas@hotmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'status' => 'active',
                 'email_verified_at' => now(),
@@ -33,7 +33,7 @@ class AdminUsersSeeder extends Seeder
             [
                 'name' => 'Admin User',
                 'email' => 'mrhalzby45@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'status' => 'active',
                 'email_verified_at' => now(),
@@ -41,7 +41,7 @@ class AdminUsersSeeder extends Seeder
             [
                 'name' => 'Jadallah Neamah',
                 'email' => 'jadallah.neamah@gmail.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'status' => 'active',
                 'email_verified_at' => now(),
