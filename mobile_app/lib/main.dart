@@ -4,9 +4,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/constants/app_colors.dart';
 import 'core/di/injection_container.dart' as di;
+import 'core/widgets/main_navigation.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/auth_event.dart';
+import 'features/auth/presentation/bloc/auth_state.dart';
 import 'features/auth/presentation/pages/login_page.dart';
+import 'features/profile/presentation/bloc/profile_bloc.dart';
+import 'features/search/presentation/bloc/search_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +23,14 @@ class TalibApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di.sl<AuthBloc>()..add(CheckAuthStatus()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => di.sl<AuthBloc>()..add(CheckAuthStatus()),
+        ),
+        BlocProvider(create: (context) => di.sl<ProfileBloc>()),
+        BlocProvider(create: (context) => di.sl<SearchBloc>()),
+      ],
       child: MaterialApp(
         title: 'Talib - منصة طالب',
         debugShowCheckedModeBanner: false,
@@ -53,6 +63,13 @@ class TalibApp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               elevation: 2,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
+          ),
+          cardTheme: CardTheme(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
         ),
@@ -63,59 +80,19 @@ class TalibApp extends StatelessWidget {
         ],
         supportedLocales: const [Locale('en', ''), Locale('ar', '')],
         locale: const Locale('ar', ''),
-        home: const LoginPage(),
+        home: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if (state is Authenticated) {
+              context.read<ProfileBloc>().add(const LoadProfile());
+              return const MainNavigation();
+            }
+            return const LoginPage();
+          },
+        ),
         routes: {
           '/login': (context) => const LoginPage(),
-          '/home': (context) => const HomePage(),
+          '/home': (context) => const MainNavigation(),
         },
-      ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('منصة طالب'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              context.read<AuthBloc>().add(LogoutRequested());
-              Navigator.of(context).pushReplacementNamed('/login');
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/talib_logo.png',
-              width: 150,
-              height: 150,
-            ),
-            const SizedBox(height: 24),
-            const Text(
-              'مرحباً بك في منصة طالب',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Welcome to Talib Platform',
-              style: TextStyle(fontSize: 18, color: AppColors.textSecondary),
-            ),
-          ],
-        ),
       ),
     );
   }

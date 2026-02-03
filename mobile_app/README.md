@@ -111,19 +111,117 @@ flutter test
 
 ## 📱 Features
 
-- ✅ Clean Architecture
-- ✅ BLoC State Management
-- ✅ Secure Authentication
-- ✅ Offline Support
-- ✅ RTL Support (Arabic)
-- ✅ Material Design 3
-- ✅ Custom Branding
+### ✅ Implemented Features
+
+- **Authentication**
+  - Login with email/password
+  - Secure token storage
+  - Auto-login on app start
+  - Logout functionality
+
+- **Search & Discovery**
+  - Search teachers, schools, centers
+  - Advanced filters (country, city, subject, stage)
+  - Real-time search results
+  - Beautiful result cards with ratings
+
+- **Profile Management**
+  - View user profile
+  - Account status display
+  - User information management
+  - Profile editing (ready for implementation)
+
+- **UI/UX**
+  - Clean Architecture
+  - BLoC State Management
+  - Smooth animations and transitions
+  - Shimmer loading effects
+  - RTL Support (Arabic)
+  - Material Design 3
+  - Custom branding with Talib colors
+  - Bottom navigation bar
+  - Responsive design
+
+- **Technical**
+  - Offline support
+  - Network connectivity check
+  - Error handling
+  - Form validation
+  - Secure storage
+  - Dependency injection
+
+## 🎯 Upcoming Features
+
+- Subscription management
+- Payment processing
+- Favorites/Bookmarks
+- Reviews and ratings
+- Chat/Messaging
+- Notifications
+- Profile editing with image upload
 
 ## 🔧 Configuration
 
+### API Configuration
+
 Update API base URL in `lib/core/constants/api_constants.dart`:
 ```dart
-static const String baseUrl = 'https://talib.live';
+static const String baseUrl = 'https://talib.live/api';
+```
+
+### Test Credentials
+
+Use these credentials to test the app:
+- **Email**: admin@talib.com
+- **Password**: admin123
+
+## 🏃 Running the App
+
+```bash
+# Get dependencies
+flutter pub get
+
+# Run on connected device
+flutter run
+
+# Run on specific device
+flutter run -d <device_id>
+
+# Run in release mode
+flutter run --release
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Package errors**: Run `flutter pub get`
+2. **Build errors**: Run `flutter clean` then `flutter pub get`
+3. **iOS issues**: Run `cd ios && pod install`
+4. **Android issues**: Sync Gradle files in Android Studio
+
+## 📚 Project Structure
+
+```
+mobile_app/
+├── lib/
+│   ├── core/
+│   │   ├── constants/       # Colors, API endpoints
+│   │   ├── di/             # Dependency injection
+│   │   ├── error/          # Error handling
+│   │   ├── network/        # Network info
+│   │   ├── usecases/       # Base use case
+│   │   ├── utils/          # Validators, formatters, animations
+│   │   └── widgets/        # Shared widgets
+│   ├── features/
+│   │   ├── auth/           # Authentication feature
+│   │   ├── search/         # Search & discovery feature
+│   │   └── profile/        # Profile management feature
+│   └── main.dart           # App entry point
+├── assets/
+│   └── images/             # App images and logo
+├── pubspec.yaml            # Dependencies
+└── README.md              # This file
 ```
 
 ## 📄 License

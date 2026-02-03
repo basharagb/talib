@@ -13,17 +13,22 @@ import '../../features/auth/domain/repositories/auth_repository.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/logout_usecase.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/profile/data/datasources/profile_remote_data_source.dart';
+import '../../features/profile/presentation/bloc/profile_bloc.dart';
+import '../../features/search/data/datasources/search_remote_data_source.dart';
+import '../../features/search/presentation/bloc/search_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  // BLoC
+  // BLoCs
+  sl.registerFactory(() => AuthBloc(loginUseCase: sl(), logoutUseCase: sl()));
+
   sl.registerFactory(
-    () => AuthBloc(
-      loginUseCase: sl(),
-      logoutUseCase: sl(),
-    ),
+    () => ProfileBloc(remoteDataSource: sl(), localDataSource: sl()),
   );
+
+  sl.registerFactory(() => SearchBloc(remoteDataSource: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
@@ -44,10 +49,15 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<AuthLocalDataSource>(
-    () => AuthLocalDataSourceImpl(
-      sharedPreferences: sl(),
-      secureStorage: sl(),
-    ),
+    () => AuthLocalDataSourceImpl(sharedPreferences: sl(), secureStorage: sl()),
+  );
+
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(dio: sl()),
+  );
+
+  sl.registerLazySingleton<SearchRemoteDataSource>(
+    () => SearchRemoteDataSourceImpl(dio: sl()),
   );
 
   // Core
@@ -65,8 +75,8 @@ Future<void> init() async {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.apiBaseUrl,
-        connectTimeout: const Duration(milliseconds: ApiConstants.connectionTimeout),
-        receiveTimeout: const Duration(milliseconds: ApiConstants.receiveTimeout),
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
