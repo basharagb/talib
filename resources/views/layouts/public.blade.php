@@ -1,59 +1,64 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', config('app.name', 'طالب'))</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+
     <style>
-        body { 
-            font-family: {{ app()->getLocale() == 'ar' ? "'Cairo'" : "'Inter'" }}, sans-serif; 
+        body {
+            font-family:
+                {{ app()->getLocale() == 'ar' ? "'Cairo'" : "'Inter'" }}
+                , sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
         }
-        
+
         .main-content {
             background: white;
             border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin: 2rem 0;
             padding: 2rem;
         }
-        
+
         .search-card {
             transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         .search-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
-        
+
         .type-badge {
             font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
             border-radius: 1rem;
         }
-        
+
         .search-form {
             background: white;
             border-radius: 1rem;
@@ -61,46 +66,48 @@
             padding: 2rem;
             margin-bottom: 2rem;
         }
-        
+
         .filter-section {
             background: #f8f9fa;
             border-radius: 0.5rem;
             padding: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .navbar {
             background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
         }
-        
+
         .btn-primary:hover {
             background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
             transform: translateY(-2px);
         }
     </style>
-    
+
     @yield('styles')
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                <span class="text-primary">طالب</span>
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
+                <img src="{{ asset('images/talib_logo.png') }}" alt="طالب"
+                    style="height: 50px; width: auto; margin-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}: 10px;">
                 <small class="text-muted">{{ __('messages.educational_platform') }}</small>
             </a>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -110,7 +117,7 @@
                         <a class="nav-link" href="{{ route('search') }}">{{ __('messages.search') }}</a>
                     </li>
                 </ul>
-                
+
                 <ul class="navbar-nav">
                     <!-- Language Switcher -->
                     <li class="nav-item dropdown">
@@ -123,7 +130,7 @@
                             <li><a class="dropdown-item" href="{{ route('locale.switch', 'en') }}">English</a></li>
                         </ul>
                     </li>
-                    
+
                     @auth
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('dashboard') }}">{{ __('messages.dashboard') }}</a>
@@ -140,12 +147,12 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Main Content -->
     <div class="container" style="margin-top: 100px;">
         @yield('content')
     </div>
-    
+
     <!-- Footer -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container">
@@ -160,10 +167,11 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     @yield('scripts')
 </body>
+
 </html>

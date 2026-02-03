@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class SchoolRegistrationController extends Controller
 {
@@ -94,9 +95,8 @@ class SchoolRegistrationController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => __('Registration failed. Please try again.')])
-                ->withInput()
-                ->with('error', __('Registration failed. Please check your information and try again.'));
+            Log::error('School Registration Error: ' . $e->getMessage() . ' | Line: ' . $e->getLine() . ' | File: ' . $e->getFile());
+            return back()->withErrors(['error' => __('Registration failed. Please try again.') . ' (' . $e->getMessage() . ')'])->withInput();
         }
     }
 

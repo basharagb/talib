@@ -58,7 +58,7 @@
                                     <div class="space-y-4">
                                         <label
                                             class="flex items-center p-5 border-2 border-gray-300 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 group">
-                                            <input type="radio" name="payment_method" value="credit_card"
+                                            <input type="radio" name="payment_method" value="card"
                                                 class="w-5 h-5 text-blue-600 focus:ring-blue-500" required>
                                             <div class="ml-4 rtl:ml-0 rtl:mr-4 flex-1">
                                                 <div class="flex items-center justify-between">
@@ -75,12 +75,16 @@
                                                         </div>
                                                         <div>
                                                             <span
-                                                                class="font-bold text-gray-900 text-lg">{{ app()->getLocale() == 'ar' ? 'فيزا / ماستركارد' : 'Visa / Mastercard' }}</span>
+                                                                class="font-bold text-gray-900 text-lg">{{ app()->getLocale() == 'ar' ? 'بطاقة ائتمان / خصم' : 'Credit / Debit Card' }}</span>
                                                             <p class="text-sm text-gray-600">
-                                                                {{ __('Pay securely with your credit or debit card') }}</p>
+                                                                {{ __('Pay securely with your credit or debit card') }}
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                    <div class="text-green-600 font-semibold">{{ __('Instant') }}</div>
+                                                    <div class="text-green-600 font-semibold">
+                                                        <span
+                                                            class="bg-green-100 px-2 py-1 rounded">{{ app()->getLocale() == 'ar' ? 'فوري' : 'Instant' }}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </label>
@@ -104,7 +108,8 @@
                                                             <span
                                                                 class="font-bold text-gray-900 text-lg">{{ __('PayPal') }}</span>
                                                             <p class="text-sm text-gray-600">
-                                                                {{ __('Pay with your PayPal account') }}</p>
+                                                                {{ __('Pay with your PayPal account') }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div class="text-green-600 font-semibold">{{ __('Instant') }}</div>
@@ -133,11 +138,47 @@
                                                             <span
                                                                 class="font-bold text-gray-900 text-lg">{{ app()->getLocale() == 'ar' ? 'حوالة بنكية' : 'Bank Transfer' }}</span>
                                                             <p class="text-sm text-gray-600">
-                                                                {{ __('Transfer directly from your bank account') }}</p>
+                                                                {{ __('Transfer directly from your bank account') }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div class="text-orange-600 font-semibold">
-                                                        {{ app()->getLocale() == 'ar' ? '1-2 يوم' : '1-2 Days' }}</div>
+                                                        <span
+                                                            class="bg-orange-100 px-2 py-1 rounded">{{ app()->getLocale() == 'ar' ? 'يدوي' : 'Manual' }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+
+                                        <label
+                                            class="flex items-center p-5 border-2 border-gray-300 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 group">
+                                            <input type="radio" name="payment_method" value="cash"
+                                                class="w-5 h-5 text-blue-600 focus:ring-blue-500">
+                                            <div class="ml-4 rtl:ml-0 rtl:mr-4 flex-1">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex items-center">
+                                                        <div
+                                                            class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-3 rtl:mr-0 rtl:ml-3 group-hover:bg-yellow-200 transition-colors">
+                                                            <svg class="w-6 h-6 text-yellow-600" fill="none"
+                                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
+                                                                </path>
+                                                            </svg>
+                                                        </div>
+                                                        <div>
+                                                            <span
+                                                                class="font-bold text-gray-900 text-lg">{{ app()->getLocale() == 'ar' ? 'دفع كاش' : 'Cash Payment' }}</span>
+                                                            <p class="text-sm text-gray-600">
+                                                                {{ app()->getLocale() == 'ar' ? 'الدفع نقداً عند مكتبنا' : 'Pay cash at our office' }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-orange-600 font-semibold">
+                                                        <span
+                                                            class="bg-orange-100 px-2 py-1 rounded">{{ app()->getLocale() == 'ar' ? 'يدوي' : 'Manual' }}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </label>
@@ -346,7 +387,7 @@
                     bankTransferDetails.classList.add('hidden');
 
                     // Show relevant section
-                    if (this.value === 'credit_card') {
+                    if (this.value === 'card') {
                         creditCardDetails.classList.remove('hidden');
                     } else if (this.value === 'bank_transfer') {
                         bankTransferDetails.classList.remove('hidden');

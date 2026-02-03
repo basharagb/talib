@@ -72,11 +72,23 @@
                 </div>
             </div>
 
-            <!-- Advanced Filters -->
-            <div class="filter-section">
-                <h6 class="mb-3">{{ __("messages.advanced_filters") }}</h6>
+            <!-- Search Button -->
+            <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="bi bi-search me-2"></i>{{ __('messages.search') }}
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="toggleAdvancedFilters()">
+                        <i class="bi bi-sliders me-2"></i>{{ __("messages.advanced_filters") }}
+                        <i class="bi bi-chevron-down ms-1" id="filter-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Advanced Filters (Collapsible) -->
+            <div class="filter-section" id="advanced-filters" style="display: none;">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6 col-lg-4 mb-3">
                         <label for="country-select" class="form-label">{{ __("messages.country") }}</label>
                         <select name="country_id" id="country-select" class="form-select">
                             <option value="">{{ __("messages.all_countries") }}</option>
@@ -87,7 +99,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6 col-lg-4 mb-3">
                         <label for="subject-select" class="form-label">{{ __('messages.subject') }}</label>
                         <select name="subject_id" id="subject-select" class="form-select">
                             <option value="">{{ __('messages.all_subjects') }}</option>
@@ -98,18 +110,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-2">
-                        <label for="grade-select" class="form-label">{{ __('messages.grade') }}</label>
-                        <select name="grade_id" id="grade-select" class="form-select">
-                            <option value="">{{ __('messages.all_grades') }}</option>
-                            @foreach($grades as $grade)
-                                <option value="{{ $grade->id }}" {{ $grade_id == $grade->id ? 'selected' : '' }}>
-                                    {{ app()->getLocale() == 'ar' ? $grade->name_ar : $grade->name_en }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-2">
+                    <div class="col-md-6 col-lg-4 mb-3">
                         <label for="educational-stage-select" class="form-label">{{ __('messages.educational_stage') }}</label>
                         <select name="educational_stage_id" id="educational-stage-select" class="form-select">
                             <option value="">{{ __('messages.all_stages') }}</option>
@@ -119,23 +120,6 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="student-type-select" class="form-label">{{ __('messages.student_type') }}</label>
-                        <select name="student_type_id" id="student-type-select" class="form-select">
-                            <option value="">{{ __('messages.all_types') }}</option>
-                            @foreach($studentTypes as $type)
-                                <option value="{{ $type->id }}" {{ $student_type_id == $type->id ? 'selected' : '' }}>
-                                    {{ app()->getLocale() == 'ar' ? $type->name_ar : $type->name_en }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label class="form-label">&nbsp;</label>
-                        <button type="submit" class="btn btn-primary w-100">
-                            <i class="bi bi-search me-2"></i>{{ __('messages.search') }}
-                        </button>
                     </div>
                 </div>
             </div>
@@ -275,15 +259,33 @@
 
 @section('scripts')
 <script>
-    // Auto-submit form when filters change
+    // Toggle advanced filters visibility
+    function toggleAdvancedFilters() {
+        const filters = document.getElementById('advanced-filters');
+        const icon = document.getElementById('filter-icon');
+        
+        if (filters.style.display === 'none') {
+            filters.style.display = 'block';
+            icon.classList.remove('bi-chevron-down');
+            icon.classList.add('bi-chevron-up');
+        } else {
+            filters.style.display = 'none';
+            icon.classList.remove('bi-chevron-up');
+            icon.classList.add('bi-chevron-down');
+        }
+    }
+    
+    // Show filters if any filter is already selected
     document.addEventListener('DOMContentLoaded', function() {
-        const selects = document.querySelectorAll('#type-select, #country-select, #subject-select, #grade-select, #educational-stage-select, #student-type-select');
-        selects.forEach(select => {
-            select.addEventListener('change', function() {
-                // Optional: Auto-submit on filter change
-                // this.form.submit();
-            });
-        });
+        const countryId = '{{ $country_id ?? "" }}';
+        const subjectId = '{{ $subject_id ?? "" }}';
+        const stageId = '{{ $educational_stage_id ?? "" }}';
+        
+        if (countryId || subjectId || stageId) {
+            document.getElementById('advanced-filters').style.display = 'block';
+            document.getElementById('filter-icon').classList.remove('bi-chevron-down');
+            document.getElementById('filter-icon').classList.add('bi-chevron-up');
+        }
     });
 </script>
 @endsection

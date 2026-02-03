@@ -22,11 +22,12 @@ class PaymentController extends Controller
     public function process(Request $request, Subscription $subscription)
     {
         $request->validate([
-            'payment_method' => 'required|in:credit_card,paypal,bank_transfer',
-            'card_number' => 'required_if:payment_method,credit_card',
-            'card_expiry' => 'required_if:payment_method,credit_card',
-            'card_cvv' => 'required_if:payment_method,credit_card',
-            'card_holder_name' => 'required_if:payment_method,credit_card',
+            'payment_method' => 'required|in:card,cash,bank_transfer,paypal',
+            'card_number' => 'required_if:payment_method,card',
+            'card_expiry' => 'required_if:payment_method,card',
+            'card_cvv' => 'required_if:payment_method,card',
+            'card_holder_name' => 'required_if:payment_method,card',
+            'transfer_receipt' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
         ]);
 
         // Ensure the subscription belongs to the authenticated user
@@ -37,43 +38,54 @@ class PaymentController extends Controller
         try {
             DB::beginTransaction();
 
-            // Create payment record
-            $payment = Payment::create([
-                'user_id' => auth()->id(),
-                'subscription_id' => $subscription->id,
-                'amount' => $subscription->amount,
-                'currency' => 'JOD',
+            // Store receipt if uploaded
+            $receiptPath = null;
+            if ($request->hasFile('transfer_receipt')) {
+                $receiptPath = $request->file('transfer_receipt')->store('payment_receipts', 'public');
+            }
+
+            // Update subscription with payment info
+            $subscription->update([
                 'payment_method' => $request->payment_method,
-                'status' => 'pending',
-                'transaction_id' => $this->generateTransactionId(),
+                'payment_status' => 'pending',
+                'payment_reference' => $this->generateTransactionId(),
+                'payment_notes' => $receiptPath ? 'Receipt uploaded: ' . $receiptPath : null,
             ]);
 
             // Process payment based on method
-            $paymentResult = $this->processPaymentByMethod($request->payment_method, $payment, $request);
+            $paymentResult = $this->processPaymentByMethod($request->payment_method, $subscription, $request);
 
             if ($paymentResult['success']) {
-                // Update payment status
-                $payment->update([
-                    'status' => 'completed',
-                    'gateway_transaction_id' => $paymentResult['transaction_id'] ?? null,
-                    'paid_at' => now(),
-                ]);
+                // Update subscription based on payment method
+                $updateData = [
+                    'payment_status' => $paymentResult['payment_status'],
+                    'payment_reference' => $paymentResult['transaction_id'],
+                ];
 
-                // Update subscription status
-                $subscription->update([
-                    'status' => 'active',
-                    'activated_at' => now(),
-                ]);
+                // Auto-approve for electronic payments (card, paypal)
+                if (in_array($request->payment_method, ['card', 'paypal'])) {
+                    $updateData['status'] = 'active';
+                    $updateData['payment_status'] = 'paid';
+                    $updateData['paid_at'] = now();
+                    $updateData['auto_approved'] = true;
+                    $subscription->user->update(['status' => 'active']);
+                }
+
+                $subscription->update($updateData);
 
                 DB::commit();
 
-                return redirect()->route('dashboard')
-                               ->with('success', __('Payment completed successfully! Your account is now active.'));
+                if ($subscription->status === 'active') {
+                    return redirect()->route('payment.status', $subscription)
+                                   ->with('success', __('Payment completed successfully! Your account is now active.'));
+                } else {
+                    return redirect()->route('payment.status', $subscription)
+                                   ->with('info', __('Payment submitted. Waiting for admin approval.'));
+                }
             } else {
-                // Update payment status to failed
-                $payment->update([
-                    'status' => 'failed',
-                    'failure_reason' => $paymentResult['error'] ?? 'Payment processing failed',
+                $subscription->update([
+                    'payment_status' => 'failed',
+                    'payment_notes' => $paymentResult['error'] ?? 'Payment processing failed',
                 ]);
 
                 DB::rollBack();
@@ -87,83 +99,100 @@ class PaymentController extends Controller
         }
     }
 
-    public function success(Payment $payment)
+    public function status(Subscription $subscription)
     {
-        if ($payment->user_id !== auth()->id()) {
+        if ($subscription->user_id !== auth()->id()) {
             abort(403);
         }
 
-        return view('payment.success', compact('payment'));
+        return view('payment.status', compact('subscription'));
     }
 
-    public function cancel(Payment $payment)
+    public function success(Subscription $subscription)
     {
-        if ($payment->user_id !== auth()->id()) {
+        if ($subscription->user_id !== auth()->id()) {
             abort(403);
         }
 
-        return view('payment.cancel', compact('payment'));
+        return view('payment.success', compact('subscription'));
     }
 
-    private function processPaymentByMethod(string $method, Payment $payment, Request $request): array
+    public function cancel(Subscription $subscription)
+    {
+        if ($subscription->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('payment.cancel', compact('subscription'));
+    }
+
+    private function processPaymentByMethod(string $method, Subscription $subscription, Request $request): array
     {
         switch ($method) {
-            case 'credit_card':
-                return $this->processCreditCardPayment($payment, $request);
+            case 'card':
+                return $this->processCardPayment($subscription, $request);
             case 'paypal':
-                return $this->processPayPalPayment($payment, $request);
+                return $this->processPayPalPayment($subscription, $request);
             case 'bank_transfer':
-                return $this->processBankTransferPayment($payment, $request);
+                return $this->processBankTransferPayment($subscription, $request);
+            case 'cash':
+                return $this->processCashPayment($subscription, $request);
             default:
                 return ['success' => false, 'error' => 'Invalid payment method'];
         }
     }
 
-    private function processCreditCardPayment(Payment $payment, Request $request): array
+    private function processCardPayment(Subscription $subscription, Request $request): array
     {
-        // This is a placeholder for credit card processing
-        // In a real application, you would integrate with a payment gateway like Stripe, PayPal, etc.
+        // This is a placeholder for card processing
+        // In a real application, you would integrate with a payment gateway like Stripe, Checkout.com, etc.
         
         // Simulate payment processing
-        $success = rand(1, 10) > 2; // 80% success rate for demo
+        $success = rand(1, 10) > 1; // 90% success rate for demo
         
         if ($success) {
             return [
                 'success' => true,
-                'transaction_id' => 'cc_' . uniqid(),
+                'transaction_id' => 'CARD_' . time() . '_' . uniqid(),
+                'payment_status' => 'paid',
             ];
         } else {
             return [
                 'success' => false,
-                'error' => 'Credit card payment failed. Please check your card details.',
+                'error' => 'Card payment failed. Please check your card details.',
             ];
         }
     }
 
-    private function processPayPalPayment(Payment $payment, Request $request): array
+    private function processPayPalPayment(Subscription $subscription, Request $request): array
     {
         // This is a placeholder for PayPal processing
         // In a real application, you would integrate with PayPal API
         
         return [
             'success' => true,
-            'transaction_id' => 'pp_' . uniqid(),
+            'transaction_id' => 'PAYPAL_' . time() . '_' . uniqid(),
+            'payment_status' => 'paid',
         ];
     }
 
-    private function processBankTransferPayment(Payment $payment, Request $request): array
+    private function processBankTransferPayment(Subscription $subscription, Request $request): array
     {
-        // Bank transfer payments are usually processed manually
-        // Mark as pending and require admin approval
-        
-        $payment->update([
-            'status' => 'pending_verification',
-            'notes' => 'Bank transfer payment - requires manual verification',
-        ]);
-
+        // Bank transfer payments require manual verification
         return [
             'success' => true,
-            'transaction_id' => 'bt_' . uniqid(),
+            'transaction_id' => 'TRANSFER_' . time() . '_' . uniqid(),
+            'payment_status' => 'pending',
+        ];
+    }
+
+    private function processCashPayment(Subscription $subscription, Request $request): array
+    {
+        // Cash payments require manual verification by admin
+        return [
+            'success' => true,
+            'transaction_id' => 'CASH_' . time() . '_' . uniqid(),
+            'payment_status' => 'pending',
         ];
     }
 
