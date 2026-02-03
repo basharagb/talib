@@ -60,10 +60,11 @@ class NurseryRegistrationController extends Controller
             // Create subscription record
             Subscription::create([
                 'user_id' => $user->id,
-                'type' => 'nursery',
+                'subscription_type' => 'nursery',
                 'amount' => 40,
                 'status' => 'pending',
-                'expires_at' => now()->addYear(),
+                'start_date' => now(),
+                'end_date' => now()->addYear(),
             ]);
 
             DB::commit();

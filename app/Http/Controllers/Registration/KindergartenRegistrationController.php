@@ -66,10 +66,11 @@ class KindergartenRegistrationController extends Controller
             // Create subscription record
             Subscription::create([
                 'user_id' => $user->id,
-                'type' => 'kindergarten',
+                'subscription_type' => 'kindergarten',
                 'amount' => 50,
                 'status' => 'pending',
-                'expires_at' => now()->addYear(),
+                'start_date' => now(),
+                'end_date' => now()->addYear(),
             ]);
 
             DB::commit();

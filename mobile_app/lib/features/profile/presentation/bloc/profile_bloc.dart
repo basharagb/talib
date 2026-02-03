@@ -11,10 +11,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
 
-  ProfileBloc({
-    required this.remoteDataSource,
-    required this.localDataSource,
-  }) : super(ProfileInitial()) {
+  ProfileBloc({required this.remoteDataSource, required this.localDataSource})
+    : super(ProfileInitial()) {
     on<LoadProfile>(_onLoadProfile);
     on<UpdateProfile>(_onUpdateProfile);
   }
@@ -26,14 +24,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
 
     try {
-      final token = await localDataSource.getToken();
+      final token = await localDataSource.getCachedToken();
       if (token == null) {
         emit(const ProfileError(message: 'Not authenticated'));
         return;
       }
 
       final profileData = await remoteDataSource.getProfile(token);
-      
+
       final profile = UserProfile(
         id: profileData['id'],
         name: profileData['name'],
@@ -63,7 +61,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileUpdating(profile: currentState.profile));
 
     try {
-      final token = await localDataSource.getToken();
+      final token = await localDataSource.getCachedToken();
       if (token == null) {
         emit(const ProfileError(message: 'Not authenticated'));
         return;

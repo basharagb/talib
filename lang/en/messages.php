@@ -553,4 +553,32 @@ return [
     'seo_title' => 'Talib - Digital Education Platform | Teachers, Educational Centers, Schools',
     'seo_description' => 'Talib digital educational platform connects students with the best teachers, educational centers, private schools, kindergartens and nurseries in the Arab region',
     'seo_keywords' => 'education, teachers, educational centers, private schools, kindergartens, nurseries, private tutoring, online education, Jordan, Saudi Arabia, UAE',
+    
+    // Missing translations from registration forms
+    'Detailed Location' => 'Detailed Location',
+    'Contact & Social Media' => 'Contact & Social Media',
+    'Select Gender' => 'Select Gender',
+    'Select Degree' => 'Select Degree',
+    'Loading cities...' => 'Loading cities...',
+    'Please select a country first' => 'Please select a country first',
+    'No cities available' => 'No cities available',
+    'Professional Information' => 'Professional Information',
+    'Full Description About Yourself' => 'Full Description About Yourself',
+    'Subjects You Teach' => 'Subjects You Teach',
+    'Facebook Profile' => 'Facebook Profile',
+    'Twitter Profile' => 'Twitter Profile',
+    'Instagram Profile' => 'Instagram Profile',
+    'LinkedIn Profile' => 'LinkedIn Profile',
+    'WhatsApp Number' => 'WhatsApp Number',
+    'Subscription Information' => 'Subscription Information',
+    'After completing registration, you will be redirected to the payment page to activate your account.' => 'After completing registration, you will be redirected to the payment page to activate your account.',
+    'Please fix the following errors:' => 'Please fix the following errors:',
+    'Back to Home' => 'Back to Home',
+    
+    // User Management
+    'user_created_successfully' => 'User created successfully',
+    'user_updated_successfully' => 'User updated successfully',
+    'user_deleted_successfully' => 'User deleted successfully',
+    'users_updated_successfully' => 'Users updated successfully',
+    'cannot_delete_yourself' => 'You cannot delete your own account',
 ];

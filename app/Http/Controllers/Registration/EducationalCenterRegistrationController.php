@@ -66,10 +66,11 @@ class EducationalCenterRegistrationController extends Controller
             // Create subscription record
             Subscription::create([
                 'user_id' => $user->id,
-                'type' => 'educational_center',
+                'subscription_type' => 'educational_center',
                 'amount' => 25,
                 'status' => 'pending',
-                'expires_at' => now()->addYear(),
+                'start_date' => now(),
+                'end_date' => now()->addYear(),
             ]);
 
             DB::commit();

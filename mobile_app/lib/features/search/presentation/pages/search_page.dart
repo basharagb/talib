@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/constants/app_colors.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/error_widget.dart';
 import '../../../../core/utils/animations.dart';
@@ -78,8 +77,8 @@ class _SearchPageState extends State<SearchPage> {
                     onRetry: () {
                       if (_searchController.text.isNotEmpty) {
                         context.read<SearchBloc>().add(
-                              SearchQueryChanged(_searchController.text),
-                            );
+                          SearchQueryChanged(_searchController.text),
+                        );
                       }
                     },
                   );

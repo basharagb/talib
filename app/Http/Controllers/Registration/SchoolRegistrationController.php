@@ -81,10 +81,11 @@ class SchoolRegistrationController extends Controller
             // Create subscription record
             $subscription = Subscription::create([
                 'user_id' => $user->id,
-                'type' => 'school',
+                'subscription_type' => 'school',
                 'amount' => 50.00,
                 'status' => 'pending',
-                'expires_at' => Carbon::now()->addYear(),
+                'start_date' => Carbon::now(),
+                'end_date' => Carbon::now()->addYear(),
             ]);
 
             DB::commit();
