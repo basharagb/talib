@@ -13,6 +13,7 @@ use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class KindergartenRegistrationController extends Controller
 {
@@ -79,7 +80,8 @@ class KindergartenRegistrationController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => __('Registration failed. Please try again.')])->withInput();
+            Log::error('Kindergarten Registration Error: ' . $e->getMessage() . ' | Line: ' . $e->getLine() . ' | File: ' . $e->getFile());
+            return back()->withErrors(['error' => __('Registration failed. Please try again.') . ' (' . $e->getMessage() . ')'])->withInput();
         }
     }
 

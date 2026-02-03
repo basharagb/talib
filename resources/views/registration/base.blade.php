@@ -378,25 +378,48 @@
         // Country/City dropdown functionality
         function loadCities(countryId, citySelectId) {
             const citySelect = document.getElementById(citySelectId);
+            const locale = '{{ app()->getLocale() }}';
             
             if (!countryId) {
-                citySelect.innerHTML = '<option value="">{{ __("Select City") }}</option>';
+                citySelect.innerHTML = '<option value="">{{ __("messages.Select City") }}</option>';
                 return;
             }
             
-            fetch(`/register/cities/${countryId}`)
-                .then(response => response.json())
+            // Show loading state
+            citySelect.innerHTML = '<option value="">{{ app()->getLocale() == "ar" ? "جاري التحميل..." : "Loading..." }}</option>';
+            citySelect.disabled = true;
+            
+            // Set timeout for slow connections
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+            
+            fetch(`/register/cities/${countryId}`, { signal: controller.signal })
+                .then(response => {
+                    clearTimeout(timeoutId);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(cities => {
-                    citySelect.innerHTML = '<option value="">{{ __("Select City") }}</option>';
-                    cities.forEach(city => {
-                        const option = document.createElement('option');
-                        option.value = city.id;
-                        option.textContent = city.name_{{ app()->getLocale() }};
-                        citySelect.appendChild(option);
-                    });
+                    citySelect.innerHTML = '<option value="">{{ __("messages.Select City") }}</option>';
+                    if (cities && cities.length > 0) {
+                        cities.forEach(city => {
+                            const option = document.createElement('option');
+                            option.value = city.id;
+                            option.textContent = locale === 'ar' ? city.name_ar : city.name_en;
+                            citySelect.appendChild(option);
+                        });
+                    } else {
+                        citySelect.innerHTML = '<option value="">{{ app()->getLocale() == "ar" ? "لا توجد مدن" : "No cities found" }}</option>';
+                    }
+                    citySelect.disabled = false;
                 })
                 .catch(error => {
+                    clearTimeout(timeoutId);
                     console.error('Error loading cities:', error);
+                    citySelect.innerHTML = '<option value="">{{ app()->getLocale() == "ar" ? "خطأ في التحميل - حاول مرة أخرى" : "Error loading - try again" }}</option>';
+                    citySelect.disabled = false;
                 });
         }
         

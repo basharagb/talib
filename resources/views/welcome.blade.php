@@ -327,10 +327,7 @@
                 <!-- Logo -->
                 <div class="flex items-center animate-slide-right">
                     <div class="relative">
-                        <div class="text-2xl md:text-4xl font-black text-gradient">طالب</div>
-                        <div
-                            class="absolute -top-0.5 -right-0.5 w-2 h-2 md:w-3 md:h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse">
-                        </div>
+                        <img src="{{ asset('images/talib_logo.png') }}" alt="طالب" class="h-12 md:h-16 w-auto">
                     </div>
                     <div class="mr-2 md:mr-4 text-xs md:text-sm text-gray-600 font-medium hidden sm:block">
                         <div>{{ app()->getLocale() == 'ar' ? 'منصة التعليم الرقمي' : 'Digital Education Platform' }}

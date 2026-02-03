@@ -70,8 +70,9 @@ Route::prefix('register')->name('register.')->group(function () {
 Route::middleware('auth')->prefix('payment')->name('payment.')->group(function () {
     Route::get('/{subscription}', [PaymentController::class, 'show'])->name('show');
     Route::post('/{subscription}', [PaymentController::class, 'process'])->name('process');
-    Route::get('/{payment}/success', [PaymentController::class, 'success'])->name('success');
-    Route::get('/{payment}/cancel', [PaymentController::class, 'cancel'])->name('cancel');
+    Route::get('/{subscription}/status', [PaymentController::class, 'status'])->name('status');
+    Route::get('/{subscription}/success', [PaymentController::class, 'success'])->name('success');
+    Route::get('/{subscription}/cancel', [PaymentController::class, 'cancel'])->name('cancel');
 });
 
 Route::middleware('auth')->group(function () {
